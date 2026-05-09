@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lenjerii de Pat — Lucia Fashion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --plum:     #3D1A5C;
+      --violet:   #7B3FA0;
+      --lavender: #C9A8E0;
+      --black:    #0D0D0D;
+      --cream:    #F8F5F2;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --sans:     'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--black);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 72px;
+      background: rgba(248,245,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(61,26,92,0.12);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--plum);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--plum);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      margin-top: 72px;
+      min-height: 60vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 80px 60px;
+      background: var(--plum);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(123,63,160,0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,224,0.12) 0%, transparent 60%);
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 680px; }
+
+    .hero-label {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--lavender);
+    }
+
+    .hero-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(248,245,242,0.65);
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+      max-width: 480px;
+    }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip {
+      background: var(--cream);
+      padding: 70px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      border-bottom: 1px solid rgba(61,26,92,0.1);
+    }
+
+    .intro-item {
+      padding: 0 48px;
+      border-left: 1px solid rgba(61,26,92,0.1);
+    }
+
+    .intro-item:first-child { border-left: none; padding-left: 0; }
+
+    .intro-item-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 10px;
+    }
+
+    .intro-item-text {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--plum);
+      line-height: 1.4;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      padding: 90px 60px 50px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .section-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--plum);
+      line-height: 1.1;
+    }
+
+    .section-header h2 em { font-style: italic; color: var(--violet); }
+
+    .section-note {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: rgba(61,26,92,0.5);
+      max-width: 260px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ── GRID LENJERII ── */
+    .lenjerii-grid {
+      padding: 0 60px 100px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .lenjerie-card {
+      position: relative;
+      background: #fff;
+      cursor: default;
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      animation: fadeUp 0.6s both;
+    }
+
+    .lenjerie-card:hover { transform: translateY(-6px); }
+
+    .lenjerie-card:nth-child(1) { animation-delay: 0.05s; }
+    .lenjerie-card:nth-child(2) { animation-delay: 0.12s; }
+    .lenjerie-card:nth-child(3) { animation-delay: 0.19s; }
+    .lenjerie-card:nth-child(4) { animation-delay: 0.26s; }
+    .lenjerie-card:nth-child(5) { animation-delay: 0.33s; }
+    .lenjerie-card:nth-child(6) { animation-delay: 0.40s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #e8dff0 0%, #d4c0e8 50%, #c9a8e0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #ede6f5 0%, #ddd0ed 100%);
+    }
+
+    .card-image-placeholder svg {
+      width: 40px;
+      height: 40px;
+      opacity: 0.3;
+      color: var(--plum);
+    }
+
+    .card-image-placeholder span {
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--plum);
+      opacity: 0.4;
+    }
+
+    .card-body { padding: 28px 28px 32px; }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--violet);
+      background: rgba(123,63,160,0.08);
+      padding: 4px 10px;
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: var(--plum);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(13,13,13,0.6);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .card-contents {
+      border-top: 1px solid rgba(61,26,92,0.08);
+      padding-top: 18px;
+    }
+
+    .card-contents-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--plum);
+      opacity: 0.5;
+      margin-bottom: 10px;
+    }
+
+    .card-contents ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .card-contents ul li {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(13,13,13,0.7);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-contents ul li::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: var(--lavender);
+      flex-shrink: 0;
+    }
+
+    /* ── CARD FEATURED (span 2 col) ── */
+    .lenjerie-card.featured {
+      grid-column: span 2;
+    }
+
+    .lenjerie-card.featured .card-image-placeholder {
+      aspect-ratio: 16/7;
+    }
+
+    /* ── CUSTOMIZARE BANNER ── */
+    .custom-banner {
+      margin: 0 60px 100px;
+      padding: 70px 80px;
+      background: var(--plum);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .custom-banner::before {
+      content: '';
+      position: absolute;
+      right: -80px; top: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(123,63,160,0.25);
+    }
+
+    .custom-banner-content { position: relative; z-index: 1; }
+
+    .custom-banner-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-bottom: 20px;
+    }
+
+    .custom-banner h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .custom-banner h3 em { font-style: italic; color: var(--lavender); }
+
+    .custom-banner p {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(248,245,242,0.6);
+      line-height: 1.85;
+    }
+
+    .custom-options { position: relative; z-index: 1; }
+
+    .custom-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(201,168,224,0.15);
+    }
+
+    .custom-option:first-child { padding-top: 0; }
+    .custom-option:last-child  { border-bottom: none; }
+
+    .custom-option-num {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: rgba(201,168,224,0.3);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 36px;
+    }
+
+    .custom-option-text h4 {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-bottom: 4px;
+    }
+
+    .custom-option-text p {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(248,245,242,0.5);
+      line-height: 1.6;
+    }
+
+    /* ── CTA CONTACT ── */
+    .cta-section {
+      text-align: center;
+      padding: 80px 60px 100px;
+      border-top: 1px solid rgba(61,26,92,0.1);
+    }
+
+    .cta-section p {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--plum);
+      margin-bottom: 32px;
+      line-height: 1.4;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--plum);
+      padding: 16px 44px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .cta-btn:hover { background: var(--violet); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--cream);
+      opacity: 0.6;
+    }
+
+    footer p {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: rgba(248,245,242,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-logo">Lucia Fashion</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Acasă</a></li>
+      <li><a href="colectii.html">Colecții</a></li>
+      <li><a href="lenjerii.html" class="active">Lenjerii</a></li>
+      <li><a href="despre.html">Despre noi</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-label">Colecție exclusivă</span>
+      <h1>Lenjerii de pat<br><em>pentru odihnă</em><br>desăvârșită</h1>
+      <p class="hero-desc">Confecționate din bumbac ramforsat 100%, lenjeriile noastre îmbină confortul autentic cu eleganța unui design atemporal.</p>
+    </div>
+  </section>
+
+  <!-- INTRO STRIP -->
+  <div class="intro-strip">
+    <div class="intro-item">
+      <div class="intro-item-label">Material</div>
+      <div class="intro-item-text">Bumbac ramforsat<br>100% natural</div>
+    </div>
+    <div class="intro-item">
+      <div class="intro-item-label">Compoziție standard</div>
+      <div class="intro-item-text">Cearceaf pat · Cearceaf<br>pilotă · 2 fețe pernă</div>
+    </div>
+    <div class="intro-item">
+      <div class="intro-item-label">Personalizare</div>
+      <div class="intro-item-text">Orice combinație,<br>la cerere</div>
+    </div>
+  </div>
+
+  <!-- SECTIUNE PRODUSE -->
+  <div class="section-header">
+    <h2>Colecțiile<br>noastre de <em>lenjerii</em></h2>
+    <p class="section-note">Fiecare set este disponibil în varianta standard sau personalizat conform dorințelor dumneavoastră.</p>
+  </div>
+
+  <div class="lenjerii-grid">
+
+    <!-- Card 1 — Featured -->
+    <div class="lenjerie-card featured">
+      <div class="card-image-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        <span>Imagine produs</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Bestseller</span>
+        <div class="card-title">Colecția Classique</div>
+        <p class="card-desc">Eleganță discretă în tonuri neutre. Textura fină a bumbacului ramforsat oferă o senzație de mătase naturală, perfectă pentru un somn reconfortant în orice anotimp.</p>
+        <div class="card-contents">
+          <div class="card-contents-label">Set standard include</div>
+          <ul>
+            <li>Cearceaf pat cu elastic</li>
+            <li>Cearceaf pilotă</li>
+            <li>2 fețe de pernă 50×70 cm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="lenjerie-card">
+      <div class="card-image-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <span>Imagine produs</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Colecție nouă</span>
+        <div class="card-title">Colecția Lumière</div>
+        <p class="card-desc">Culori luminoase cu accente delicate. Inspirată din paleta zorilor, această colecție aduce prospețime și bucurie în dormitor.</p>
+        <div class="card-contents">
+          <div class="card-contents-label">Set standard include</div>
+          <ul>
+            <li>Cearceaf pat cu elastic</li>
+            <li>Cearceaf pilotă</li>
+            <li>2 fețe de pernă 50×70 cm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="lenjerie-card">
+      <div class="card-image-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <span>Imagine produs</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Premium</span>
+        <div class="card-title">Colecția Noblesse</div>
+        <p class="card-desc">Rafinament maxim în tonuri închise, profunde. O alegere sofisticată pentru cei care apreciază luxul în detalii.</p>
+        <div class="card-contents">
+          <div class="card-contents-label">Set standard include</div>
+          <ul>
+            <li>Cearceaf pat cu elastic</li>
+            <li>Cearceaf pilotă</li>
+            <li>2 fețe de pernă 50×70 cm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="lenjerie-card">
+      <div class="card-image-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <span>Imagine produs</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Seasonal</span>
+        <div class="card-title">Colecția Blossom</div>
+        <p class="card-desc">Motive florale fine brodate pe fond crem. O colecție romantică ce transformă dormitorul într-un refugiu primăvăratic.</p>
+        <div class="card-contents">
+          <div class="card-contents-label">Set standard include</div>
+          <ul>
+            <li>Cearceaf pat cu elastic</li>
+            <li>Cearceaf pilotă</li>
+            <li>2 fețe de pernă 50×70 cm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="lenjerie-card">
+      <div class="card-image-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <span>Imagine produs</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">Minimalist</span>
+        <div class="card-title">Colecția Pure</div>
+        <p class="card-desc">Alb imaculat, linii curate, puritate absolută. Pentru cei care găsesc frumusețea în simplitate și eleganța în absența ornamentelor.</p>
+        <div class="card-contents">
+          <div class="card-contents-label">Set standard include</div>
+          <ul>
+            <li>Cearceaf pat cu elastic</li>
+            <li>Cearceaf pilotă</li>
+            <li>2 fețe de pernă 50×70 cm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CUSTOMIZARE BANNER -->
+  <div class="custom-banner">
+    <div class="custom-banner-content">
+      <div class="custom-banner-label">Serviciu personalizat</div>
+      <h3>Creăm lenjeria<br><em>visurilor tale</em></h3>
+      <p>Fiecare set poate fi personalizat complet — de la dimensiuni și compoziție, până la culori, modele și detalii de finisaj. Contactați-ne pentru o consultație.</p>
+    </div>
+    <div class="custom-options">
+      <div class="custom-option">
+        <div class="custom-option-num">01</div>
+        <div class="custom-option-text">
+          <h4>Dimensiuni la alegere</h4>
+          <p>Pat simplu, dublu, Queen sau King Size — adaptăm fiecare piesă la dimensiunile exacte ale patului dumneavoastră.</p>
+        </div>
+      </div>
+      <div class="custom-option">
+        <div class="custom-option-num">02</div>
+        <div class="custom-option-text">
+          <h4>Compoziție flexibilă</h4>
+          <p>Adăugați sau eliminați piese din set, măriți numărul de fețe de pernă sau includeți piese speciale.</p>
+        </div>
+      </div>
+      <div class="custom-option">
+        <div class="custom-option-num">03</div>
+        <div class="custom-option-text">
+          <h4>Culori & modele</h4>
+          <p>Paleta noastră extinsă sau culoarea exactă solicitată — realizăm lenjeria în nuanța care completează perfect interiorul.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <p>Doriți o lenjerie personalizată<br>sau aveți întrebări despre colecții?</p>
+    <a href="contact.html" class="cta-btn">Contactați-ne</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="logo">Lucia Fashion</span>
+    <p>© 2025 Lucia Fashion. Toate drepturile rezervate.</p>
+  </footer>
+
+</body>
+</html>
