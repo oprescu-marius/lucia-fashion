@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colecții — Lucia Fashion</title>
+  <meta name="description" content="Descoperă colecțiile Lucia Fashion — rochii de mireasă, rochii de seară, ținute business și piese vintage unicat." />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">
+      Lucia Fashion
+      <span>Design Vestimentar</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Acasă</a></li>
+      <li><a href="colectii.html" class="active">Colecții</a></li>
+      <li><a href="despre.html">Despre noi</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div>
+      <span class="section-eyebrow">✦ Atelier Lucia Fashion</span>
+      <h1 style="margin-bottom:0.5rem;">Colecțiile Noastre</h1>
+      <p style="color: var(--lavender); font-family: var(--font-serif); font-style:italic; font-size:1.1rem; letter-spacing:0.15em;">
+        Fiecare piesă — o lume aparte
+      </p>
+    </div>
+  </div>
+
+  <!-- Collections Section -->
+  <section class="collections-section">
+
+    <!-- Filter bar -->
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">Toate</button>
+      <button class="filter-btn" data-filter="mireasa">Rochii Mireasă</button>
+      <button class="filter-btn" data-filter="seara">Rochii Seară</button>
+      <button class="filter-btn" data-filter="business">Business</button>
+      <button class="filter-btn" data-filter="vintage">Vintage</button>
+      <button class="filter-btn" data-filter="bluze">Bluze & Fuste</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid reveal">
+
+      <div class="product-card" data-category="mireasa">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-1"></div>
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Mireasă</p>
+          <h3 class="product-name">Rochia „Alba Eternă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-2"></div>
+          <span class="product-badge">Nou</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">Rochia „Noapte de Lavandă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="business">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-3"></div>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Ținută Business</p>
+          <h3 class="product-name">Costum „Elegance Noir"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="vintage">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-4"></div>
+          <span class="product-badge">Vintage</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Colecție Vintage</p>
+          <h3 class="product-name">Rochița „Anilor '50"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-5"></div>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluze & Fuste</p>
+          <h3 class="product-name">Set „Lila Dream"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="mireasa">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-6"></div>
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Mireasă</p>
+          <h3 class="product-name">Rochia „Poveste de Iubire"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-1"></div>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">Rochia „Amurg Violet"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="business">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-2"></div>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Ținută Business</p>
+          <h3 class="product-name">Sacou „Power Plum"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="vintage">
+        <div class="product-img">
+          <div class="product-img-bg prod-bg-3"></div>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Colecție Vintage</p>
+          <h3 class="product-name">Rochița „Belle Époque"</h3>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align:center; margin-top:5rem;" class="reveal">
+      <div class="ornament"><span>✦</span></div>
+      <h3 style="margin-bottom:1rem; color:var(--cream);">Nu ai găsit ce cauți?</h3>
+      <p style="color:rgba(248,245,242,0.6); margin-bottom:2rem; max-width:400px; margin-left:auto; margin-right:auto; font-family:var(--font-serif); font-style:italic;">
+        Fiecare vis poate deveni realitate. Contactează-ne pentru o piesă personalizată, croită special pentru tine.
+      </p>
+      <a href="contact.html" class="btn btn-primary">
+        <span>Comandă Personalizat</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">Lucia Fashion<span>Design Vestimentar</span></div>
+        <p>Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigare</h4>
+        <ul>
+          <li><a href="../index.html">Acasă</a></li>
+          <li><a href="colectii.html">Colecții</a></li>
+          <li><a href="despre.html">Despre noi</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Colecții</h4>
+        <ul>
+          <li><a href="colectii.html">Rochii de Mireasă</a></li>
+          <li><a href="colectii.html">Rochii de Seară</a></li>
+          <li><a href="colectii.html">Ținute Business</a></li>
+          <li><a href="colectii.html">Vintage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></li>
+          <li><a href="tel:+40700000000">+40 700 000 000</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Lucia Fashion Design. Toate drepturile rezervate.</p>
+      <p>Creat cu ♥ pentru eleganță autentică</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Lucia Fashion</title>
+  <meta name="description" content="Contactează Lucia Fashion pentru comenzi personalizate, întrebări sau programări la atelier." />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">
+      Lucia Fashion
+      <span>Design Vestimentar</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Acasă</a></li>
+      <li><a href="colectii.html">Colecții</a></li>
+      <li><a href="despre.html">Despre noi</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div>
+      <span class="section-eyebrow">✦ Suntem la dispoziția ta</span>
+      <h1 style="margin-bottom:0.5rem;">Contactează-ne</h1>
+      <p style="color: var(--lavender); font-family: var(--font-serif); font-style:italic; font-size:1.1rem; letter-spacing:0.15em;">
+        Fiecare mare poveste începe cu un mesaj
+      </p>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+
+    <!-- Info -->
+    <div class="reveal">
+      <span class="section-eyebrow">✦ Informații</span>
+      <h2 style="margin-bottom:1.5rem;">Să Vorbim<br>despre <em>Visul Tău</em></h2>
+      <p>
+        Fie că ai o idee clară sau abia începi să visezi la ținuta perfectă,
+        suntem aici să te ascultăm și să te ghidăm. Contactează-ne pentru
+        o consultație gratuită.
+      </p>
+
+      <ul class="contact-details">
+        <li>
+          <div class="contact-icon">✉</div>
+          <div class="contact-detail-text">
+            <small>Email</small>
+            <span>contact@luciafashion.ro</span>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">✆</div>
+          <div class="contact-detail-text">
+            <small>Telefon / WhatsApp</small>
+            <span>+40 700 000 000</span>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">◎</div>
+          <div class="contact-detail-text">
+            <small>Atelier</small>
+            <span>Adresă disponibilă la programare</span>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">◷</div>
+          <div class="contact-detail-text">
+            <small>Program</small>
+            <span>Luni–Sâmbătă: 10:00 – 18:00</span>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">f</div>
+          <div class="contact-detail-text">
+            <small>Facebook</small>
+            <span>Lucia Fashion Design</span>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Note -->
+      <div style="margin-top:2.5rem; padding:1.5rem; border:1px solid rgba(201,168,112,0.12); background:rgba(61,26,92,0.1);">
+        <p style="color:var(--gold); font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; margin-bottom:0.5rem;">✦ Important</p>
+        <p style="color:rgba(248,245,242,0.6); line-height:2;">
+          Pentru rochii de mireasă sau comenzi complexe, vă rugăm să contactați
+          atelierul cu minimum <strong style="color:var(--lavender);">3–6 luni</strong> înainte de eveniment,
+          pentru a ne asigura că avem suficient timp să creăm piesa perfectă.
+        </p>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="contact-form-wrap reveal reveal-delay-1">
+      <span class="section-eyebrow" style="display:block; margin-bottom:1.5rem;">✦ Trimite un mesaj</span>
+
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Prenume</label>
+            <input type="text" id="fname" name="fname" placeholder="Elena" required />
+          </div>
+          <div class="form-group">
+            <label for="lname">Nume</label>
+            <input type="text" id="lname" name="lname" placeholder="Ionescu" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="elena@email.ro" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Telefon (opțional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="+40 7XX XXX XXX" />
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subiect</label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Selectează tipul comenzii...</option>
+            <option value="mireasa">Rochie de Mireasă</option>
+            <option value="seara">Rochie de Seară</option>
+            <option value="business">Ținută Business</option>
+            <option value="vintage">Piesă Vintage</option>
+            <option value="bluze">Bluze & Fuste</option>
+            <option value="alta">Altă solicitare</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="eveniment">Data evenimentului (dacă există)</label>
+          <input type="date" id="eveniment" name="eveniment" />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Descrierea visului tău</label>
+          <textarea id="message" name="message" placeholder="Descrie-ne ce îți dorești — culori, stil, ocazia specială, orice detaliu contează..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+          <span>Trimite Mesajul</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+
+        <p style="text-align:center; margin-top:1rem; color:rgba(248,245,242,0.3); font-size:0.65rem; letter-spacing:0.1em;">
+          Îți răspundem în maxim 24 de ore. Datele tale sunt confidențiale.
+        </p>
+      </form>
+    </div>
+
+  </section>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-number" data-target="15" data-suffix="+">15+</div>
+      <div class="stat-label">Ani de Experiență</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="400" data-suffix="+">400+</div>
+      <div class="stat-label">Clienți Fericiți</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="24" data-suffix="h">24h</div>
+      <div class="stat-label">Timp de Răspuns</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">Lucia Fashion<span>Design Vestimentar</span></div>
+        <p>Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigare</h4>
+        <ul>
+          <li><a href="../index.html">Acasă</a></li>
+          <li><a href="colectii.html">Colecții</a></li>
+          <li><a href="despre.html">Despre noi</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Colecții</h4>
+        <ul>
+          <li><a href="colectii.html">Rochii de Mireasă</a></li>
+          <li><a href="colectii.html">Rochii de Seară</a></li>
+          <li><a href="colectii.html">Ținute Business</a></li>
+          <li><a href="colectii.html">Vintage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></li>
+          <li><a href="tel:+40700000000">+40 700 000 000</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Lucia Fashion Design. Toate drepturile rezervate.</p>
+      <p>Creat cu ♥ pentru eleganță autentică</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
