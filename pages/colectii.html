@@ -13,21 +13,18 @@
       gap: 2px;
       padding: 0 2rem 4rem;
     }
-
     .product-card {
       position: relative;
       overflow: hidden;
       cursor: pointer;
       background: #1a0a2e;
     }
-
     .product-card .product-img {
       position: relative;
       width: 100%;
       aspect-ratio: 3/4;
       overflow: hidden;
     }
-
     .product-card .product-img img {
       width: 100%;
       height: 100%;
@@ -35,22 +32,11 @@
       display: block;
       transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-
-    .product-card:hover .product-img img {
-      transform: scale(1.06);
-    }
-
-    .product-card .product-img-bg {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #3D1A5C, #7B3FA0);
-    }
-
+    .product-card:hover .product-img img { transform: scale(1.06); }
     .product-card .product-info {
       padding: 1rem 1.2rem 1.4rem;
       background: #0D0D0D;
     }
-
     .product-card .product-category {
       font-size: 0.58rem;
       letter-spacing: 0.18em;
@@ -59,7 +45,6 @@
       margin-bottom: 0.3rem;
       font-family: var(--font-sans);
     }
-
     .product-card .product-name {
       font-family: var(--font-serif);
       font-size: 1rem;
@@ -67,51 +52,49 @@
       color: var(--cream);
       line-height: 1.3;
     }
-
     .product-badge {
       position: absolute;
-      top: 12px;
-      left: 12px;
-      font-size: 0.55rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #0D0D0D;
-      background: var(--lavender);
-      padding: 4px 10px;
-      z-index: 2;
+      top: 12px; left: 12px;
+      font-size: 0.55rem; font-weight: 500;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #0D0D0D; background: var(--lavender);
+      padding: 4px 10px; z-index: 2;
     }
-
-    .product-card[style*="display: none"] { display: none !important; }
+    .photo-count {
+      position: absolute;
+      bottom: 10px; right: 10px;
+      font-size: 0.55rem; letter-spacing: 0.1em;
+      color: var(--cream); background: rgba(13,13,13,0.7);
+      padding: 3px 8px; z-index: 2;
+      font-family: var(--font-sans);
+    }
 
     /* Lightbox */
     .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
+      display: none; position: fixed; inset: 0; z-index: 1000;
       background: rgba(13,13,13,0.96);
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-out;
+      flex-direction: column; align-items: center; justify-content: center;
     }
     .lightbox.active { display: flex; }
-    .lightbox img {
-      max-width: 88vw;
-      max-height: 88vh;
+    .lightbox-main {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; flex: 1;
+    }
+    .lightbox-main img {
+      max-width: 80vw; max-height: 78vh;
       object-fit: contain;
-      animation: lbIn 0.3s ease;
+      animation: lbIn 0.25s ease;
     }
     @keyframes lbIn {
-      from { opacity: 0; transform: scale(0.94); }
+      from { opacity: 0; transform: scale(0.96); }
       to   { opacity: 1; transform: scale(1); }
     }
     .lightbox-close {
-      position: absolute; top: 24px; right: 32px;
+      position: absolute; top: 20px; right: 28px;
       font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em;
       text-transform: uppercase; color: rgba(248,245,242,0.5);
-      cursor: pointer; background: none; border: none; font-family: var(--font-sans);
-      transition: color 0.2s;
+      cursor: pointer; background: none; border: none;
+      font-family: var(--font-sans); transition: color 0.2s;
     }
     .lightbox-close:hover { color: var(--cream); }
     .lightbox-nav {
@@ -122,19 +105,34 @@
       cursor: pointer; font-size: 1.2rem; transition: all 0.2s;
     }
     .lightbox-nav:hover { background: rgba(248,245,242,0.1); color: var(--cream); }
-    .lightbox-prev { left: 24px; }
-    .lightbox-next { right: 24px; }
-    .lightbox-info {
-      position: absolute; bottom: 24px; text-align: center;
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-footer {
+      width: 100%; padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(248,245,242,0.08);
     }
-    .lightbox-info p {
-      font-size: 0.6rem; letter-spacing: 0.2em;
-      color: rgba(248,245,242,0.4); margin: 0;
-    }
-    .lightbox-info strong {
+    .lightbox-footer-info strong {
       display: block; font-family: var(--font-serif);
-      font-size: 1rem; font-weight: 400;
-      color: rgba(248,245,242,0.7); margin-bottom: 4px;
+      font-size: 1.1rem; font-weight: 400; color: var(--cream);
+    }
+    .lightbox-footer-info span {
+      font-size: 0.6rem; letter-spacing: 0.15em;
+      color: rgba(248,245,242,0.4); text-transform: uppercase;
+    }
+    .lightbox-thumbnails {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .lightbox-thumb {
+      width: 48px; height: 48px; object-fit: cover;
+      cursor: pointer; opacity: 0.4;
+      transition: opacity 0.2s; border: 1px solid transparent;
+    }
+    .lightbox-thumb.active { opacity: 1; border-color: var(--lavender); }
+    .lightbox-thumb:hover { opacity: 0.8; }
+    .lightbox-counter {
+      font-size: 0.6rem; letter-spacing: 0.15em;
+      color: rgba(248,245,242,0.3); min-width: 60px; text-align: right;
     }
   </style>
 </head>
@@ -145,8 +143,7 @@
 
   <nav class="navbar">
     <a href="../index.html" class="nav-logo">
-      Lucia Fashion
-      <span>Design Vestimentar</span>
+      Lucia Fashion <span>Design Vestimentar</span>
     </a>
     <ul class="nav-links">
       <li><a href="../index.html">Acasă</a></li>
@@ -161,7 +158,7 @@
     <div>
       <span class="section-eyebrow">✦ Atelier Lucia Fashion</span>
       <h1 style="margin-bottom:0.5rem;">Colecțiile Noastre</h1>
-      <p style="color: var(--lavender); font-family: var(--font-serif); font-style:italic; font-size:1.1rem; letter-spacing:0.15em;">
+      <p style="color:var(--lavender);font-family:var(--font-serif);font-style:italic;font-size:1.1rem;letter-spacing:0.15em;">
         Fiecare piesă — o lume aparte
       </p>
     </div>
@@ -183,10 +180,13 @@
     <div class="products-grid reveal" id="productsGrid">
 
       <!-- ROCHII DE MIREASA -->
-      <div class="product-card" data-category="mireasa" data-index="0">
+      <div class="product-card" data-category="mireasa"
+           data-photos='["r28_1.jpg","r28_2.jpg"]'
+           data-name="Flori de Nuntă" data-cat="Rochie Mireasă">
         <div class="product-img">
-          <img src="../assets/rochii/r28.jpg" alt="Flori de Nuntă" loading="lazy">
+          <img src="../assets/rochii/r28_1.jpg" alt="Flori de Nuntă" loading="lazy">
           <span class="product-badge">Unicat</span>
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie Mireasă</p>
@@ -194,10 +194,13 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="mireasa" data-index="1">
+      <div class="product-card" data-category="mireasa"
+           data-photos='["r36_1.jpg","r36_2.jpg","r36_3.jpg"]'
+           data-name="Mireasă Romantică" data-cat="Rochie Mireasă">
         <div class="product-img">
-          <img src="../assets/rochii/r36.jpg" alt="Mireasă Romantică" loading="lazy">
+          <img src="../assets/rochii/r36_1.jpg" alt="Mireasă Romantică" loading="lazy">
           <span class="product-badge">Unicat</span>
+          <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie Mireasă</p>
@@ -206,10 +209,13 @@
       </div>
 
       <!-- ROCHII DE SEARA -->
-      <div class="product-card" data-category="seara" data-index="2">
+      <div class="product-card" data-category="seara"
+           data-photos='["r15_1.jpg","r15_2.jpg","r15_3.jpg"]'
+           data-name="Noapte de Dantelă" data-cat="Rochie de Seară">
         <div class="product-img">
-          <img src="../assets/rochii/r15.jpg" alt="Noapte de Dantelă" loading="lazy">
+          <img src="../assets/rochii/r15_1.jpg" alt="Noapte de Dantelă" loading="lazy">
           <span class="product-badge">Bestseller</span>
+          <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
@@ -217,7 +223,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="3">
+      <div class="product-card" data-category="seara"
+           data-photos='["r1.jpg"]'
+           data-name="Vișiniu Regal" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r1.jpg" alt="Vișiniu Regal" loading="lazy">
         </div>
@@ -227,7 +235,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="4">
+      <div class="product-card" data-category="seara"
+           data-photos='["r4.jpg"]'
+           data-name="Roșu Pasiune" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r4.jpg" alt="Roșu Pasiune" loading="lazy">
         </div>
@@ -237,7 +247,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="5">
+      <div class="product-card" data-category="seara"
+           data-photos='["r16.jpg"]'
+           data-name="Aur Sclipitor" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r16.jpg" alt="Aur Sclipitor" loading="lazy">
           <span class="product-badge">Exclusiv</span>
@@ -248,9 +260,12 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="6">
+      <div class="product-card" data-category="seara"
+           data-photos='["r18_1.jpg","r18_2.jpg"]'
+           data-name="Roz Zeiță" data-cat="Rochie de Seară">
         <div class="product-img">
-          <img src="../assets/rochii/r18.jpg" alt="Roz Zeiță" loading="lazy">
+          <img src="../assets/rochii/r18_1.jpg" alt="Roz Zeiță" loading="lazy">
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
@@ -258,9 +273,12 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="7">
+      <div class="product-card" data-category="seara"
+           data-photos='["r19_1.jpg","r19_2.jpg","r19_3.jpg"]'
+           data-name="Roșu Statement" data-cat="Rochie de Seară">
         <div class="product-img">
-          <img src="../assets/rochii/r19.jpg" alt="Roșu Statement" loading="lazy">
+          <img src="../assets/rochii/r19_1.jpg" alt="Roșu Statement" loading="lazy">
+          <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
@@ -268,7 +286,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="8">
+      <div class="product-card" data-category="seara"
+           data-photos='["r20.jpg"]'
+           data-name="Petale de Ceață" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r20.jpg" alt="Petale de Ceață" loading="lazy">
         </div>
@@ -278,7 +298,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="9">
+      <div class="product-card" data-category="seara"
+           data-photos='["r21.jpg"]'
+           data-name="Trandafir Sângriu" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r21.jpg" alt="Trandafir Sângriu" loading="lazy">
         </div>
@@ -288,7 +310,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="10">
+      <div class="product-card" data-category="seara"
+           data-photos='["r23.jpg"]'
+           data-name="Flacăra de Aur" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r23.jpg" alt="Flacăra de Aur" loading="lazy">
           <span class="product-badge">Nou</span>
@@ -299,7 +323,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="11">
+      <div class="product-card" data-category="seara"
+           data-photos='["r24.jpg"]'
+           data-name="Zeiță Albă" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r24.jpg" alt="Zeiță Albă" loading="lazy">
         </div>
@@ -309,9 +335,12 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="12">
+      <div class="product-card" data-category="seara"
+           data-photos='["r25_1.jpg","r25_2.jpg"]'
+           data-name="Champagne Senzual" data-cat="Rochie de Seară">
         <div class="product-img">
-          <img src="../assets/rochii/r25.jpg" alt="Champagne Senzual" loading="lazy">
+          <img src="../assets/rochii/r25_1.jpg" alt="Champagne Senzual" loading="lazy">
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
@@ -319,9 +348,12 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="13">
+      <div class="product-card" data-category="seara"
+           data-photos='["r26_1.jpg","r26_2.jpg"]'
+           data-name="Burgundy Nocturn" data-cat="Rochie de Seară">
         <div class="product-img">
-          <img src="../assets/rochii/r26.jpg" alt="Burgundy Nocturn" loading="lazy">
+          <img src="../assets/rochii/r26_1.jpg" alt="Burgundy Nocturn" loading="lazy">
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
@@ -329,7 +361,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="14">
+      <div class="product-card" data-category="seara"
+           data-photos='["r27.jpg"]'
+           data-name="Noapte cu Paiete" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r27.jpg" alt="Noapte cu Paiete" loading="lazy">
         </div>
@@ -339,7 +373,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="15">
+      <div class="product-card" data-category="seara"
+           data-photos='["r29.jpg"]'
+           data-name="Petale Aurii" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r29.jpg" alt="Petale Aurii" loading="lazy">
           <span class="product-badge">Exclusiv</span>
@@ -350,10 +386,13 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="16">
+      <div class="product-card" data-category="seara"
+           data-photos='["r30_1.jpg","r30_2.jpg"]'
+           data-name="Regină de Aur" data-cat="Rochie de Seară">
         <div class="product-img">
-          <img src="../assets/rochii/r30.jpg" alt="Regină de Aur" loading="lazy">
+          <img src="../assets/rochii/r30_1.jpg" alt="Regină de Aur" loading="lazy">
           <span class="product-badge">Exclusiv</span>
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
@@ -361,7 +400,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="17">
+      <div class="product-card" data-category="seara"
+           data-photos='["r31.jpg"]'
+           data-name="Spumă Albă" data-cat="Rochie de Seară">
         <div class="product-img">
           <img src="../assets/rochii/r31.jpg" alt="Spumă Albă" loading="lazy">
         </div>
@@ -371,10 +412,13 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="seara" data-index="18">
+      <div class="product-card" data-category="seara"
+           data-photos='["r38_1.jpg","r38_2.jpg"]'
+           data-name="Smarald Fluid" data-cat="Rochie de Seară">
         <div class="product-img">
-          <img src="../assets/rochii/r38.jpg" alt="Smarald Fluid" loading="lazy">
+          <img src="../assets/rochii/r38_1.jpg" alt="Smarald Fluid" loading="lazy">
           <span class="product-badge">Nou</span>
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
@@ -383,7 +427,9 @@
       </div>
 
       <!-- ROCHII DE BAL -->
-      <div class="product-card" data-category="bal" data-index="19">
+      <div class="product-card" data-category="bal"
+           data-photos='["r11.jpg"]'
+           data-name="Stea de Argint" data-cat="Rochie de Bal">
         <div class="product-img">
           <img src="../assets/rochii/r11.jpg" alt="Stea de Argint" loading="lazy">
           <span class="product-badge">Unicat</span>
@@ -394,9 +440,12 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="bal" data-index="20">
+      <div class="product-card" data-category="bal"
+           data-photos='["r22_1.jpg","r22_2.jpg","r22_3.jpg"]'
+           data-name="Balerina Roz" data-cat="Rochie de Bal">
         <div class="product-img">
-          <img src="../assets/rochii/r22.jpg" alt="Balerina Roz" loading="lazy">
+          <img src="../assets/rochii/r22_1.jpg" alt="Balerina Roz" loading="lazy">
+          <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Bal</p>
@@ -404,10 +453,13 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="bal" data-index="21">
+      <div class="product-card" data-category="bal"
+           data-photos='["r37_1.jpg","r37_2.jpg"]'
+           data-name="Prințesă Albastră" data-cat="Rochie de Bal">
         <div class="product-img">
-          <img src="../assets/rochii/r37.jpg" alt="Prințesă Albastră" loading="lazy">
+          <img src="../assets/rochii/r37_1.jpg" alt="Prințesă Albastră" loading="lazy">
           <span class="product-badge">Unicat</span>
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Bal</p>
@@ -416,7 +468,9 @@
       </div>
 
       <!-- ROCHII DE ZI -->
-      <div class="product-card" data-category="zi" data-index="22">
+      <div class="product-card" data-category="zi"
+           data-photos='["r6.jpg"]'
+           data-name="Safari Leopard" data-cat="Rochie de Zi">
         <div class="product-img">
           <img src="../assets/rochii/r6.jpg" alt="Safari Leopard" loading="lazy">
         </div>
@@ -426,7 +480,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="zi" data-index="23">
+      <div class="product-card" data-category="zi"
+           data-photos='["r10.jpg"]'
+           data-name="Flori de Iarnă" data-cat="Rochie de Zi">
         <div class="product-img">
           <img src="../assets/rochii/r10.jpg" alt="Flori de Iarnă" loading="lazy">
         </div>
@@ -436,7 +492,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="zi" data-index="24">
+      <div class="product-card" data-category="zi"
+           data-photos='["r12.jpg"]'
+           data-name="Mov Nocturn" data-cat="Rochie de Zi">
         <div class="product-img">
           <img src="../assets/rochii/r12.jpg" alt="Mov Nocturn" loading="lazy">
         </div>
@@ -446,7 +504,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="zi" data-index="25">
+      <div class="product-card" data-category="zi"
+           data-photos='["r13.jpg"]'
+           data-name="Grădina Nopții" data-cat="Rochie de Zi">
         <div class="product-img">
           <img src="../assets/rochii/r13.jpg" alt="Grădina Nopții" loading="lazy">
         </div>
@@ -456,7 +516,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="zi" data-index="26">
+      <div class="product-card" data-category="zi"
+           data-photos='["r39.jpg"]'
+           data-name="Grădina Acuarelă" data-cat="Rochie de Zi">
         <div class="product-img">
           <img src="../assets/rochii/r39.jpg" alt="Grădina Acuarelă" loading="lazy">
         </div>
@@ -466,10 +528,12 @@
         </div>
       </div>
 
-      <!-- COSTUME ELEGANTE -->
-      <div class="product-card" data-category="zi" data-index="27">
+      <div class="product-card" data-category="zi"
+           data-photos='["r8.jpg","r9.jpg"]'
+           data-name="Safir cu Dantelă" data-cat="Costum Elegant">
         <div class="product-img">
           <img src="../assets/rochii/r8.jpg" alt="Safir cu Dantelă" loading="lazy">
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Costum Elegant</p>
@@ -477,18 +541,10 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="zi" data-index="28">
-        <div class="product-img">
-          <img src="../assets/rochii/r9.jpg" alt="Albastru Cobalt" loading="lazy">
-        </div>
-        <div class="product-info">
-          <p class="product-category">Rochie Elegantă</p>
-          <h3 class="product-name">„Albastru Cobalt"</h3>
-        </div>
-      </div>
-
-      <!-- BLUZE & TOPURI -->
-      <div class="product-card" data-category="bluze" data-index="29">
+      <!-- BLUZE -->
+      <div class="product-card" data-category="bluze"
+           data-photos='["r2.jpg"]'
+           data-name="Portocalie Solară" data-cat="Bluză">
         <div class="product-img">
           <img src="../assets/rochii/r2.jpg" alt="Portocalie Solară" loading="lazy">
         </div>
@@ -498,7 +554,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="bluze" data-index="30">
+      <div class="product-card" data-category="bluze"
+           data-photos='["r3.jpg"]'
+           data-name="Briza de In" data-cat="Bluză / Tunică">
         <div class="product-img">
           <img src="../assets/rochii/r3.jpg" alt="Briza de In" loading="lazy">
         </div>
@@ -508,7 +566,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="bluze" data-index="31">
+      <div class="product-card" data-category="bluze"
+           data-photos='["r7.jpg"]'
+           data-name="Nocturnă Bleumarin" data-cat="Bolero Dantelă">
         <div class="product-img">
           <img src="../assets/rochii/r7.jpg" alt="Nocturnă Bleumarin" loading="lazy">
         </div>
@@ -518,7 +578,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="bluze" data-index="32">
+      <div class="product-card" data-category="bluze"
+           data-photos='["r17.jpg"]'
+           data-name="Perla Ivory" data-cat="Bluză Elegantă">
         <div class="product-img">
           <img src="../assets/rochii/r17.jpg" alt="Perla Ivory" loading="lazy">
         </div>
@@ -528,7 +590,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="bluze" data-index="33">
+      <div class="product-card" data-category="bluze"
+           data-photos='["r32.jpg"]'
+           data-name="Mozaic Oriental" data-cat="Bluză / Tunică">
         <div class="product-img">
           <img src="../assets/rochii/r32.jpg" alt="Mozaic Oriental" loading="lazy">
         </div>
@@ -538,7 +602,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="bluze" data-index="34">
+      <div class="product-card" data-category="bluze"
+           data-photos='["r35.jpg"]'
+           data-name="Vis Paisley" data-cat="Bluză">
         <div class="product-img">
           <img src="../assets/rochii/r35.jpg" alt="Vis Paisley" loading="lazy">
         </div>
@@ -549,7 +615,9 @@
       </div>
 
       <!-- FUSTE -->
-      <div class="product-card" data-category="fuste" data-index="35">
+      <div class="product-card" data-category="fuste"
+           data-photos='["r14.jpg"]'
+           data-name="Vals Alb" data-cat="Fustă / Crinolenă">
         <div class="product-img">
           <img src="../assets/rochii/r14.jpg" alt="Vals Alb" loading="lazy">
         </div>
@@ -559,10 +627,13 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="fuste" data-index="36">
+      <div class="product-card" data-category="fuste"
+           data-photos='["r33_1.jpg","r33_2.jpg","r33_3.jpg"]'
+           data-name="Floare de Noapte" data-cat="Fustă Midi">
         <div class="product-img">
-          <img src="../assets/rochii/r33.jpg" alt="Floare de Noapte" loading="lazy">
+          <img src="../assets/rochii/r33_1.jpg" alt="Floare de Noapte" loading="lazy">
           <span class="product-badge">Unicat</span>
+          <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Fustă Midi</p>
@@ -570,7 +641,9 @@
         </div>
       </div>
 
-      <div class="product-card" data-category="fuste" data-index="37">
+      <div class="product-card" data-category="fuste"
+           data-photos='["r34.jpg"]'
+           data-name="Trandafiri de Catifea" data-cat="Fustă Midi">
         <div class="product-img">
           <img src="../assets/rochii/r34.jpg" alt="Trandafiri de Catifea" loading="lazy">
         </div>
@@ -581,7 +654,9 @@
       </div>
 
       <!-- PALTOANE -->
-      <div class="product-card" data-category="paltoane" data-index="38">
+      <div class="product-card" data-category="paltoane"
+           data-photos='["r40.jpg"]'
+           data-name="Eleganță Ivory" data-cat="Palton / Jachetă">
         <div class="product-img">
           <img src="../assets/rochii/r40.jpg" alt="Eleganță Ivory" loading="lazy">
           <span class="product-badge">Unicat</span>
@@ -594,28 +669,31 @@
 
     </div>
 
-    <!-- CTA -->
     <div style="text-align:center; margin-top:5rem;" class="reveal">
       <div class="ornament"><span>✦</span></div>
       <h3 style="margin-bottom:1rem; color:var(--cream);">Nu ai găsit ce cauți?</h3>
       <p style="color:rgba(248,245,242,0.6); margin-bottom:2rem; max-width:400px; margin-left:auto; margin-right:auto; font-family:var(--font-serif); font-style:italic;">
         Fiecare vis poate deveni realitate. Contactează-ne pentru o piesă personalizată, croită special pentru tine.
       </p>
-      <a href="contact.html" class="btn btn-primary">
-        <span>Comandă Personalizat</span>
-      </a>
+      <a href="contact.html" class="btn btn-primary"><span>Comandă Personalizat</span></a>
     </div>
   </section>
 
   <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox" id="lightbox">
     <button class="lightbox-close" onclick="closeLightboxBtn()">✕ Închide</button>
-    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navigate(-1)">&#8592;</button>
-    <img id="lightboxImg" src="" alt="">
-    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navigate(1)">&#8594;</button>
-    <div class="lightbox-info">
-      <strong id="lightboxName"></strong>
-      <p id="lightboxCounter"></p>
+    <button class="lightbox-nav lightbox-prev" onclick="navigatePhoto(-1)">&#8592;</button>
+    <div class="lightbox-main" onclick="closeLightbox(event)">
+      <img id="lightboxImg" src="" alt="">
+    </div>
+    <button class="lightbox-nav lightbox-next" onclick="navigatePhoto(1)">&#8594;</button>
+    <div class="lightbox-footer">
+      <div class="lightbox-footer-info">
+        <strong id="lightboxName"></strong>
+        <span id="lightboxCat"></span>
+      </div>
+      <div class="lightbox-thumbnails" id="lightboxThumbs"></div>
+      <div class="lightbox-counter" id="lightboxCounter"></div>
     </div>
   </div>
 
@@ -662,66 +740,71 @@
 
   <script src="../js/main.js"></script>
   <script>
-    // Filter
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.product-card');
+    const BASE = '../assets/rochii/';
+    let currentPhotos = [];
+    let currentPhotoIdx = 0;
+    let currentName = '';
+    let currentCat = '';
 
-    filterBtns.forEach(btn => {
+    // Filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
-        cards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+        document.querySelectorAll('.product-card').forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
         });
-        updateLightboxImages();
       });
     });
 
-    // Lightbox
-    let visibleImages = [];
-    let current = 0;
-
-    function updateLightboxImages() {
-      visibleImages = Array.from(cards)
-        .filter(c => c.style.display !== 'none')
-        .map(c => ({
-          src: c.querySelector('img') ? c.querySelector('img').src : '',
-          name: c.querySelector('.product-name') ? c.querySelector('.product-name').textContent : '',
-          cat: c.querySelector('.product-category') ? c.querySelector('.product-category').textContent : ''
-        }))
-        .filter(i => i.src);
-    }
-
-    updateLightboxImages();
-
-    cards.forEach((card, i) => {
+    // Open lightbox
+    document.querySelectorAll('.product-card').forEach(card => {
       card.addEventListener('click', () => {
-        updateLightboxImages();
-        const img = card.querySelector('img');
-        if (!img) return;
-        current = visibleImages.findIndex(vi => vi.src === img.src);
-        if (current === -1) current = 0;
-        showLightbox();
+        currentPhotos = JSON.parse(card.dataset.photos || '[]');
+        currentName = card.dataset.name || '';
+        currentCat = card.dataset.cat || '';
+        currentPhotoIdx = 0;
+        openLightbox();
       });
     });
 
-    function showLightbox() {
-      const item = visibleImages[current];
-      if (!item) return;
-      document.getElementById('lightboxImg').src = item.src;
-      document.getElementById('lightboxName').textContent = item.name;
-      document.getElementById('lightboxCounter').textContent = item.cat + ' · ' + (current + 1) + ' / ' + visibleImages.length;
+    function openLightbox() {
+      updateLightbox();
       document.getElementById('lightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
+    function updateLightbox() {
+      const photo = currentPhotos[currentPhotoIdx];
+      document.getElementById('lightboxImg').src = BASE + photo;
+      document.getElementById('lightboxImg').alt = currentName;
+      document.getElementById('lightboxName').textContent = currentName;
+      document.getElementById('lightboxCat').textContent = currentCat;
+      document.getElementById('lightboxCounter').textContent =
+        currentPhotos.length > 1 ? (currentPhotoIdx + 1) + ' / ' + currentPhotos.length : '';
+
+      // Thumbnails
+      const thumbsEl = document.getElementById('lightboxThumbs');
+      thumbsEl.innerHTML = '';
+      if (currentPhotos.length > 1) {
+        currentPhotos.forEach((p, i) => {
+          const img = document.createElement('img');
+          img.src = BASE + p;
+          img.className = 'lightbox-thumb' + (i === currentPhotoIdx ? ' active' : '');
+          img.onclick = (e) => { e.stopPropagation(); currentPhotoIdx = i; updateLightbox(); };
+          thumbsEl.appendChild(img);
+        });
+      }
+    }
+
+    function navigatePhoto(dir) {
+      currentPhotoIdx = (currentPhotoIdx + dir + currentPhotos.length) % currentPhotos.length;
+      updateLightbox();
+    }
+
     function closeLightbox(e) {
-      if (e.target === document.getElementById('lightbox')) closeLightboxBtn();
+      if (e.target === e.currentTarget) closeLightboxBtn();
     }
 
     function closeLightboxBtn() {
@@ -729,15 +812,10 @@
       document.body.style.overflow = '';
     }
 
-    function navigate(dir) {
-      current = (current + dir + visibleImages.length) % visibleImages.length;
-      showLightbox();
-    }
-
     document.addEventListener('keydown', e => {
       if (!document.getElementById('lightbox').classList.contains('active')) return;
-      if (e.key === 'ArrowRight') navigate(1);
-      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigatePhoto(1);
+      if (e.key === 'ArrowLeft') navigatePhoto(-1);
       if (e.key === 'Escape') closeLightboxBtn();
     });
   </script>
