@@ -489,6 +489,134 @@
       letter-spacing: 0.12em;
       color: rgba(248,245,242,0.3);
     }
+
+    /* ── GALERIE ── */
+    .gallery-section { padding: 0 60px 100px; }
+
+    .gallery-header {
+      padding: 80px 0 50px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .gallery-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--plum);
+      line-height: 1.1;
+    }
+
+    .gallery-header h2 em { font-style: italic; color: var(--violet); }
+
+    .gallery-header p {
+      font-size: 0.72rem;
+      color: rgba(61,26,92,0.5);
+      max-width: 240px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    .gallery-grid {
+      columns: 3;
+      column-gap: 6px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 6px;
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(61,26,92,0);
+      transition: background 0.3s;
+    }
+
+    .gallery-item:hover::after { background: rgba(61,26,92,0.08); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(13,13,13,0.95);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 88vw;
+      max-height: 88vh;
+      object-fit: contain;
+      animation: lbIn 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(248,245,242,0.5);
+      cursor: pointer;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+    }
+
+    .lightbox-close:hover { color: var(--cream); }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(248,245,242,0.2);
+      color: rgba(248,245,242,0.6);
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
+
+    .lightbox-nav:hover { background: rgba(248,245,242,0.1); color: var(--cream); }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 24px;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: rgba(248,245,242,0.3);
+    }
   </style>
 </head>
 <body>
@@ -662,6 +790,54 @@
     </div>
   </div>
 
+  <!-- GALERIE -->
+  <div class="gallery-section">
+    <div class="gallery-header">
+      <h2>Toate <em>modelele</em><br>disponibile</h2>
+      <p>Click pe orice model pentru a-l vedea în detaliu.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" onclick="openLightbox(0)"><img src="../assets/l20.jpg" alt="Lenjerie frunze tropicale" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(1)"><img src="../assets/l29.jpg" alt="Lenjerie trandafiri roz" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(2)"><img src="../assets/l28.jpg" alt="Lenjerie model geometric" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(3)"><img src="../assets/l27.jpg" alt="Lenjerie stele multicolore" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(4)"><img src="../assets/l1.jpg" alt="Lenjerie bujori roz" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(5)"><img src="../assets/l2.jpg" alt="Lenjerie lamai" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(6)"><img src="../assets/l3.jpg" alt="Lenjerie flori pastel" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(7)"><img src="../assets/l4.jpg" alt="Lenjerie flori albastre" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(8)"><img src="../assets/l5.jpg" alt="Lenjerie margarete" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(9)"><img src="../assets/l6.jpg" alt="Lenjerie masini retro" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(10)"><img src="../assets/l7.jpg" alt="Lenjerie trandafiri roz auriu" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(11)"><img src="../assets/l8.jpg" alt="Lenjerie inimi rosii" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(12)"><img src="../assets/l9.jpg" alt="Lenjerie inimi mari" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(13)"><img src="../assets/l10.jpg" alt="Lenjerie flori colorate" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(14)"><img src="../assets/l11.jpg" alt="Lenjerie floricele roz" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(15)"><img src="../assets/l12.jpg" alt="Lenjerie flori delicate" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(16)"><img src="../assets/l13.jpg" alt="Lenjerie model geometric modern" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(17)"><img src="../assets/l14.jpg" alt="Lenjerie flori crem auriu" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(18)"><img src="../assets/l15.jpg" alt="Lenjerie maci rosii" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(19)"><img src="../assets/l16.jpg" alt="Lenjerie toile de jouy negru" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(20)"><img src="../assets/l17.jpg" alt="Lenjerie pene colorate" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(21)"><img src="../assets/l18.jpg" alt="Lenjerie lavanda" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(22)"><img src="../assets/l19.jpg" alt="Lenjerie bujori roz pastel" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(23)"><img src="../assets/l21.jpg" alt="Seturi lenjerii ambalate" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(24)"><img src="../assets/l22.jpg" alt="Seturi lenjerii stivuite" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(25)"><img src="../assets/l23.jpg" alt="Seturi lenjerii alb si bleu" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(26)"><img src="../assets/l24.jpg" alt="Seturi lenjerii trandafiri si stele" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(27)"><img src="../assets/l25.jpg" alt="Seturi lenjerii flori albastre" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLightbox(28)"><img src="../assets/l26.jpg" alt="Seturi lenjerii diverse" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightboxBtn()">✕ Închide</button>
+    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navigate(-1)">&#8592;</button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navigate(1)">&#8594;</button>
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+  </div>
+
   <!-- CTA -->
   <div class="cta-section">
     <p>Doriți o lenjerie personalizată<br>sau aveți întrebări despre colecții?</p>
@@ -673,6 +849,53 @@
     <span class="logo">Lucia Fashion</span>
     <p>© 2025 Lucia Fashion. Toate drepturile rezervate.</p>
   </footer>
+
+  <script>
+    const images = [
+      '../assets/l20.jpg', '../assets/l29.jpg', '../assets/l28.jpg', '../assets/l27.jpg',
+      '../assets/l1.jpg',  '../assets/l2.jpg',  '../assets/l3.jpg',  '../assets/l4.jpg',
+      '../assets/l5.jpg',  '../assets/l6.jpg',  '../assets/l7.jpg',  '../assets/l8.jpg',
+      '../assets/l9.jpg',  '../assets/l10.jpg', '../assets/l11.jpg', '../assets/l12.jpg',
+      '../assets/l13.jpg', '../assets/l14.jpg', '../assets/l15.jpg', '../assets/l16.jpg',
+      '../assets/l17.jpg', '../assets/l18.jpg', '../assets/l19.jpg', '../assets/l21.jpg',
+      '../assets/l22.jpg', '../assets/l23.jpg', '../assets/l24.jpg', '../assets/l25.jpg',
+      '../assets/l26.jpg'
+    ];
+
+    let current = 0;
+
+    function openLightbox(index) {
+      current = index;
+      document.getElementById('lightboxImg').src = images[current];
+      document.getElementById('lightboxCounter').textContent = (current + 1) + ' / ' + images.length;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+      if (e.target === document.getElementById('lightbox')) {
+        closeLightboxBtn();
+      }
+    }
+
+    function closeLightboxBtn() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      current = (current + dir + images.length) % images.length;
+      document.getElementById('lightboxImg').src = images[current];
+      document.getElementById('lightboxCounter').textContent = (current + 1) + ' / ' + images.length;
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'ArrowRight') navigate(1);
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'Escape') closeLightboxBtn();
+    });
+  </script>
 
 </body>
 </html>
