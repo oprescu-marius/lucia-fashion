@@ -4,8 +4,139 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Colecții — Lucia Fashion</title>
-  <meta name="description" content="Descoperă colecțiile Lucia Fashion — rochii de mireasă, rochii de seară, ținute business și piese vintage unicat." />
+  <meta name="description" content="Descoperă colecțiile Lucia Fashion — rochii de mireasă, rochii de seară, ținute elegante, fuste, bluze și paltoane unicat." />
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding: 0 2rem 4rem;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: #1a0a2e;
+    }
+
+    .product-card .product-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+
+    .product-card .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.06);
+    }
+
+    .product-card .product-img-bg {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #3D1A5C, #7B3FA0);
+    }
+
+    .product-card .product-info {
+      padding: 1rem 1.2rem 1.4rem;
+      background: #0D0D0D;
+    }
+
+    .product-card .product-category {
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-bottom: 0.3rem;
+      font-family: var(--font-sans);
+    }
+
+    .product-card .product-name {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #0D0D0D;
+      background: var(--lavender);
+      padding: 4px 10px;
+      z-index: 2;
+    }
+
+    .product-card[style*="display: none"] { display: none !important; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(13,13,13,0.96);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 88vw;
+      max-height: 88vh;
+      object-fit: contain;
+      animation: lbIn 0.3s ease;
+    }
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 32px;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(248,245,242,0.5);
+      cursor: pointer; background: none; border: none; font-family: var(--font-sans);
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: var(--cream); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: none; border: 1px solid rgba(248,245,242,0.2);
+      color: rgba(248,245,242,0.6); width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.2rem; transition: all 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(248,245,242,0.1); color: var(--cream); }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+    .lightbox-info {
+      position: absolute; bottom: 24px; text-align: center;
+    }
+    .lightbox-info p {
+      font-size: 0.6rem; letter-spacing: 0.2em;
+      color: rgba(248,245,242,0.4); margin: 0;
+    }
+    .lightbox-info strong {
+      display: block; font-family: var(--font-serif);
+      font-size: 1rem; font-weight: 400;
+      color: rgba(248,245,242,0.7); margin-bottom: 4px;
+    }
+  </style>
 </head>
 <body>
 
@@ -26,7 +157,6 @@
     </ul>
   </nav>
 
-  <!-- Page Hero -->
   <div class="page-hero">
     <div>
       <span class="section-eyebrow">✦ Atelier Lucia Fashion</span>
@@ -37,113 +167,428 @@
     </div>
   </div>
 
-  <!-- Collections Section -->
   <section class="collections-section">
 
-    <!-- Filter bar -->
     <div class="filter-bar reveal">
       <button class="filter-btn active" data-filter="all">Toate</button>
       <button class="filter-btn" data-filter="mireasa">Rochii Mireasă</button>
       <button class="filter-btn" data-filter="seara">Rochii Seară</button>
-      <button class="filter-btn" data-filter="business">Business</button>
-      <button class="filter-btn" data-filter="vintage">Vintage</button>
-      <button class="filter-btn" data-filter="bluze">Bluze & Fuste</button>
+      <button class="filter-btn" data-filter="zi">Rochii de Zi</button>
+      <button class="filter-btn" data-filter="bal">Rochii de Bal</button>
+      <button class="filter-btn" data-filter="bluze">Bluze & Topuri</button>
+      <button class="filter-btn" data-filter="fuste">Fuste</button>
+      <button class="filter-btn" data-filter="paltoane">Paltoane</button>
     </div>
 
-    <!-- Products Grid -->
-    <div class="products-grid reveal">
+    <div class="products-grid reveal" id="productsGrid">
 
-      <div class="product-card" data-category="mireasa">
+      <!-- ROCHII DE MIREASA -->
+      <div class="product-card" data-category="mireasa" data-index="0">
         <div class="product-img">
-          <div class="product-img-bg prod-bg-1"></div>
+          <img src="../assets/rochii/r28.jpg" alt="Flori de Nuntă" loading="lazy">
           <span class="product-badge">Unicat</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie Mireasă</p>
-          <h3 class="product-name">Rochia „Alba Eternă"</h3>
+          <h3 class="product-name">„Flori de Nuntă"</h3>
         </div>
       </div>
 
-      <div class="product-card" data-category="seara">
+      <div class="product-card" data-category="mireasa" data-index="1">
         <div class="product-img">
-          <div class="product-img-bg prod-bg-2"></div>
+          <img src="../assets/rochii/r36.jpg" alt="Mireasă Romantică" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Mireasă</p>
+          <h3 class="product-name">„Mireasă Romantică"</h3>
+        </div>
+      </div>
+
+      <!-- ROCHII DE SEARA -->
+      <div class="product-card" data-category="seara" data-index="2">
+        <div class="product-img">
+          <img src="../assets/rochii/r15.jpg" alt="Noapte de Dantelă" loading="lazy">
+          <span class="product-badge">Bestseller</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Noapte de Dantelă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="3">
+        <div class="product-img">
+          <img src="../assets/rochii/r1.jpg" alt="Vișiniu Regal" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Vișiniu Regal"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="4">
+        <div class="product-img">
+          <img src="../assets/rochii/r4.jpg" alt="Roșu Pasiune" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Roșu Pasiune"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="5">
+        <div class="product-img">
+          <img src="../assets/rochii/r16.jpg" alt="Aur Sclipitor" loading="lazy">
+          <span class="product-badge">Exclusiv</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Aur Sclipitor"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="6">
+        <div class="product-img">
+          <img src="../assets/rochii/r18.jpg" alt="Roz Zeiță" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Roz Zeiță"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="7">
+        <div class="product-img">
+          <img src="../assets/rochii/r19.jpg" alt="Roșu Statement" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Roșu Statement"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="8">
+        <div class="product-img">
+          <img src="../assets/rochii/r20.jpg" alt="Petale de Ceață" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Petale de Ceață"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="9">
+        <div class="product-img">
+          <img src="../assets/rochii/r21.jpg" alt="Trandafir Sângriu" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Trandafir Sângriu"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="10">
+        <div class="product-img">
+          <img src="../assets/rochii/r23.jpg" alt="Flacăra de Aur" loading="lazy">
           <span class="product-badge">Nou</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
-          <h3 class="product-name">Rochia „Noapte de Lavandă"</h3>
+          <h3 class="product-name">„Flacăra de Aur"</h3>
         </div>
       </div>
 
-      <div class="product-card" data-category="business">
+      <div class="product-card" data-category="seara" data-index="11">
         <div class="product-img">
-          <div class="product-img-bg prod-bg-3"></div>
-        </div>
-        <div class="product-info">
-          <p class="product-category">Ținută Business</p>
-          <h3 class="product-name">Costum „Elegance Noir"</h3>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="vintage">
-        <div class="product-img">
-          <div class="product-img-bg prod-bg-4"></div>
-          <span class="product-badge">Vintage</span>
-        </div>
-        <div class="product-info">
-          <p class="product-category">Colecție Vintage</p>
-          <h3 class="product-name">Rochița „Anilor '50"</h3>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="bluze">
-        <div class="product-img">
-          <div class="product-img-bg prod-bg-5"></div>
-        </div>
-        <div class="product-info">
-          <p class="product-category">Bluze & Fuste</p>
-          <h3 class="product-name">Set „Lila Dream"</h3>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="mireasa">
-        <div class="product-img">
-          <div class="product-img-bg prod-bg-6"></div>
-          <span class="product-badge">Unicat</span>
-        </div>
-        <div class="product-info">
-          <p class="product-category">Rochie Mireasă</p>
-          <h3 class="product-name">Rochia „Poveste de Iubire"</h3>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="seara">
-        <div class="product-img">
-          <div class="product-img-bg prod-bg-1"></div>
+          <img src="../assets/rochii/r24.jpg" alt="Zeiță Albă" loading="lazy">
         </div>
         <div class="product-info">
           <p class="product-category">Rochie de Seară</p>
-          <h3 class="product-name">Rochia „Amurg Violet"</h3>
+          <h3 class="product-name">„Zeiță Albă"</h3>
         </div>
       </div>
 
-      <div class="product-card" data-category="business">
+      <div class="product-card" data-category="seara" data-index="12">
         <div class="product-img">
-          <div class="product-img-bg prod-bg-2"></div>
+          <img src="../assets/rochii/r25.jpg" alt="Champagne Senzual" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Ținută Business</p>
-          <h3 class="product-name">Sacou „Power Plum"</h3>
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Champagne Senzual"</h3>
         </div>
       </div>
 
-      <div class="product-card" data-category="vintage">
+      <div class="product-card" data-category="seara" data-index="13">
         <div class="product-img">
-          <div class="product-img-bg prod-bg-3"></div>
+          <img src="../assets/rochii/r26.jpg" alt="Burgundy Nocturn" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Colecție Vintage</p>
-          <h3 class="product-name">Rochița „Belle Époque"</h3>
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Burgundy Nocturn"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="14">
+        <div class="product-img">
+          <img src="../assets/rochii/r27.jpg" alt="Noapte cu Paiete" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Noapte cu Paiete"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="15">
+        <div class="product-img">
+          <img src="../assets/rochii/r29.jpg" alt="Petale Aurii" loading="lazy">
+          <span class="product-badge">Exclusiv</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Petale Aurii"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="16">
+        <div class="product-img">
+          <img src="../assets/rochii/r30.jpg" alt="Regină de Aur" loading="lazy">
+          <span class="product-badge">Exclusiv</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Regină de Aur"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="17">
+        <div class="product-img">
+          <img src="../assets/rochii/r31.jpg" alt="Spumă Albă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Spumă Albă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara" data-index="18">
+        <div class="product-img">
+          <img src="../assets/rochii/r38.jpg" alt="Smarald Fluid" loading="lazy">
+          <span class="product-badge">Nou</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Seară</p>
+          <h3 class="product-name">„Smarald Fluid"</h3>
+        </div>
+      </div>
+
+      <!-- ROCHII DE BAL -->
+      <div class="product-card" data-category="bal" data-index="19">
+        <div class="product-img">
+          <img src="../assets/rochii/r11.jpg" alt="Stea de Argint" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Bal</p>
+          <h3 class="product-name">„Stea de Argint"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal" data-index="20">
+        <div class="product-img">
+          <img src="../assets/rochii/r22.jpg" alt="Balerina Roz" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Bal</p>
+          <h3 class="product-name">„Balerina Roz"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal" data-index="21">
+        <div class="product-img">
+          <img src="../assets/rochii/r37.jpg" alt="Prințesă Albastră" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Bal</p>
+          <h3 class="product-name">„Prințesă Albastră"</h3>
+        </div>
+      </div>
+
+      <!-- ROCHII DE ZI -->
+      <div class="product-card" data-category="zi" data-index="22">
+        <div class="product-img">
+          <img src="../assets/rochii/r6.jpg" alt="Safari Leopard" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Zi</p>
+          <h3 class="product-name">„Safari Leopard"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi" data-index="23">
+        <div class="product-img">
+          <img src="../assets/rochii/r10.jpg" alt="Flori de Iarnă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Zi</p>
+          <h3 class="product-name">„Flori de Iarnă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi" data-index="24">
+        <div class="product-img">
+          <img src="../assets/rochii/r12.jpg" alt="Mov Nocturn" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Zi</p>
+          <h3 class="product-name">„Mov Nocturn"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi" data-index="25">
+        <div class="product-img">
+          <img src="../assets/rochii/r13.jpg" alt="Grădina Nopții" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Zi</p>
+          <h3 class="product-name">„Grădina Nopții"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi" data-index="26">
+        <div class="product-img">
+          <img src="../assets/rochii/r39.jpg" alt="Grădina Acuarelă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie de Zi</p>
+          <h3 class="product-name">„Grădina Acuarelă"</h3>
+        </div>
+      </div>
+
+      <!-- COSTUME ELEGANTE -->
+      <div class="product-card" data-category="zi" data-index="27">
+        <div class="product-img">
+          <img src="../assets/rochii/r8.jpg" alt="Safir cu Dantelă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Costum Elegant</p>
+          <h3 class="product-name">„Safir cu Dantelă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi" data-index="28">
+        <div class="product-img">
+          <img src="../assets/rochii/r9.jpg" alt="Albastru Cobalt" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Elegantă</p>
+          <h3 class="product-name">„Albastru Cobalt"</h3>
+        </div>
+      </div>
+
+      <!-- BLUZE & TOPURI -->
+      <div class="product-card" data-category="bluze" data-index="29">
+        <div class="product-img">
+          <img src="../assets/rochii/r2.jpg" alt="Portocalie Solară" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză</p>
+          <h3 class="product-name">„Portocalie Solară"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze" data-index="30">
+        <div class="product-img">
+          <img src="../assets/rochii/r3.jpg" alt="Briza de In" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză / Tunică</p>
+          <h3 class="product-name">„Briza de In"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze" data-index="31">
+        <div class="product-img">
+          <img src="../assets/rochii/r7.jpg" alt="Nocturnă Bleumarin" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bolero / Jachetă Dantelă</p>
+          <h3 class="product-name">„Nocturnă Bleumarin"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze" data-index="32">
+        <div class="product-img">
+          <img src="../assets/rochii/r17.jpg" alt="Perla Ivory" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză Elegantă</p>
+          <h3 class="product-name">„Perla Ivory"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze" data-index="33">
+        <div class="product-img">
+          <img src="../assets/rochii/r32.jpg" alt="Mozaic Oriental" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză / Tunică</p>
+          <h3 class="product-name">„Mozaic Oriental"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze" data-index="34">
+        <div class="product-img">
+          <img src="../assets/rochii/r35.jpg" alt="Vis Paisley" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză</p>
+          <h3 class="product-name">„Vis Paisley"</h3>
+        </div>
+      </div>
+
+      <!-- FUSTE -->
+      <div class="product-card" data-category="fuste" data-index="35">
+        <div class="product-img">
+          <img src="../assets/rochii/r14.jpg" alt="Vals Alb" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă / Crinolenă</p>
+          <h3 class="product-name">„Vals Alb"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="fuste" data-index="36">
+        <div class="product-img">
+          <img src="../assets/rochii/r33.jpg" alt="Floare de Noapte" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă Midi</p>
+          <h3 class="product-name">„Floare de Noapte"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="fuste" data-index="37">
+        <div class="product-img">
+          <img src="../assets/rochii/r34.jpg" alt="Trandafiri de Catifea" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă Midi</p>
+          <h3 class="product-name">„Trandafiri de Catifea"</h3>
+        </div>
+      </div>
+
+      <!-- PALTOANE -->
+      <div class="product-card" data-category="paltoane" data-index="38">
+        <div class="product-img">
+          <img src="../assets/rochii/r40.jpg" alt="Eleganță Ivory" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Palton / Jachetă</p>
+          <h3 class="product-name">„Eleganță Ivory"</h3>
         </div>
       </div>
 
@@ -161,6 +606,18 @@
       </a>
     </div>
   </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightboxBtn()">✕ Închide</button>
+    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navigate(-1)">&#8592;</button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navigate(1)">&#8594;</button>
+    <div class="lightbox-info">
+      <strong id="lightboxName"></strong>
+      <p id="lightboxCounter"></p>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="footer-grid">
@@ -183,8 +640,8 @@
         <ul>
           <li><a href="colectii.html">Rochii de Mireasă</a></li>
           <li><a href="colectii.html">Rochii de Seară</a></li>
-          <li><a href="colectii.html">Ținute Business</a></li>
-          <li><a href="colectii.html">Vintage</a></li>
+          <li><a href="colectii.html">Rochii de Bal</a></li>
+          <li><a href="colectii.html">Fuste & Bluze</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -204,5 +661,85 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script>
+    // Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.product-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        updateLightboxImages();
+      });
+    });
+
+    // Lightbox
+    let visibleImages = [];
+    let current = 0;
+
+    function updateLightboxImages() {
+      visibleImages = Array.from(cards)
+        .filter(c => c.style.display !== 'none')
+        .map(c => ({
+          src: c.querySelector('img') ? c.querySelector('img').src : '',
+          name: c.querySelector('.product-name') ? c.querySelector('.product-name').textContent : '',
+          cat: c.querySelector('.product-category') ? c.querySelector('.product-category').textContent : ''
+        }))
+        .filter(i => i.src);
+    }
+
+    updateLightboxImages();
+
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        updateLightboxImages();
+        const img = card.querySelector('img');
+        if (!img) return;
+        current = visibleImages.findIndex(vi => vi.src === img.src);
+        if (current === -1) current = 0;
+        showLightbox();
+      });
+    });
+
+    function showLightbox() {
+      const item = visibleImages[current];
+      if (!item) return;
+      document.getElementById('lightboxImg').src = item.src;
+      document.getElementById('lightboxName').textContent = item.name;
+      document.getElementById('lightboxCounter').textContent = item.cat + ' · ' + (current + 1) + ' / ' + visibleImages.length;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightboxBtn();
+    }
+
+    function closeLightboxBtn() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir) {
+      current = (current + dir + visibleImages.length) % visibleImages.length;
+      showLightbox();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'ArrowRight') navigate(1);
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'Escape') closeLightboxBtn();
+    });
+  </script>
 </body>
 </html>
