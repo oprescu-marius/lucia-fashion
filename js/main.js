@@ -179,3 +179,40 @@
   });
 
 })();
+
+/* ── Mobile Hamburger Menu ─────────────────── */
+(function() {
+  const hamburger = document.querySelector('.nav-hamburger');
+  const overlay = document.querySelector('.nav-mobile-overlay');
+  const closeBtn = document.querySelector('.nav-mobile-close');
+
+  if (!hamburger || !overlay) return;
+
+  function openMenu() {
+    hamburger.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+  // Închide la click pe link
+  overlay.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Închide la Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+})();
