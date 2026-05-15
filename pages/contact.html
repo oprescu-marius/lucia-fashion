@@ -4,8 +4,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Lucia Fashion</title>
-  <meta name="description" content="Contactează Lucia Fashion pentru comenzi personalizate, întrebări sau programări la atelier." />
+  <meta name="description" content="Contactează Lucia Fashion pentru comenzi personalizate, întrebări sau programări la atelier. Str. Plutașilor 18, Sector 1, București." />
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .map-section { padding: 0 3rem 5rem; }
+    .map-label {
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .map-wrap {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,112,0.15);
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 360px;
+      border: 0;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+    }
+    .map-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 60px; height: 60px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .contact-details a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .contact-details a:hover { color: var(--gold); }
+    .contact-icon.fb { font-family: var(--font-serif); font-weight: 600; font-style: italic; }
+
+    /* ── VALIDARE ── */
+    .form-group input.invalid,
+    .form-group select.invalid,
+    .form-group textarea.invalid {
+      border-color: #c0392b !important;
+      box-shadow: 0 0 0 2px rgba(192,57,43,0.15);
+    }
+    .form-group input.valid,
+    .form-group select.valid,
+    .form-group textarea.valid {
+      border-color: rgba(201,168,112,0.5) !important;
+    }
+    .field-error {
+      color: #e74c3c;
+      font-size: 0.62rem;
+      font-family: var(--font-sans);
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+      display: none;
+    }
+    .field-error.show { display: block; }
+
+    /* ── SUCCES ── */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+      border: 1px solid rgba(201,168,112,0.2);
+      background: rgba(61,26,92,0.12);
+    }
+    .form-success.show { display: block; }
+    .form-success-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
+    .form-success h3 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+    .form-success p {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: rgba(248,245,242,0.55);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 600px) {
+      .map-section { padding: 0 1rem 3rem; }
+      .map-wrap iframe { height: 260px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -25,13 +115,10 @@
       <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
     <button class="nav-hamburger" aria-label="Meniu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- Mobile menu overlay -->
   <div class="nav-mobile-overlay">
     <button class="nav-mobile-close">✕ Închide</button>
     <a href="../index.html">Acasă</a>
@@ -41,75 +128,71 @@
     <a href="contact.html">Contact</a>
   </div>
 
-  <!-- Page Hero -->
   <div class="page-hero">
     <div>
       <span class="section-eyebrow">✦ Suntem la dispoziția ta</span>
       <h1 style="margin-bottom:0.5rem;">Contactează-ne</h1>
-      <p style="color: var(--lavender); font-family: var(--font-serif); font-style:italic; font-size:1.1rem; letter-spacing:0.15em;">
+      <p style="color:var(--lavender); font-family:var(--font-serif); font-style:italic; font-size:1.1rem; letter-spacing:0.15em;">
         Fiecare mare poveste începe cu un mesaj
       </p>
     </div>
   </div>
 
-  <!-- Contact Section -->
   <section class="contact-section">
 
     <!-- Info -->
     <div class="reveal">
       <span class="section-eyebrow">✦ Informații</span>
       <h2 style="margin-bottom:1.5rem;">Să Vorbim<br>despre <em>Visul Tău</em></h2>
-      <p>
-        Fie că ai o idee clară sau abia începi să visezi la ținuta perfectă,
-        suntem aici să te ascultăm și să te ghidăm. Contactează-ne pentru
-        o consultație gratuită.
-      </p>
+      <p>Fie că ai o idee clară sau abia începi să visezi la ținuta perfectă, suntem aici să te ascultăm și să te ghidăm. Contactează-ne pentru o consultație gratuită.</p>
 
       <ul class="contact-details">
         <li>
           <div class="contact-icon">✉</div>
           <div class="contact-detail-text">
             <small>Email</small>
-            <span>contact@luciafashion.ro</span>
+            <span><a href="mailto:tudoranlucia@yahoo.com">tudoranlucia@yahoo.com</a></span>
           </div>
         </li>
         <li>
           <div class="contact-icon">✆</div>
           <div class="contact-detail-text">
             <small>Telefon / WhatsApp</small>
-            <span>+40 700 000 000</span>
+            <span><a href="tel:+40728304151">0728 304 151</a></span>
           </div>
         </li>
         <li>
           <div class="contact-icon">◎</div>
           <div class="contact-detail-text">
             <small>Atelier</small>
-            <span>Adresă disponibilă la programare</span>
+            <span>Str. Plutașilor nr. 18, Sector 1, București</span>
           </div>
         </li>
         <li>
           <div class="contact-icon">◷</div>
           <div class="contact-detail-text">
             <small>Program</small>
-            <span>Luni–Sâmbătă: 10:00 – 18:00</span>
+            <span>Luni–Vineri: 09:00 – 21:00</span>
+            <span style="font-size:0.68rem; color:rgba(248,245,242,0.4); margin-top:3px; display:block;">
+              Weekend: doar cu programare —
+              <a href="tel:+40728304151" style="color:var(--lavender); text-decoration:none;">0728 304 151</a>
+            </span>
           </div>
         </li>
         <li>
-          <div class="contact-icon">f</div>
+          <div class="contact-icon fb">f</div>
           <div class="contact-detail-text">
             <small>Facebook</small>
-            <span>Lucia Fashion Design</span>
+            <span><a href="https://www.facebook.com/luciafashiondesign/" target="_blank" rel="noopener">Lucia Fashion Design</a></span>
           </div>
         </li>
       </ul>
 
-      <!-- Note -->
       <div style="margin-top:2.5rem; padding:1.5rem; border:1px solid rgba(201,168,112,0.12); background:rgba(61,26,92,0.1);">
         <p style="color:var(--gold); font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; margin-bottom:0.5rem;">✦ Important</p>
         <p style="color:rgba(248,245,242,0.6); line-height:2;">
-          Pentru rochii de mireasă sau comenzi complexe, vă rugăm să contactați
-          atelierul cu minimum <strong style="color:var(--lavender);">3–6 luni</strong> înainte de eveniment,
-          pentru a ne asigura că avem suficient timp să creăm piesa perfectă.
+          Pentru rochii de mireasă sau comenzi complexe, vă rugăm să contactați atelierul cu minimum
+          <strong style="color:var(--lavender);">3–6 luni</strong> înainte de eveniment.
         </p>
       </div>
     </div>
@@ -118,65 +201,118 @@
     <div class="contact-form-wrap reveal reveal-delay-1">
       <span class="section-eyebrow" style="display:block; margin-bottom:1.5rem;">✦ Trimite un mesaj</span>
 
-      <form id="contactForm" novalidate>
+      <!--
+        NETLIFY FORMS — instrucțiuni de configurare după deploy:
+        1. Mergi în Netlify Dashboard → Site → Forms
+        2. Selectează formularul "contact"
+        3. Mergi la Settings → Form notifications
+        4. Adaugă Email notification → to: tudoranlucia@yahoo.com
+        5. Activează "Reply-To" pe câmpul "email"
+      -->
+      <form
+        id="contactForm"
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        novalidate
+      >
+        <!-- Câmpuri obligatorii Netlify -->
+        <input type="hidden" name="form-name" value="contact" />
+        <p style="display:none;"><label>Nu completa: <input name="bot-field" /></label></p>
+
         <div class="form-row">
           <div class="form-group">
-            <label for="fname">Prenume</label>
-            <input type="text" id="fname" name="fname" placeholder="Elena" required />
+            <label for="fname">Prenume *</label>
+            <input type="text" id="fname" name="prenume" placeholder="Elena" required autocomplete="given-name" />
+            <span class="field-error" id="err-fname">Te rugăm să introduci prenumele.</span>
           </div>
           <div class="form-group">
-            <label for="lname">Nume</label>
-            <input type="text" id="lname" name="lname" placeholder="Ionescu" required />
+            <label for="lname">Nume *</label>
+            <input type="text" id="lname" name="nume" placeholder="Ionescu" required autocomplete="family-name" />
+            <span class="field-error" id="err-lname">Te rugăm să introduci numele.</span>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="elena@email.ro" required />
+          <label for="email">Email * <span style="opacity:0.45; font-size:0.65rem;">(folosit pentru reply)</span></label>
+          <input type="email" id="email" name="email" placeholder="elena@email.ro" required autocomplete="email" />
+          <span class="field-error" id="err-email">Te rugăm să introduci un email valid (ex: nume@domeniu.ro).</span>
         </div>
 
         <div class="form-group">
-          <label for="phone">Telefon (opțional)</label>
-          <input type="tel" id="phone" name="phone" placeholder="+40 7XX XXX XXX" />
+          <label for="phone">Telefon <span style="opacity:0.5;">(opțional)</span></label>
+          <input type="tel" id="phone" name="telefon" placeholder="+40 7XX XXX XXX" autocomplete="tel" />
+          <span class="field-error" id="err-phone">Număr invalid — minim 7 cifre.</span>
         </div>
 
         <div class="form-group">
-          <label for="subject">Subiect</label>
-          <select id="subject" name="subject" required>
+          <label for="subject">Subiect *</label>
+          <select id="subject" name="subiect" required>
             <option value="" disabled selected>Selectează tipul comenzii...</option>
-            <option value="mireasa">Rochie de Mireasă</option>
-            <option value="seara">Rochie de Seară</option>
-            <option value="business">Ținută Business</option>
-            <option value="vintage">Piesă Vintage</option>
-            <option value="bluze">Bluze & Fuste</option>
-            <option value="alta">Altă solicitare</option>
+            <option value="Rochie de Mireasă">Rochie de Mireasă</option>
+            <option value="Rochie de Seară">Rochie de Seară</option>
+            <option value="Ținută Business">Ținută Business</option>
+            <option value="Piesă Vintage">Piesă Vintage</option>
+            <option value="Bluze & Fuste">Bluze &amp; Fuste</option>
+            <option value="Lenjerii de Pat">Lenjerii de Pat</option>
+            <option value="Altă solicitare">Altă solicitare</option>
           </select>
+          <span class="field-error" id="err-subject">Te rugăm să selectezi tipul comenzii.</span>
         </div>
 
         <div class="form-group">
-          <label for="eveniment">Data evenimentului (dacă există)</label>
-          <input type="date" id="eveniment" name="eveniment" />
+          <label for="eveniment">Data evenimentului <span style="opacity:0.5;">(dacă există)</span></label>
+          <input type="date" id="eveniment" name="data_eveniment" />
         </div>
 
         <div class="form-group">
-          <label for="message">Descrierea visului tău</label>
-          <textarea id="message" name="message" placeholder="Descrie-ne ce îți dorești — culori, stil, ocazia specială, orice detaliu contează..." required></textarea>
+          <label for="message">Descrierea visului tău *</label>
+          <textarea id="message" name="mesaj" placeholder="Descrie-ne ce îți dorești — culori, stil, ocazia specială, orice detaliu contează..." required></textarea>
+          <span class="field-error" id="err-message">Te rugăm să ne descrii ce îți dorești.</span>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
-          <span>Trimite Mesajul</span>
+        <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%; justify-content:center;">
+          <span id="submitLabel">Trimite Mesajul</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         </button>
 
         <p style="text-align:center; margin-top:1rem; color:rgba(248,245,242,0.3); font-size:0.65rem; letter-spacing:0.1em;">
-          Îți răspundem în maxim 24 de ore. Datele tale sunt confidențiale.
+          Îți răspundem în maxim 24 de ore · Datele tale sunt confidențiale
         </p>
       </form>
+
+      <!-- Mesaj succes -->
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✦</div>
+        <h3>Mesaj trimis!</h3>
+        <p>
+          Îți mulțumim pentru mesaj.<br>
+          Te vom contacta în maxim 24 de ore la adresa de email furnizată.<br><br>
+          <em style="color:var(--lavender);">— Echipa Lucia Fashion</em>
+        </p>
+      </div>
     </div>
 
   </section>
 
-  <!-- Stats Bar -->
+  <!-- HARTA -->
+  <div class="map-section reveal">
+    <span class="map-label">✦ Găsește atelierul nostru</span>
+    <div class="map-wrap">
+      <iframe
+        title="Lucia Fashion — Str. Plutașilor 18, Sector 1, București"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3376.0562716396403!2d26.034121376565455!3d44.49229849775771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b203bd08113451%3A0x36c309b4ed5f0c85!2sLucia%20fashion!5e1!3m2!1sro!2sro!4v1778829961207!5m2!1sro!2sro"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <p style="margin-top:0.8rem; font-size:0.7rem; color:rgba(248,245,242,0.35); letter-spacing:0.08em; font-family:var(--font-sans);">
+      Str. Plutașilor nr. 18, Sector 1, București &nbsp;·&nbsp;
+      <a href="https://maps.google.com/?q=Lucia+fashion,+Strada+Plutasilor+18,+Bucuresti" target="_blank" rel="noopener" style="color:var(--gold); text-decoration:none;">Deschide în Google Maps →</a>
+    </p>
+  </div>
+
+  <!-- Stats -->
   <div class="stats-bar reveal">
     <div class="stat-item">
       <div class="stat-number" data-target="15" data-suffix="+">15+</div>
@@ -196,7 +332,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="nav-logo">Lucia Fashion<span>Design Vestimentar</span></div>
-        <p>Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze.</p>
+        <p>Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste, bluze și lenjerii de pat.</p>
       </div>
       <div class="footer-col">
         <h4>Navigare</h4>
@@ -213,17 +349,17 @@
         <ul>
           <li><a href="colectii.html">Rochii de Mireasă</a></li>
           <li><a href="colectii.html">Rochii de Seară</a></li>
+          <li><a href="lenjerii.html">Lenjerii de Pat</a></li>
           <li><a href="colectii.html">Ținute Business</a></li>
-          <li><a href="colectii.html">Vintage</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></li>
-          <li><a href="tel:+40700000000">+40 700 000 000</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
+          <li><a href="mailto:tudoranlucia@yahoo.com">tudoranlucia@yahoo.com</a></li>
+          <li><a href="tel:+40728304151">0728 304 151</a></li>
+          <li><a href="https://www.facebook.com/luciafashiondesign/" target="_blank" rel="noopener">Facebook</a></li>
+          <li style="color:rgba(248,245,242,0.35); font-size:0.7rem; line-height:1.5;">Str. Plutașilor 18<br>Sector 1, București</li>
         </ul>
       </div>
     </div>
@@ -234,5 +370,87 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script>
+  (function() {
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitLabel = document.getElementById('submitLabel');
+
+    function validateField(el) {
+      const errEl = document.getElementById('err-' + el.id);
+      let valid = true;
+
+      if (el.hasAttribute('required')) {
+        valid = el.tagName === 'SELECT' ? el.value !== '' : el.value.trim() !== '';
+      }
+      if (el.id === 'email' && el.value.trim() !== '') {
+        valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+      }
+      if (el.id === 'phone' && el.value.trim() !== '') {
+        valid = /^[\d\s\+\-\(\)]{7,15}$/.test(el.value.trim());
+      }
+
+      el.classList.toggle('invalid', !valid);
+      el.classList.toggle('valid', valid && el.value.trim() !== '');
+      if (errEl) errEl.classList.toggle('show', !valid);
+
+      return valid;
+    }
+
+    // Validare live
+    form.querySelectorAll('input, select, textarea').forEach(function(el) {
+      el.addEventListener('blur', function() {
+        if (el.value.trim() !== '' || el.classList.contains('invalid')) validateField(el);
+      });
+      el.addEventListener('input', function() {
+        if (el.classList.contains('invalid')) validateField(el);
+      });
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let allValid = true;
+      form.querySelectorAll('input[required], select[required], textarea[required]').forEach(function(el) {
+        if (!validateField(el)) allValid = false;
+      });
+      const phoneEl = document.getElementById('phone');
+      if (phoneEl.value.trim() !== '' && !validateField(phoneEl)) allValid = false;
+
+      if (!allValid) {
+        const first = form.querySelector('.invalid');
+        if (first) { first.focus(); first.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        return;
+      }
+
+      // Loading
+      submitBtn.disabled = true;
+      submitLabel.textContent = 'Se trimite...';
+
+      // Submit AJAX către Netlify
+      const formData = new FormData(form);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(function(res) {
+        if (res.ok) {
+          form.style.display = 'none';
+          const success = document.getElementById('formSuccess');
+          success.classList.add('show');
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error(res.status);
+        }
+      })
+      .catch(function() {
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Trimite Mesajul';
+        alert('A apărut o eroare la trimitere.\nTe rugăm să ne contactezi direct:\n📞 0728 304 151\n✉ tudoranlucia@yahoo.com');
+      });
+    });
+  })();
+  </script>
 </body>
 </html>

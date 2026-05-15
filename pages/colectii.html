@@ -4,146 +4,330 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Colecții — Lucia Fashion</title>
-  <meta name="description" content="Descoperă colecțiile Lucia Fashion — rochii de mireasă, rochii de seară, ținute elegante, fuste, bluze și paltoane unicat." />
+  <meta name="description" content="Descoperă colecțiile Lucia Fashion — rochii de mireasă, rochii de seară, rochii de bal, bluze, fuste și jachete. Design vestimentar autentic românesc." />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      padding: 0 2rem 4rem;
+    /* ══════════════════════════════════════════════
+       COLECTII PAGE — Styles suplimentare față de style.css
+       Navbar și mobilul vin din style.css global.
+    ══════════════════════════════════════════════ */
+
+    /* Page body override: fundalul acestei pagini e cream, nu deep-bg */
+    body {
+      background-color: var(--cream);
+      color: var(--black);
     }
-    .product-card {
+
+    /* Cursorul custom vine din style.css, dar pe pagina cream arată bine */
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: linear-gradient(135deg, var(--plum) 0%, var(--violet) 100%);
+      text-align: center;
+      padding: 9rem 2rem 3rem; /* top mare ca să nu fie acoperit de navbar fixed */
       position: relative;
       overflow: hidden;
-      cursor: pointer;
-      background: #1a0a2e;
     }
-    .product-card .product-img {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 3/4;
-      overflow: hidden;
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A8E0' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
     }
-    .product-card .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
-    .product-card:hover .product-img img { transform: scale(1.06); }
-    .product-card .product-info {
-      padding: 1rem 1.2rem 1.4rem;
-      background: #0D0D0D;
-    }
-    .product-card .product-category {
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--lavender);
-      margin-bottom: 0.3rem;
-      font-family: var(--font-sans);
-    }
-    .product-card .product-name {
+    .page-header h1 {
       font-family: var(--font-serif);
-      font-size: 1rem;
-      font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300;
       color: var(--cream);
-      line-height: 1.3;
+      letter-spacing: 0.1em;
+      position: relative;
     }
-    .product-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      font-size: 0.55rem; font-weight: 500;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: #0D0D0D; background: var(--lavender);
-      padding: 4px 10px; z-index: 2;
-    }
-    .photo-count {
-      position: absolute;
-      bottom: 10px; right: 10px;
-      font-size: 0.55rem; letter-spacing: 0.1em;
-      color: var(--cream); background: rgba(13,13,13,0.7);
-      padding: 3px 8px; z-index: 2;
+    .page-header p {
+      color: var(--lavender);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      position: relative;
       font-family: var(--font-sans);
     }
 
-    /* Lightbox */
-    .lightbox {
-      display: none; position: fixed; inset: 0; z-index: 1000;
-      background: rgba(13,13,13,0.96);
-      flex-direction: column; align-items: center; justify-content: center;
+    /* ── FILTERS ── */
+    .filters-wrap {
+      background: white;
+      border-bottom: 1px solid rgba(61,26,92,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: sticky;
+      top: 0; /* navbar fixed, deci sticky la 0 e ok */
+      z-index: 90;
     }
-    .lightbox.active { display: flex; }
-    .lightbox-main {
-      display: flex; align-items: center; justify-content: center;
-      width: 100%; flex: 1;
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--lavender);
+      color: var(--plum);
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
     }
-    .lightbox-main img {
-      max-width: 80vw; max-height: 78vh;
+    .filter-btn:hover { background: var(--lavender); border-color: var(--lavender); }
+    .filter-btn.active { background: var(--plum); border-color: var(--plum); color: var(--cream); }
+
+    /* ── GRID ── */
+    .grid-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ── CARD ── */
+    .product-card {
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(61,26,92,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(61,26,92,0.18);
+    }
+    .product-img {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: #f0eaf6;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-img img { transform: scale(1.06); }
+
+    .product-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: var(--plum);
+      color: var(--gold);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+    .product-badge.gold { background: var(--gold); color: var(--plum); }
+
+    .photo-count {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(13,13,13,0.6);
+      color: white;
+      font-size: 0.6rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.08em;
+    }
+
+    .product-info {
+      padding: 1rem 1.1rem 1.2rem;
+      border-top: 2px solid var(--lavender);
+    }
+    .product-category {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 0.3rem;
+    }
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--plum);
+      line-height: 1.3;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(13,13,13,0.92);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-inner {
+      background: var(--cream);
+      border-radius: 6px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+    .lb-gallery {
+      background: #1a0f2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 350px;
+      padding: 1rem;
+    }
+    .lb-main-img {
+      width: 100%;
+      max-height: 420px;
       object-fit: contain;
-      animation: lbIn 0.25s ease;
+      border-radius: 4px;
     }
-    @keyframes lbIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to   { opacity: 1; transform: scale(1); }
+    .lb-thumbs {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .lightbox-close {
-      position: absolute; top: 20px; right: 28px;
-      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: rgba(248,245,242,0.5);
-      cursor: pointer; background: none; border: none;
-      font-family: var(--font-sans); transition: color 0.2s;
+    .lb-thumb {
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 3px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
     }
-    .lightbox-close:hover { color: var(--cream); }
-    .lightbox-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: none; border: 1px solid rgba(248,245,242,0.2);
-      color: rgba(248,245,242,0.6); width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 1.2rem; transition: all 0.2s;
+    .lb-thumb.active { border-color: var(--gold); }
+    .lb-info {
+      padding: 2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
-    .lightbox-nav:hover { background: rgba(248,245,242,0.1); color: var(--cream); }
-    .lightbox-prev { left: 20px; }
-    .lightbox-next { right: 20px; }
-    .lightbox-footer {
-      width: 100%; padding: 16px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid rgba(248,245,242,0.08);
+    .lb-cat {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--violet);
     }
-    .lightbox-footer-info strong {
-      display: block; font-family: var(--font-serif);
-      font-size: 1.1rem; font-weight: 400; color: var(--cream);
+    .lb-name {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--plum);
+      line-height: 1.2;
     }
-    .lightbox-footer-info span {
-      font-size: 0.6rem; letter-spacing: 0.15em;
-      color: rgba(248,245,242,0.4); text-transform: uppercase;
+    .lb-divider { width: 40px; height: 2px; background: var(--gold); }
+    .lb-desc { font-size: 0.85rem; line-height: 1.8; color: #444; }
+    .lb-close {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      background: var(--plum);
+      color: white;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s;
     }
-    .lightbox-thumbnails {
-      display: flex; gap: 6px; align-items: center;
+    .lb-close:hover { background: var(--violet); }
+
+    /* ── FOOTER specific acestei pagini ── */
+    .footer-simple {
+      background: var(--plum);
+      color: var(--lavender);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      font-family: var(--font-sans);
     }
-    .lightbox-thumb {
-      width: 48px; height: 48px; object-fit: cover;
-      cursor: pointer; opacity: 0.4;
-      transition: opacity 0.2s; border: 1px solid transparent;
+    .footer-simple span { color: var(--gold); }
+
+    .hidden { display: none !important; }
+
+    /* ══ MOBILE ══ */
+    @media (max-width: 900px) {
+      .page-header { padding: 8rem 1.5rem 2.5rem; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+      .filters-wrap { padding: 0.8rem 1rem; gap: 0.4rem; }
     }
-    .lightbox-thumb.active { opacity: 1; border-color: var(--lavender); }
-    .lightbox-thumb:hover { opacity: 0.8; }
-    .lightbox-counter {
-      font-size: 0.6rem; letter-spacing: 0.15em;
-      color: rgba(248,245,242,0.3); min-width: 60px; text-align: right;
+
+    @media (max-width: 600px) {
+      .page-header { padding: 7rem 1rem 2rem; }
+      .filters-wrap {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding: 0.8rem 1rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .filters-wrap::-webkit-scrollbar { display: none; }
+      .filter-btn { font-size: 0.62rem; padding: 0.4rem 0.9rem; flex-shrink: 0; }
+      .products-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+      .product-name { font-size: 0.9rem; }
+      .product-info { padding: 0.8rem 0.8rem 1rem; }
+      .grid-wrap { padding: 1.5rem 0.8rem 4rem; }
+      /* Lightbox pe mobile — singura coloană */
+      .lightbox-inner { grid-template-columns: 1fr; }
+      .lb-gallery { min-height: 250px; }
+      .lb-name { font-size: 1.4rem; }
+      .lb-info { padding: 1.2rem; }
+    }
+
+    @media (max-width: 380px) {
+      .products-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Custom Cursor (din style.css) -->
   <div class="cursor"></div>
   <div class="cursor-follower"></div>
 
+  <!-- ══ NAVBAR — identic cu restul site-ului, folosește style.css ══ -->
   <nav class="navbar">
     <a href="../index.html" class="nav-logo">
-      Lucia Fashion <span>Design Vestimentar</span>
+      Lucia Fashion
+      <span>Design Vestimentar</span>
     </a>
     <ul class="nav-links">
       <li><a href="../index.html">Acasă</a></li>
@@ -153,13 +337,11 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <button class="nav-hamburger" aria-label="Meniu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- Mobile menu overlay -->
+  <!-- Mobile overlay -->
   <div class="nav-mobile-overlay">
     <button class="nav-mobile-close">✕ Închide</button>
     <a href="../index.html">Acasă</a>
@@ -169,35 +351,34 @@
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="page-hero">
-    <div>
-      <span class="section-eyebrow">✦ Atelier Lucia Fashion</span>
-      <h1 style="margin-bottom:0.5rem;">Colecțiile Noastre</h1>
-      <p style="color:var(--lavender);font-family:var(--font-serif);font-style:italic;font-size:1.1rem;letter-spacing:0.15em;">
-        Fiecare piesă — o lume aparte
-      </p>
-    </div>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>Colecțiile Noastre</h1>
+    <p>Eleganță croită cu suflet</p>
   </div>
 
-  <section class="collections-section">
+  <!-- FILTERS -->
+  <div class="filters-wrap">
+    <button class="filter-btn active" data-filter="all">Toate</button>
+    <button class="filter-btn" data-filter="mireasa">Rochii Mireasă</button>
+    <button class="filter-btn" data-filter="seara">Rochii Seară</button>
+    <button class="filter-btn" data-filter="bal">Rochii de Bal</button>
+    <button class="filter-btn" data-filter="zi">Rochii de Zi</button>
+    <button class="filter-btn" data-filter="bluze">Bluze &amp; Topuri</button>
+    <button class="filter-btn" data-filter="fuste">Fuste</button>
+    <button class="filter-btn" data-filter="jachete">Jachete &amp; Paltoane</button>
+  </div>
 
-    <div class="filter-bar reveal">
-      <button class="filter-btn active" data-filter="all">Toate</button>
-      <button class="filter-btn" data-filter="mireasa">Rochii Mireasă</button>
-      <button class="filter-btn" data-filter="seara">Rochii Seară</button>
-      <button class="filter-btn" data-filter="zi">Rochii de Zi</button>
-      <button class="filter-btn" data-filter="bal">Rochii de Bal</button>
-      <button class="filter-btn" data-filter="bluze">Bluze & Topuri</button>
-      <button class="filter-btn" data-filter="fuste">Fuste</button>
-      <button class="filter-btn" data-filter="paltoane">Paltoane</button>
-    </div>
+  <!-- GRID -->
+  <div class="grid-wrap">
+    <div class="products-grid" id="productsGrid">
 
-    <div class="products-grid reveal" id="productsGrid">
+      <!-- ══════════════ ROCHII MIREASĂ ══════════════ -->
 
-      <!-- ROCHII DE MIREASA -->
       <div class="product-card" data-category="mireasa"
            data-photos='["r28_1.jpg","r28_2.jpg"]'
-           data-name="Flori de Nuntă" data-cat="Rochie Mireasă">
+           data-name="Flori de Nuntă" data-cat="Rochie Mireasă"
+           data-desc="O ploaie de petale prinsă în mătase albă — rochia care face timpul să stea în loc în ziua cea mai importantă.">
         <div class="product-img">
           <img src="../assets/rochii/r28_1.jpg" alt="Flori de Nuntă" loading="lazy">
           <span class="product-badge">Unicat</span>
@@ -211,7 +392,8 @@
 
       <div class="product-card" data-category="mireasa"
            data-photos='["r36_1.jpg","r36_2.jpg","r36_3.jpg"]'
-           data-name="Mireasă Romantică" data-cat="Rochie Mireasă">
+           data-name="Mireasă Romantică" data-cat="Rochie Mireasă"
+           data-desc="Romantismul în stare pură — volane delicate, talie sculptată, o siluetă care respiră feminitate și grație.">
         <div class="product-img">
           <img src="../assets/rochii/r36_1.jpg" alt="Mireasă Romantică" loading="lazy">
           <span class="product-badge">Unicat</span>
@@ -223,329 +405,895 @@
         </div>
       </div>
 
-      <!-- ROCHII DE SEARA -->
-      <div class="product-card" data-category="seara"
-           data-photos='["r15_1.jpg","r15_2.jpg","r15_3.jpg"]'
-           data-name="Noapte de Dantelă" data-cat="Rochie de Seară">
+      <div class="product-card" data-category="mireasa"
+           data-photos='["r70_1.jpg","r70_2.jpg","r70_3.jpg"]'
+           data-name="Prințesă de Zăpadă" data-cat="Rochie Mireasă"
+           data-desc="Corset din dantelă brodată manual, fustă din tul multistrat voluminos, voal diafan — o rochie care transformă visul de mireasă în realitate pură.">
         <div class="product-img">
-          <img src="../assets/rochii/r15_1.jpg" alt="Noapte de Dantelă" loading="lazy">
-          <span class="product-badge">Bestseller</span>
+          <img src="../assets/rochii/r70_1.jpg" alt="Prințesă de Zăpadă" loading="lazy">
+          <span class="product-badge">Unicat</span>
           <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Mireasă</p>
+          <h3 class="product-name">„Prințesă de Zăpadă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="mireasa"
+           data-photos='["r91_1.jpg","r91_2.jpg"]'
+           data-name="Mireasă Elină" data-cat="Rochie Mireasă"
+           data-desc="Șifonul alb curgând liber ca o togă antică — mâneci clopot, decolteu drapat și trandafiri din satin la talie, o rochie de mireasă cu suflet de zeiță și grație de altă epocă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r91_1.jpg" alt="Mireasă Elină" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Mireasă</p>
+          <h3 class="product-name">„Mireasă Elină"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="mireasa"
+           data-photos='["r83.jpg","r83_2.jpg"]'
+           data-name="Voal de Vis" data-cat="Voal Mireasă"
+           data-desc="Tul diafan în două straturi, bordat cu dantelă brodată manual și cristale sclipitoare — voalul care transformă orice mireasă într-o apariție de poveste.">
+        <div class="product-img">
+          <img src="../assets/rochii/r83.jpg" alt="Voal de Vis" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Voal Mireasă</p>
+          <h3 class="product-name">„Voal de Vis"</h3>
+        </div>
+      </div>
+
+      <!-- ══════════════ ROCHII SEARĂ ══════════════ -->
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r15_1.jpg","r15_2.jpg","r15_3.jpg"]'
+           data-name="Noapte de Dantelă" data-cat="Rochie Seară"
+           data-desc="Dantela neagră țesută ca o noapte de vară — senzuală, misterioasă, imposibil de ignorat.">
+        <div class="product-img">
+          <img src="../assets/rochii/r15_1.jpg" alt="Noapte de Dantelă" loading="lazy">
+          <span class="product-badge gold">Bestseller</span>
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Noapte de Dantelă"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r1.jpg"]'
-           data-name="Vișiniu Regal" data-cat="Rochie de Seară">
+           data-name="Vișiniu Regal" data-cat="Rochie Seară"
+           data-desc="Roșul vișiniu al puterii regale — o rochie care nu cere permisiunea să domine o sală întreagă.">
         <div class="product-img">
           <img src="../assets/rochii/r1.jpg" alt="Vișiniu Regal" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Vișiniu Regal"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r4.jpg"]'
-           data-name="Roșu Pasiune" data-cat="Rochie de Seară">
+           data-name="Roșu Pasiune" data-cat="Rochie Seară"
+           data-desc="Roșul cel mai sincer al pasiunii — croială care îmbrățișează silueta și aprinde toate privirile.">
         <div class="product-img">
           <img src="../assets/rochii/r4.jpg" alt="Roșu Pasiune" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Roșu Pasiune"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r16.jpg"]'
-           data-name="Aur Sclipitor" data-cat="Rochie de Seară">
+           data-name="Aur Sclipitor" data-cat="Rochie Seară"
+           data-desc="Aurul care prinde lumina și o restituie înmulțit — pentru serile în care vrei să fii propria ta constelație.">
         <div class="product-img">
           <img src="../assets/rochii/r16.jpg" alt="Aur Sclipitor" loading="lazy">
-          <span class="product-badge">Exclusiv</span>
+          <span class="product-badge gold">Exclusiv</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Aur Sclipitor"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r18_1.jpg","r18_2.jpg"]'
-           data-name="Roz Zeiță" data-cat="Rochie de Seară">
+           data-name="Roz Zeiță" data-cat="Rochie Seară"
+           data-desc="Rozul diafan al zorilor de zi — o rochie purtată parcă de vânt, ușoară ca un vis de primăvară.">
         <div class="product-img">
           <img src="../assets/rochii/r18_1.jpg" alt="Roz Zeiță" loading="lazy">
           <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Roz Zeiță"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r19_1.jpg","r19_2.jpg","r19_3.jpg"]'
-           data-name="Roșu Statement" data-cat="Rochie de Seară">
+           data-name="Roșu Statement" data-cat="Rochie Seară"
+           data-desc="Nu o rochie — o declarație. Roșu fără scuze, siluetă fără compromisuri, prezență fără rival.">
         <div class="product-img">
           <img src="../assets/rochii/r19_1.jpg" alt="Roșu Statement" loading="lazy">
           <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Roșu Statement"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r20.jpg"]'
-           data-name="Petale de Ceață" data-cat="Rochie de Seară">
+           data-name="Petale de Ceață" data-cat="Rochie Seară"
+           data-desc="Visul prins în țesătură — tonuri pale ca ceața dimineții, o feminitate etereală și discretă.">
         <div class="product-img">
           <img src="../assets/rochii/r20.jpg" alt="Petale de Ceață" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Petale de Ceață"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r21.jpg"]'
-           data-name="Trandafir Sângriu" data-cat="Rochie de Seară">
+           data-name="Trandafir Sângriu" data-cat="Rochie Seară"
+           data-desc="Intensitatea unui trandafir în plină înflorire — roșu-închis care vorbește despre forță și feminitate în același timp.">
         <div class="product-img">
           <img src="../assets/rochii/r21.jpg" alt="Trandafir Sângriu" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Trandafir Sângriu"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r23.jpg"]'
-           data-name="Flacăra de Aur" data-cat="Rochie de Seară">
+           data-name="Flacăra de Aur" data-cat="Rochie Seară"
+           data-desc="Aurul topit în fiecare fir — o rochie care arde lent și frumos, ca o flacără ce nu se stinge.">
         <div class="product-img">
           <img src="../assets/rochii/r23.jpg" alt="Flacăra de Aur" loading="lazy">
-          <span class="product-badge">Nou</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Flacăra de Aur"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r24.jpg"]'
-           data-name="Zeiță Albă" data-cat="Rochie de Seară">
+           data-name="Zeiță Albă" data-cat="Rochie Seară"
+           data-desc="Albul absolut al purității regale — o rochie care transformă seara de gală într-o apariție mitologică.">
         <div class="product-img">
           <img src="../assets/rochii/r24.jpg" alt="Zeiță Albă" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Zeiță Albă"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r25_1.jpg","r25_2.jpg"]'
-           data-name="Champagne Senzual" data-cat="Rochie de Seară">
+           data-name="Champagne Senzual" data-cat="Rochie Seară"
+           data-desc="Efervescența unui pahar de champagne prinsă în mătase — sclipiri calde, eleganță discretă, senzualitate rafinată.">
         <div class="product-img">
           <img src="../assets/rochii/r25_1.jpg" alt="Champagne Senzual" loading="lazy">
           <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Champagne Senzual"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r26_1.jpg","r26_2.jpg"]'
-           data-name="Burgundy Nocturn" data-cat="Rochie de Seară">
+           data-name="Burgundy Nocturn" data-cat="Rochie Seară"
+           data-desc="Profunzimea vinului roșu în amurg — o nuanță care îmbracă noaptea în mister și rafinament absolut.">
         <div class="product-img">
           <img src="../assets/rochii/r26_1.jpg" alt="Burgundy Nocturn" loading="lazy">
           <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Burgundy Nocturn"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r27.jpg"]'
-           data-name="Noapte cu Paiete" data-cat="Rochie de Seară">
+           data-name="Noapte cu Paiete" data-cat="Rochie Seară"
+           data-desc="Paietele care mimează stelele — o noapte întreagă purtată pe umeri, sclipind la fiecare pas de dans.">
         <div class="product-img">
           <img src="../assets/rochii/r27.jpg" alt="Noapte cu Paiete" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Noapte cu Paiete"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r29.jpg"]'
-           data-name="Petale Aurii" data-cat="Rochie de Seară">
+           data-name="Petale Aurii" data-cat="Rochie Seară"
+           data-desc="Fiecare detaliu — o petală de aur. O rochie care înflorește odată cu purtătoarea ei.">
         <div class="product-img">
           <img src="../assets/rochii/r29.jpg" alt="Petale Aurii" loading="lazy">
-          <span class="product-badge">Exclusiv</span>
+          <span class="product-badge gold">Exclusiv</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Petale Aurii"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r30_1.jpg","r30_2.jpg"]'
-           data-name="Regină de Aur" data-cat="Rochie de Seară">
+           data-name="Regină de Aur" data-cat="Rochie Seară"
+           data-desc="Aurul coroanei regale transpus în rochie — pentru femeia care știe că nu are nevoie de tron ca să domnească.">
         <div class="product-img">
           <img src="../assets/rochii/r30_1.jpg" alt="Regină de Aur" loading="lazy">
-          <span class="product-badge">Exclusiv</span>
+          <span class="product-badge gold">Exclusiv</span>
           <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Regină de Aur"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r31.jpg"]'
-           data-name="Spumă Albă" data-cat="Rochie de Seară">
+           data-name="Spumă Albă" data-cat="Rochie Seară"
+           data-desc="Ușoară ca spuma valurilor — alb imaculat, volane care dansează, o siluetă ca dintr-un tablou.">
         <div class="product-img">
           <img src="../assets/rochii/r31.jpg" alt="Spumă Albă" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Spumă Albă"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="seara"
            data-photos='["r38_1.jpg","r38_2.jpg"]'
-           data-name="Smarald Fluid" data-cat="Rochie de Seară">
+           data-name="Smarald Fluid" data-cat="Rochie Seară"
+           data-desc="Verdele smaraldului curgând fluid pe siluetă — o rochie cu suflet de piatră prețioasă și mișcarea apei.">
         <div class="product-img">
           <img src="../assets/rochii/r38_1.jpg" alt="Smarald Fluid" loading="lazy">
-          <span class="product-badge">Nou</span>
           <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Seară</p>
+          <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Smarald Fluid"</h3>
         </div>
       </div>
 
-      <!-- ROCHII DE BAL -->
+      <div class="product-card" data-category="seara"
+           data-photos='["r45.jpg"]'
+           data-name="Coral Roșu" data-cat="Rochie Seară"
+           data-desc="Broderia în fir roșu trasează pe alb o hartă a frumuseții — un model organic, ca rădăcinile unui copac în floare.">
+        <div class="product-img">
+          <img src="../assets/rochii/r45.jpg" alt="Coral Roșu" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Coral Roșu"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r50_1.jpg","r50_2.jpg","r50_3.jpg"]'
+           data-name="Flori de Foc" data-cat="Rochie Seară"
+           data-desc="Flori tridimensionale din satin fuchsia — aplicate manual, cu margele și franjuri, o explozie de culoare și artizanat pur.">
+        <div class="product-img">
+          <img src="../assets/rochii/r50_1.jpg" alt="Flori de Foc" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Flori de Foc"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r54_1.jpg","r54_2.jpg","r54_3.jpg"]'
+           data-name="Roșu Olimp" data-cat="Rochie Seară"
+           data-desc="Roșu aprins, umăr unic și siluetă lungă din satin — o rochie care poartă în ea măreția zeițelor antice.">
+        <div class="product-img">
+          <img src="../assets/rochii/r54_1.jpg" alt="Roșu Olimp" loading="lazy">
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Roșu Olimp"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r60.jpg"]'
+           data-name="Stardust" data-cat="Rochie Seară"
+           data-desc="Lurex argintiu cu reflexe roz — o rochie mini care prinde lumina ca o stea căzătoare și o păstrează toată noaptea.">
+        <div class="product-img">
+          <img src="../assets/rochii/r60.jpg" alt="Stardust" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Stardust"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r63.jpg"]'
+           data-name="Trandafiri pe Mare" data-cat="Rochie Seară"
+           data-desc="Bleumarin adânc presărat cu trandafiri roșii și albi — un halter drapat care evocă eleganța vacanței la mare.">
+        <div class="product-img">
+          <img src="../assets/rochii/r63.jpg" alt="Trandafiri pe Mare" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Trandafiri pe Mare"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r65_1.jpg","r65_2.jpg"]'
+           data-name="Argint Regal" data-cat="Rochie Seară"
+           data-desc="Brocart argintiu-roz cu motive baroque, decolteu V adânc și fustă amplă — o rochie de gală cu personalitate de regină.">
+        <div class="product-img">
+          <img src="../assets/rochii/r65_1.jpg" alt="Argint Regal" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Argint Regal"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r74_1.jpg","r74_2.jpg","r74_3.jpg"]'
+           data-name="Smarald & Fildeș" data-cat="Rochie Seară"
+           data-desc="Ivory-ul dantelei brodate îmbrățișează verdele smaraldului într-un duo de culori rare — o rochie de seară cu suflet romantic și prezență de scenă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r74_1.jpg" alt="Smarald & Fildeș" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Smarald & Fildeș"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r78_1.jpg","r78_2.jpg"]'
+           data-name="Noapte de Satin" data-cat="Rochie Seară"
+           data-desc="Satinul bleumarin care alunecă pe siluetă ca umbra nopții — drapaj lateral sculpted, decolteu V îndrăzneț, o rochie care vorbește înainte ca tu să deschizi gura.">
+        <div class="product-img">
+          <img src="../assets/rochii/r78_1.jpg" alt="Noapte de Satin" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Noapte de Satin"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r85_1.jpg","r85_2.jpg","r85_3.jpg"]'
+           data-name="Umbra cu Mărgele" data-cat="Rochie Seară"
+           data-desc="Dantela cu mărgele care acoperă fără să ascundă — o rochie mini cu spate complet decupat și o coloană de dantelă care coboară dramatic, pentru serile când vrei să fii de neuitat.">
+        <div class="product-img">
+          <img src="../assets/rochii/r85_1.jpg" alt="Umbra cu Mărgele" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Umbra cu Mărgele"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r86_1.jpg","r86_2.jpg"]'
+           data-name="Argint & Dantelă Neagră" data-cat="Rochie Seară"
+           data-desc="Satinul argintiu îmbrăcat în dantelă neagră — un contrast rece și senzual, mâneci de mesh care completează o rochie mini cu spatele deschis și suflet de haute couture.">
+        <div class="product-img">
+          <img src="../assets/rochii/r86_1.jpg" alt="Argint & Dantelă Neagră" loading="lazy">
+          <span class="product-badge gold">Exclusiv</span>
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Argint & Dantelă Neagră"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r87.jpg"]'
+           data-name="Lila cu Dantelă Argintie" data-cat="Rochie Seară"
+           data-desc="Lila-ul satinat întâlnește dantela argintie pe un corsaj transparent — mâneci petală și fustă drapată care creează o siluetă romantică, perfectă pentru seara în care vrei să arăți ca dintr-un vis.">
+        <div class="product-img">
+          <img src="../assets/rochii/r87.jpg" alt="Lila cu Dantelă Argintie" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Lila cu Dantelă Argintie"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r89_1.jpg","r89_2.jpg"]'
+           data-name="Ivory cu Accent Negru" data-cat="Rochie Seară"
+           data-desc="Albul imaculat tăiat precis de o centură de dantelă neagră și nasturi eleganți — un contrast clasic, sofisticat, o rochie care spune totul despre gustul rafinat al purtătoarei.">
+        <div class="product-img">
+          <img src="../assets/rochii/r89_1.jpg" alt="Ivory cu Accent Negru" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Ivory cu Accent Negru"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r93_1.jpg","r93_2.jpg"]'
+           data-name="Smarald cu Dantelă Neagră" data-cat="Rochie Seară"
+           data-desc="Smarald metalic îmbrăcat în dantelă neagră până la ultimul fir — o rochie care aduce strălucirea anilor de aur ai glamour-ului vintage, cu detalii de bijuterie la talie.">
+        <div class="product-img">
+          <img src="../assets/rochii/r93_1.jpg" alt="Smarald cu Dantelă Neagră" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Smarald cu Dantelă Neagră"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r95_1.jpg","r95_2.jpg"]'
+           data-name="Piersică de Seară" data-cat="Rochie Seară"
+           data-desc="Piersica moale a șifonului pliat în cute fine, centură cu floare din pene și perle — o rochie care îmbracă seara în delicatețe și te face să pari că ai venit direct dintr-o grădină în floare.">
+        <div class="product-img">
+          <img src="../assets/rochii/r95_1.jpg" alt="Piersică de Seară" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Piersică de Seară"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r101.jpg"]'
+           data-name="Violet Seară" data-cat="Rochie Seară"
+           data-desc="Violetul profund al satinului fluid — o rochie de seară simplă și elegantă, cu o prezență care nu are nevoie de ornamente pentru a domina o sală întreagă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r101.jpg" alt="Violet Seară" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Violet Seară"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r104.jpg"]'
+           data-name="Rădăcini Roșii" data-cat="Rochie Seară"
+           data-desc="Dantela roșie trasează pe fondul alb o hartă organică de rădăcini și ramuri — o rochie cu un pattern unic, între artă și natură, pe o siluetă bustier care nu lasă nimic la voia întâmplării.">
+        <div class="product-img">
+          <img src="../assets/rochii/r104.jpg" alt="Rădăcini Roșii" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Rădăcini Roșii"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r114_1.jpg","r114_2.jpg","r114_3.jpg"]'
+           data-name="Catifea cu Ciucuri" data-cat="Rochie Seară"
+           data-desc="Catifeaua neagră care mângâie silueta, spate decupat cu ciucuri argintii și o centură brodată cu strass — o rochie pentru serile când eleganța poartă un accent de dramă bine calculată.">
+        <div class="product-img">
+          <img src="../assets/rochii/r114_1.jpg" alt="Catifea cu Ciucuri" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Catifea cu Ciucuri"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r115.jpg"]'
+           data-name="Violet & Aur" data-cat="Rochie Seară"
+           data-desc="Violetul intens al satinului tăiat de o centură aurie lată — o rochie halter cu decolteu îndrăzneț și fustă amplă, pentru serile când vrei să intri în cameră înainte să deschizi ușa.">
+        <div class="product-img">
+          <img src="../assets/rochii/r115.jpg" alt="Violet & Aur" loading="lazy">
+          <span class="product-badge gold">Exclusiv</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Violet & Aur"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r116.jpg"]'
+           data-name="Mozaic Roșu" data-cat="Rochie Seară"
+           data-desc="Brocartul roșu-vișiniu cu pătrate metalice sclipitoare — o rochie care prinde lumina în fiecare unghi și o transformă în spectacol pur, pentru serile când prezența ta trebuie să fie de necontestat.">
+        <div class="product-img">
+          <img src="../assets/rochii/r116.jpg" alt="Mozaic Roșu" loading="lazy">
+          <span class="product-badge gold">Exclusiv</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Mozaic Roșu"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r118_1.jpg","r118_2.jpg","r118_3.jpg","r118_4.jpg","r118_5.jpg"]'
+           data-name="Albastru Regal" data-cat="Rochie Seară"
+           data-desc="Albastrul electric al satinului fluid, corsaj cu broderie de cristale argintii și fustă care se mișcă la fiecare pas ca valul mării — o rochie de seară fotografiată ca o operă de artă, pentru că este una.">
+        <div class="product-img">
+          <img src="../assets/rochii/r118_1.jpg" alt="Albastru Regal" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">5 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Albastru Regal"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r120_1.jpg","r120_2.jpg","r120_3.jpg","r120_4.jpg"]'
+           data-name="Ivory Auriu cu Flori" data-cat="Rochie Seară"
+           data-desc="Satinul ivory-auriu care alunecă pe siluetă până la podea, cu un crapeu îndrăzneț și flori colorate la umăr — o rochie care combină eleganța clasică cu un detaliu de artizanat care schimbă totul.">
+        <div class="product-img">
+          <img src="../assets/rochii/r120_1.jpg" alt="Ivory Auriu cu Flori" loading="lazy">
+          <span class="product-badge gold">Exclusiv</span>
+          <span class="photo-count">4 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Ivory Auriu cu Flori"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r121.jpg"]'
+           data-name="Cireș Înflorit" data-cat="Rochie Seară"
+           data-desc="Satinul ivory presărat cu flori de cireș roz, decolteu cowl drapat și fustă cloș — o rochie care aduce primăvara japoneză în garderoba ta, elegantă și poetică în egală măsură.">
+        <div class="product-img">
+          <img src="../assets/rochii/r121.jpg" alt="Cireș Înflorit" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Cireș Înflorit"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r122.jpg"]'
+           data-name="Petale de Ivory" data-cat="Rochie Seară"
+           data-desc="Un corsaj întreg acoperit cu petale de țesătură ivory — textura unui câmp înflorit prinsă pe bust, fustă din șifon care cade fluid, o rochie care seamănă cu o sculptură vie.">
+        <div class="product-img">
+          <img src="../assets/rochii/r122.jpg" alt="Petale de Ivory" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Petale de Ivory"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r124_1.jpg","r124_2.jpg"]'
+           data-name="Constelație Neagră" data-cat="Rochie Seară"
+           data-desc="Dantela neagră acoperită în totalitate cu paiete și cristale — o rochie de seară lungă care prinde lumina în fiecare punct și o transformă în constelație, cu spate decupat care adaugă drama necesară.">
+        <div class="product-img">
+          <img src="../assets/rochii/r124_1.jpg" alt="Constelație Neagră" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Constelație Neagră"</h3>
+        </div>
+      </div>
+
+      <!-- ══════════════ ROCHII BAL ══════════════ -->
+
       <div class="product-card" data-category="bal"
            data-photos='["r11.jpg"]'
-           data-name="Stea de Argint" data-cat="Rochie de Bal">
+           data-name="Stea de Argint" data-cat="Rochie Bal"
+           data-desc="Argintul nopții de gală — sclipiri reci și aristocratice pentru o apariție care rămâne în amintire.">
         <div class="product-img">
           <img src="../assets/rochii/r11.jpg" alt="Stea de Argint" loading="lazy">
           <span class="product-badge">Unicat</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Bal</p>
+          <p class="product-category">Rochie Bal</p>
           <h3 class="product-name">„Stea de Argint"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="bal"
            data-photos='["r22_1.jpg","r22_2.jpg","r22_3.jpg"]'
-           data-name="Balerina Roz" data-cat="Rochie de Bal">
+           data-name="Balerina Roz" data-cat="Rochie Bal"
+           data-desc="Grația unei balerine în fiecare fald — roz pudrat, jupoane moi, o feminitate delicată ca porțelanul.">
         <div class="product-img">
           <img src="../assets/rochii/r22_1.jpg" alt="Balerina Roz" loading="lazy">
           <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Bal</p>
+          <p class="product-category">Rochie Bal</p>
           <h3 class="product-name">„Balerina Roz"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="bal"
            data-photos='["r37_1.jpg","r37_2.jpg"]'
-           data-name="Prințesă Albastră" data-cat="Rochie de Bal">
+           data-name="Prințesă Albastră" data-cat="Rochie Bal"
+           data-desc="Albastrul de poveste al principesei — o rochie care transformă balul într-un basm și pe purtătoare în protagonistă.">
         <div class="product-img">
           <img src="../assets/rochii/r37_1.jpg" alt="Prințesă Albastră" loading="lazy">
           <span class="product-badge">Unicat</span>
           <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Bal</p>
+          <p class="product-category">Rochie Bal</p>
           <h3 class="product-name">„Prințesă Albastră"</h3>
         </div>
       </div>
 
-      <!-- ROCHII DE ZI -->
+      <div class="product-card" data-category="bal"
+           data-photos='["r56.jpg","r57.jpg"]'
+           data-name="Piersică & Dantelă" data-cat="Set Mamă–Fiică"
+           data-desc="Două rochii care împart același vis — tul piersică și dantelă albă, cusute cu dragoste pentru un moment de neuitat alături de cea mică.">
+        <div class="product-img">
+          <img src="../assets/rochii/r56.jpg" alt="Piersică & Dantelă" loading="lazy">
+          <span class="product-badge">Set Unicat</span>
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Set Mamă–Fiică</p>
+          <h3 class="product-name">„Piersică & Dantelă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r67_1.jpg","r67_2.jpg","r67_3.jpg"]'
+           data-name="Azur cu Stele" data-cat="Rochie Bal"
+           data-desc="Albastru electric de vis, tul diafan presărat cu aplicații florale argintii — o rochie care îmbracă noaptea în constelații.">
+        <div class="product-img">
+          <img src="../assets/rochii/r67_1.jpg" alt="Azur cu Stele" loading="lazy">
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Bal</p>
+          <h3 class="product-name">„Azur cu Stele"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r90.jpg"]'
+           data-name="Teal Retro" data-cat="Rochie Bal"
+           data-desc="Satinul teal care aduce anii '50 în prezent cu grație — guler răsfrânt, fundă la talie și fustă evazată, o rochie de bal cu personalitate vintage și eleganță atemporală.">
+        <div class="product-img">
+          <img src="../assets/rochii/r90.jpg" alt="Teal Retro" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Bal</p>
+          <h3 class="product-name">„Teal Retro"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r92_1.jpg","r92_2.jpg","r92_3.jpg"]'
+           data-name="Roz & Turcoaz în Vals" data-cat="Rochie Bal"
+           data-desc="Turcoazul brodat cu mărgele roz întâlnește șifonul în degradeu de roz — o rochie de bal cu fustă fluidă și spate deschis, ca dintr-un vis de prințesă în care culorile dansează.">
+        <div class="product-img">
+          <img src="../assets/rochii/r92_1.jpg" alt="Roz & Turcoaz în Vals" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Bal</p>
+          <h3 class="product-name">„Roz & Turcoaz în Vals"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r96.jpg"]'
+           data-name="Micuța Prințesă" data-cat="Rochie Fetița"
+           data-desc="Violet cu paiete și tul lavandă — o rochie care transformă orice fetiță în prințesa balului, cu fustă amplă care invită la dans și sclipiri care nu se uită.">
+        <div class="product-img">
+          <img src="../assets/rochii/r96.jpg" alt="Micuța Prințesă" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Fetița</p>
+          <h3 class="product-name">„Micuța Prințesă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r97.jpg"]'
+           data-name="Regina Barocului" data-cat="Costum Spectacol"
+           data-desc="Alb și aur în exuberanță barocă — un costum de spectacol cu volane, mâneci bufante și flori din organza aurie, pentru momentele când scena cere prezență totală și costumul devine personaj.">
+        <div class="product-img">
+          <img src="../assets/rochii/r97.jpg" alt="Regina Barocului" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Costum Spectacol</p>
+          <h3 class="product-name">„Regina Barocului"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r103.jpg"]'
+           data-name="Smarald & Somon" data-cat="Rochie Bal"
+           data-desc="Corsaj smarald brodat cu fir auriu și fustă din tul somon în degradeu — un contrast neașteptat și tocmai de aceea irezistibil, o rochie de bal care aduce laolaltă natura și rafinamentul.">
+        <div class="product-img">
+          <img src="../assets/rochii/r103.jpg" alt="Smarald & Somon" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Bal</p>
+          <h3 class="product-name">„Smarald & Somon"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r111.jpg"]'
+           data-name="Lebăda Mică" data-cat="Costum Balet Fetița"
+           data-desc="Tul roz pudrat presărat cu cristale și bordat cu argint sclipitor — un tutu de balet pentru micuța dansatoare care visează la scenă, la lumini și la aplauze.">
+        <div class="product-img">
+          <img src="../assets/rochii/r111.jpg" alt="Lebăda Mică" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Costum Balet Fetița</p>
+          <h3 class="product-name">„Lebăda Mică"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r112.jpg"]'
+           data-name="Aurul Scenei" data-cat="Costum Balet"
+           data-desc="Broderia aurie care acoperă corsajul și tivul tului — un tutu de gală pentru momentele în care scena merită toată splendoarea și fiecare mișcare trebuie să strălucească.">
+        <div class="product-img">
+          <img src="../assets/rochii/r112.jpg" alt="Aurul Scenei" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Costum Balet</p>
+          <h3 class="product-name">„Aurul Scenei"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bal"
+           data-photos='["r113.jpg"]'
+           data-name="Dantelă cu Franjuri" data-cat="Rochie Fetița"
+           data-desc="Dantela albă cu franjuri delicate la tiv și mâneci — o rochie pentru fetița care merită să se simtă prințesă la orice ocazie specială.">
+        <div class="product-img">
+          <img src="../assets/rochii/r113.jpg" alt="Dantelă cu Franjuri" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Fetița</p>
+          <h3 class="product-name">„Dantelă cu Franjuri"</h3>
+        </div>
+      </div>
+
+      <!-- ══════════════ ROCHII ZI ══════════════ -->
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r61.jpg"]'
+           data-name="Grădina Colorată" data-cat="Rochie Zi"
+           data-desc="Un imprimeu floral viu și optimist — rochie de zi cu culori calde care aduc bucuria primăverii în orice ținută, oricând.">
+        <div class="product-img">
+          <img src="../assets/rochii/r61.jpg" alt="Grădina Colorată" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Grădina Colorată"</h3>
+        </div>
+      </div>
+
       <div class="product-card" data-category="zi"
            data-photos='["r6.jpg"]'
-           data-name="Safari Leopard" data-cat="Rochie de Zi">
+           data-name="Safari Leopard" data-cat="Rochie Zi"
+           data-desc="Sălbăticia îmblânzită în imprimeu leopard — pentru femeia care poartă natura cu eleganță citadină.">
         <div class="product-img">
           <img src="../assets/rochii/r6.jpg" alt="Safari Leopard" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Zi</p>
+          <p class="product-category">Rochie Zi</p>
           <h3 class="product-name">„Safari Leopard"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="zi"
            data-photos='["r10.jpg"]'
-           data-name="Flori de Iarnă" data-cat="Rochie de Zi">
+           data-name="Flori de Iarnă" data-cat="Rochie Zi"
+           data-desc="Florile care îndrăznesc să înflorească în anotimp rece — culori calde pe fond sobru, un paradox frumos.">
         <div class="product-img">
           <img src="../assets/rochii/r10.jpg" alt="Flori de Iarnă" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Zi</p>
+          <p class="product-category">Rochie Zi</p>
           <h3 class="product-name">„Flori de Iarnă"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="zi"
            data-photos='["r12.jpg"]'
-           data-name="Mov Nocturn" data-cat="Rochie de Zi">
+           data-name="Mov Nocturn" data-cat="Rochie Zi"
+           data-desc="Movul adânc al amurgului — o rochie de zi cu suflet de seară, elegantă în orice context.">
         <div class="product-img">
           <img src="../assets/rochii/r12.jpg" alt="Mov Nocturn" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Zi</p>
+          <p class="product-category">Rochie Zi</p>
           <h3 class="product-name">„Mov Nocturn"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="zi"
            data-photos='["r13.jpg"]'
-           data-name="Grădina Nopții" data-cat="Rochie de Zi">
+           data-name="Grădina Nopții" data-cat="Rochie Zi"
+           data-desc="O grădină care înflorește în întuneric — imprimeu floral pe fond închis, misterios și rafinat.">
         <div class="product-img">
           <img src="../assets/rochii/r13.jpg" alt="Grădina Nopții" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Zi</p>
+          <p class="product-category">Rochie Zi</p>
           <h3 class="product-name">„Grădina Nopții"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="zi"
            data-photos='["r39.jpg"]'
-           data-name="Grădina Acuarelă" data-cat="Rochie de Zi">
+           data-name="Grădina Acuarelă" data-cat="Rochie Zi"
+           data-desc="Culorile acuarelei care curg liber pe pânza rochiei — blândețe artistică, feminitate autentică.">
         <div class="product-img">
           <img src="../assets/rochii/r39.jpg" alt="Grădina Acuarelă" loading="lazy">
         </div>
         <div class="product-info">
-          <p class="product-category">Rochie de Zi</p>
+          <p class="product-category">Rochie Zi</p>
           <h3 class="product-name">„Grădina Acuarelă"</h3>
         </div>
       </div>
 
       <div class="product-card" data-category="zi"
            data-photos='["r8.jpg","r9.jpg"]'
-           data-name="Safir cu Dantelă" data-cat="Costum Elegant">
+           data-name="Safir cu Dantelă" data-cat="Costum Elegant"
+           data-desc="Albastrul safirul îmbrăcat în dantelă fină — un costum elegant care îmbină rigoarea business cu feminitatea discretă.">
         <div class="product-img">
           <img src="../assets/rochii/r8.jpg" alt="Safir cu Dantelă" loading="lazy">
           <span class="photo-count">2 foto</span>
@@ -556,10 +1304,359 @@
         </div>
       </div>
 
-      <!-- BLUZE -->
+      <div class="product-card" data-category="zi"
+           data-photos='["r43.jpg"]'
+           data-name="Negru cu Petale" data-cat="Rochie Zi"
+           data-desc="Simplitatea neagră ridicată la rang de artă prin bordura de dantelă florală — eleganță minimalistă cu un detaliu care spune totul.">
+        <div class="product-img">
+          <img src="../assets/rochii/r43.jpg" alt="Negru cu Petale" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Negru cu Petale"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r47.jpg"]'
+           data-name="Linii Urbane" data-cat="Rochie Zi"
+           data-desc="Dungi verticale în gri și negru — o rochie care alungește silueta și transmite eleganță urbană modernă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r47.jpg" alt="Linii Urbane" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Linii Urbane"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r48.jpg"]'
+           data-name="Câmpie Orientală" data-cat="Rochie Maxi"
+           data-desc="Florile mici ale câmpiei întâlnesc motivele orientale — o rochie maxi cu spirit de călătorie și suflet boem.">
+        <div class="product-img">
+          <img src="../assets/rochii/r48.jpg" alt="Câmpie Orientală" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Maxi</p>
+          <h3 class="product-name">„Câmpie Orientală"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r49.jpg"]'
+           data-name="Grădină în Floare" data-cat="Rochie Maxi"
+           data-desc="O explozie florală în roșu și verde — rochie maxi cu mâneci evazate, feminitate liberă și bucurie de vară.">
+        <div class="product-img">
+          <img src="../assets/rochii/r49.jpg" alt="Grădină în Floare" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Maxi</p>
+          <h3 class="product-name">„Grădină în Floare"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r53.jpg"]'
+           data-name="Brocart Tomnatic" data-cat="Rochie Zi"
+           data-desc="Brocartul în portocaliu și violet, umeri structurați, fustă evazată — o rochie cu personalitatea toamnei bogate.">
+        <div class="product-img">
+          <img src="../assets/rochii/r53.jpg" alt="Brocart Tomnatic" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Brocart Tomnatic"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r58_1.jpg","r58_2.jpg"]'
+           data-name="Pisicuțe în Zbor" data-cat="Rochie Zi"
+           data-desc="Siluete jucăușe de pisici pe fond alb, fundă elegantă la decolteu — o rochie care amestecă umorul fin cu feminitatea delicată.">
+        <div class="product-img">
+          <img src="../assets/rochii/r58_1.jpg" alt="Pisicuțe în Zbor" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Pisicuțe în Zbor"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r59_1.jpg"]'
+           data-name="Roz Carmen" data-cat="Rochie Zi"
+           data-desc="Off-shoulder cu volane în cascadă — rozul delicat îmbrăcat în volanul care te face să te simți ca într-o zi de vară mediteraneană.">
+        <div class="product-img">
+          <img src="../assets/rochii/r59_1.jpg" alt="Roz Carmen" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Roz Carmen"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r59_2.jpg"]'
+           data-name="Roz Candid" data-cat="Rochie Zi"
+           data-desc="Rozul curat al candorii, guler Peter Pan și linie A clasică — o rochie tânără, proaspătă, perfect croită pentru fiecare zi.">
+        <div class="product-img">
+          <img src="../assets/rochii/r59_2.jpg" alt="Roz Candid" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Roz Candid"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r62.jpg"]'
+           data-name="Grădina de Noapte" data-cat="Rochie Zi"
+           data-desc="Florile în roz, auriu și mov înfloresc pe fond negru — o rochie shift elegantă care poartă în ea frumusețea unui grădini nocturne.">
+        <div class="product-img">
+          <img src="../assets/rochii/r62.jpg" alt="Grădina de Noapte" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Grădina de Noapte"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r66.jpg"]'
+           data-name="Lămâie de Sicilia" data-cat="Rochie Zi"
+           data-desc="Lămâi galbene și flori roz pe fond crem, bordură de dantelă, fustă cloș — o rochie care aduce soarele Mediteranei la tine acasă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r66.jpg" alt="Lămâie de Sicilia" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Lămâie de Sicilia"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r68.jpg"]'
+           data-name="Valuri de Culoare" data-cat="Rochie Zi"
+           data-desc="Linii grafice abstracte în portocaliu, verde, roz și galben pe fond alb — o rochie care transformă corpul în pânza unui artist.">
+        <div class="product-img">
+          <img src="../assets/rochii/r68.jpg" alt="Valuri de Culoare" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Valuri de Culoare"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r71.jpg"]'
+           data-name="Marinara Modernă" data-cat="Rochie Maxi"
+           data-desc="Dungi alb și negru care aleargă de sus în jos — o rochie maxi cu energie maritimă și linie curată, pentru zilele când simplitatea e cel mai îndrăzneț statement.">
+        <div class="product-img">
+          <img src="../assets/rochii/r71.jpg" alt="Marinara Modernă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Maxi</p>
+          <h3 class="product-name">„Marinara Modernă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r75_1.jpg","r75_2.jpg"]'
+           data-name="Noapte Transparentă" data-cat="Salopetă Elegantă"
+           data-desc="Mesh-ul negru care lasă să se întrevadă fără să dezvăluie — o salopetă cu pantalone palazzo, jocul perfect între mister și eleganță urbană.">
+        <div class="product-img">
+          <img src="../assets/rochii/r75_1.jpg" alt="Noapte Transparentă" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Salopetă Elegantă</p>
+          <h3 class="product-name">„Noapte Transparentă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r76_1.jpg","r76_2.jpg"]'
+           data-name="Pădurea de Smarald" data-cat="Rochie Maxi"
+           data-desc="Verde smarald intens, talie cu șnur și buzunare generoase — o rochie maxi care îmbină confortul boem cu eleganța cromatică a naturii în toată splendoarea ei.">
+        <div class="product-img">
+          <img src="../assets/rochii/r76_1.jpg" alt="Pădurea de Smarald" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Maxi</p>
+          <h3 class="product-name">„Pădurea de Smarald"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r77.jpg"]'
+           data-name="Trandafiri de Iarnă" data-cat="Rochie Midi"
+           data-desc="Trandafirii în vișiniu și burgundy înfloresc pe fondul negru al unui tricot cald — o rochie midi cu personalitate tomnatic-romantică și eleganță fără efort.">
+        <div class="product-img">
+          <img src="../assets/rochii/r77.jpg" alt="Trandafiri de Iarnă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Midi</p>
+          <h3 class="product-name">„Trandafiri de Iarnă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r79_1.jpg","r79_2.jpg"]'
+           data-name="Baroque Gris" data-cat="Rochie Zi"
+           data-desc="Motivele baroque în gri și negru țesute în jacquard — o rochie shift care aduce rafinamentul artei clasice în garderoba de zi cu zi.">
+        <div class="product-img">
+          <img src="../assets/rochii/r79_1.jpg" alt="Baroque Gris" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Baroque Gris"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r81.jpg"]'
+           data-name="Nude Parizian" data-cat="Rochie Zi"
+           data-desc="Nudul cald al pielii transpus în țesătură fină — o rochie midi cu talie elastică și mâneci trei-sferturi, eleganță discretă pentru fiecare zi importantă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r81.jpg" alt="Nude Parizian" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Nude Parizian"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r84.jpg"]'
+           data-name="Savana Roz" data-cat="Rochie Maxi"
+           data-desc="Toate tiparele naturii reunite pe o singură rochie — leopard, zebră și puncte dalmatiene în roz și negru, o maxi plină de curaj și feminitate sălbatică.">
+        <div class="product-img">
+          <img src="../assets/rochii/r84.jpg" alt="Savana Roz" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Maxi</p>
+          <h3 class="product-name">„Savana Roz"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r88.jpg"]'
+           data-name="Focul de Toamnă" data-cat="Rochie Zi"
+           data-desc="Portocaliu aprins ca ultimele frunze de toamnă — o rochie directă, curată, cu o fundă care marchează talia cu grație și un optimism care nu se neagă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r88.jpg" alt="Focul de Toamnă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Focul de Toamnă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r102.jpg"]'
+           data-name="Coral cu Tul Argintiu" data-cat="Rochie Zi"
+           data-desc="Satinul coral-piersică cu reflexe argintii și fustă din tul evazat — o rochie de zi cu energia unui apus de soare și feminitate fără compromis.">
+        <div class="product-img">
+          <img src="../assets/rochii/r102.jpg" alt="Coral cu Tul Argintiu" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Coral cu Tul Argintiu"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r105_1.jpg","r105_2.jpg","r105_3.jpg"]'
+           data-name="Mentă cu Nituri Aurii" data-cat="Rochie Maxi"
+           data-desc="Verdele mentă proaspăt decorat cu nituri aurii la umeri și talie — o rochie maxi care amestecă feminitatea fluidă cu un accent metalic urban.">
+        <div class="product-img">
+          <img src="../assets/rochii/r105_1.jpg" alt="Mentă cu Nituri Aurii" loading="lazy">
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Maxi</p>
+          <h3 class="product-name">„Mentă cu Nituri Aurii"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r107.jpg"]'
+           data-name="Pin-Up Portocaliu" data-cat="Rochie Zi"
+           data-desc="Bulinele albe pe portocaliu aprins, corsaj bustier și fustă cloș — o rochie care aduce anii '50 direct în prezent cu energie, joc și o feminitate fără prejudecăți.">
+        <div class="product-img">
+          <img src="../assets/rochii/r107.jpg" alt="Pin-Up Portocaliu" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Pin-Up Portocaliu"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r110.jpg"]'
+           data-name="Dantelă Albă cu Franjuri" data-cat="Rochie Zi"
+           data-desc="Dantela albă cu franjuri delicate la tiv și mâneci — o rochie midi cu textura bogată a artizanatului și silueta lejeră a feminității fără efort.">
+        <div class="product-img">
+          <img src="../assets/rochii/r110.jpg" alt="Dantelă Albă cu Franjuri" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Dantelă Albă cu Franjuri"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r117.jpg"]'
+           data-name="Bleumarin de Nuntă" data-cat="Rochie Ocazie"
+           data-desc="Dantela bleumarin în toată profunzimea ei — o rochie de ocazie elegantă, croită pentru femeia care vrea să strălucească alături de mireasă fără să o umbrească.">
+        <div class="product-img">
+          <img src="../assets/rochii/r117.jpg" alt="Bleumarin de Nuntă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Ocazie</p>
+          <h3 class="product-name">„Bleumarin de Nuntă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r119_1.jpg","r119_2.jpg","r119_3.jpg"]'
+           data-name="Roșu Rebel" data-cat="Rochie Zi"
+           data-desc="Roșul cel mai curajos, volane suprapuse pe piept și o fustă cloș care dansează la fiecare mișcare — o rochie mică cu energie mare.">
+        <div class="product-img">
+          <img src="../assets/rochii/r119_1.jpg" alt="Roșu Rebel" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Roșu Rebel"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="zi"
+           data-photos='["r123.jpg"]'
+           data-name="Mov Minimalist" data-cat="Rochie Zi"
+           data-desc="Movul sobru al lânii fine — o rochie shift fără mâneci, guler barcă și linie dreaptă care definește eleganța prin ceea ce omite, nu prin ceea ce adaugă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r123.jpg" alt="Mov Minimalist" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Zi</p>
+          <h3 class="product-name">„Mov Minimalist"</h3>
+        </div>
+      </div>
+
+      <!-- ══════════════ BLUZE & TOPURI ══════════════ -->
+
       <div class="product-card" data-category="bluze"
            data-photos='["r2.jpg"]'
-           data-name="Portocalie Solară" data-cat="Bluză">
+           data-name="Portocalie Solară" data-cat="Bluză"
+           data-desc="Energia soarelui captată în portocaliu vibrant — o bluză care luminează orice outfit și orice zi.">
         <div class="product-img">
           <img src="../assets/rochii/r2.jpg" alt="Portocalie Solară" loading="lazy">
         </div>
@@ -571,7 +1668,8 @@
 
       <div class="product-card" data-category="bluze"
            data-photos='["r3.jpg"]'
-           data-name="Briza de In" data-cat="Bluză / Tunică">
+           data-name="Briza de In" data-cat="Bluză / Tunică"
+           data-desc="Inul care respiră odată cu purtătoarea — o tunică ușoară, naturală, croită pentru zilele când confortul e eleganța supremă.">
         <div class="product-img">
           <img src="../assets/rochii/r3.jpg" alt="Briza de In" loading="lazy">
         </div>
@@ -583,7 +1681,8 @@
 
       <div class="product-card" data-category="bluze"
            data-photos='["r7.jpg"]'
-           data-name="Nocturnă Bleumarin" data-cat="Bolero Dantelă">
+           data-name="Nocturnă Bleumarin" data-cat="Bolero / Jachetă Dantelă"
+           data-desc="Dantela bleumarin care îmbracă umerii cu rafinament — un bolero care completează orice ținută cu o notă de mister.">
         <div class="product-img">
           <img src="../assets/rochii/r7.jpg" alt="Nocturnă Bleumarin" loading="lazy">
         </div>
@@ -595,7 +1694,8 @@
 
       <div class="product-card" data-category="bluze"
            data-photos='["r17.jpg"]'
-           data-name="Perla Ivory" data-cat="Bluză Elegantă">
+           data-name="Perla Ivory" data-cat="Bluză Elegantă"
+           data-desc="Ivory-ul perlei — o bluză elegantă cu un luciu discret, perfectă pentru ținute business sau ocazii speciale.">
         <div class="product-img">
           <img src="../assets/rochii/r17.jpg" alt="Perla Ivory" loading="lazy">
         </div>
@@ -607,7 +1707,8 @@
 
       <div class="product-card" data-category="bluze"
            data-photos='["r32.jpg"]'
-           data-name="Mozaic Oriental" data-cat="Bluză / Tunică">
+           data-name="Mozaic Oriental" data-cat="Bluză / Tunică"
+           data-desc="Un mozaic de culori și motive orientale — tunică largă cu personalitate puternică și spirit de artistă.">
         <div class="product-img">
           <img src="../assets/rochii/r32.jpg" alt="Mozaic Oriental" loading="lazy">
         </div>
@@ -619,7 +1720,8 @@
 
       <div class="product-card" data-category="bluze"
            data-photos='["r35.jpg"]'
-           data-name="Vis Paisley" data-cat="Bluză">
+           data-name="Vis Paisley" data-cat="Bluză"
+           data-desc="Motivul paisley reinterpretat în nuanțe delicate — o bluză care poartă în fiecare motiv o poveste din Orient.">
         <div class="product-img">
           <img src="../assets/rochii/r35.jpg" alt="Vis Paisley" loading="lazy">
         </div>
@@ -629,10 +1731,78 @@
         </div>
       </div>
 
-      <!-- FUSTE -->
+      <div class="product-card" data-category="bluze"
+           data-photos='["r44.jpg"]'
+           data-name="Toamnă Paisley" data-cat="Bluză / Tunică"
+           data-desc="Paisley-ul toamnei în nuanțe de gri, bej și brun — o tunică oversize cu alură artistică și confort desăvârșit.">
+        <div class="product-img">
+          <img src="../assets/rochii/r44.jpg" alt="Toamnă Paisley" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză / Tunică</p>
+          <h3 class="product-name">„Toamnă Paisley"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze"
+           data-photos='["r69.jpg"]'
+           data-name="Galben Solar" data-cat="Bluză"
+           data-desc="Galbenul satin al soarelui la amiază — o bluză simplă, luminoasă, care ridică orice ținută la rang de declarație de optimism.">
+        <div class="product-img">
+          <img src="../assets/rochii/r69.jpg" alt="Galben Solar" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză</p>
+          <h3 class="product-name">„Galben Solar"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze"
+           data-photos='["r70_1.jpg","r70_2.jpg","r70_3.jpg"]'
+           data-name="Sakura Roz" data-cat="Bluză"
+           data-desc="Flori de cireș gri-alb pe fond roz-fuchsia — o bluză care aduce primăvara japoneză în garderoba ta.">
+        <div class="product-img">
+          <img src="../assets/rochii/r70_1.jpg" alt="Sakura Roz" loading="lazy">
+          <span class="photo-count">3 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză</p>
+          <h3 class="product-name">„Sakura Roz"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze"
+           data-photos='["r106.jpg"]'
+           data-name="Flori Fuchsia" data-cat="Bluză / Tunică"
+           data-desc="Florile fuchsia în acuarelă pe fond alb — o tunică lejeră, artistică, pentru zilele în care vrei să porți o explozie de culoare cu toată grația lumii.">
+        <div class="product-img">
+          <img src="../assets/rochii/r106.jpg" alt="Flori Fuchsia" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză / Tunică</p>
+          <h3 class="product-name">„Flori Fuchsia"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="bluze"
+           data-photos='["r126.jpg"]'
+           data-name="Taupe cu Broderie" data-cat="Bluză Elegantă"
+           data-desc="Taupe-ul cald al toamnei, mâneci 3/4 și o broderie delicată în zigzag care încadrează gulerul și manșetele — o bluză pentru femeile care știu că eleganța stă în detalii, nu în strigăt.">
+        <div class="product-img">
+          <img src="../assets/rochii/r126.jpg" alt="Taupe cu Broderie" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bluză Elegantă</p>
+          <h3 class="product-name">„Taupe cu Broderie"</h3>
+        </div>
+      </div>
+
+      <!-- ══════════════ FUSTE ══════════════ -->
+
       <div class="product-card" data-category="fuste"
            data-photos='["r14.jpg"]'
-           data-name="Vals Alb" data-cat="Fustă / Crinolenă">
+           data-name="Vals Alb" data-cat="Fustă / Crinolenă"
+           data-desc="Crinolenă albă care invită la dans — falduri largi, mișcare liberă, un val care se desprinde de realitate.">
         <div class="product-img">
           <img src="../assets/rochii/r14.jpg" alt="Vals Alb" loading="lazy">
         </div>
@@ -644,7 +1814,8 @@
 
       <div class="product-card" data-category="fuste"
            data-photos='["r33_1.jpg","r33_2.jpg","r33_3.jpg"]'
-           data-name="Floare de Noapte" data-cat="Fustă Midi">
+           data-name="Floare de Noapte" data-cat="Fustă Midi"
+           data-desc="Florile care aleg să înflorească după lăsarea întunericului — o fustă midi cu imprimeu nocturn și feminitate discretă.">
         <div class="product-img">
           <img src="../assets/rochii/r33_1.jpg" alt="Floare de Noapte" loading="lazy">
           <span class="product-badge">Unicat</span>
@@ -658,7 +1829,8 @@
 
       <div class="product-card" data-category="fuste"
            data-photos='["r34.jpg"]'
-           data-name="Trandafiri de Catifea" data-cat="Fustă Midi">
+           data-name="Trandafiri de Catifea" data-cat="Fustă Midi"
+           data-desc="Catifeaua care îmbracă trandafirii în lux pur — o fustă midi cu textură bogată și un romantism profund.">
         <div class="product-img">
           <img src="../assets/rochii/r34.jpg" alt="Trandafiri de Catifea" loading="lazy">
         </div>
@@ -668,171 +1840,314 @@
         </div>
       </div>
 
-      <!-- PALTOANE -->
-      <div class="product-card" data-category="paltoane"
+      <div class="product-card" data-category="fuste"
+           data-photos='["r72.jpg"]'
+           data-name="Petale de Toamnă" data-cat="Fustă Midi"
+           data-desc="Organza diafană cu flori în tonuri de piersică și auriu — o fustă care transformă orice pas într-o apariție de toamnă romantică.">
+        <div class="product-img">
+          <img src="../assets/rochii/r72.jpg" alt="Petale de Toamnă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă Midi</p>
+          <h3 class="product-name">„Petale de Toamnă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="fuste"
+           data-photos='["r73.jpg"]'
+           data-name="Grădina Secretă" data-cat="Fustă Midi"
+           data-desc="Un buchet întreg de trandafiri prinși în fustă — culori vii pe fond închis, feminitate exuberantă într-o croială care îmbrățișează perfect silueta.">
+        <div class="product-img">
+          <img src="../assets/rochii/r73.jpg" alt="Grădina Secretă" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă Midi</p>
+          <h3 class="product-name">„Grădina Secretă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="fuste"
+           data-photos='["r82.jpg"]'
+           data-name="Rock Noir" data-cat="Fustă Midi"
+           data-desc="Pielea neagră care prinde formă și volum — o fustă evazată cu atitudine rock și rafinament neașteptat, pentru femeia care nu alege între putere și feminitate.">
+        <div class="product-img">
+          <img src="../assets/rochii/r82.jpg" alt="Rock Noir" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă Midi</p>
+          <h3 class="product-name">„Rock Noir"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="fuste"
+           data-photos='["r98.jpg"]'
+           data-name="Aur Roz" data-cat="Fustă Maxi"
+           data-desc="Roz pudrat cu sclipiri aurii de lurex — o fustă maxi cu talie comodă și cădere fluidă, pentru zilele când vrei eleganță fără efort.">
+        <div class="product-img">
+          <img src="../assets/rochii/r98.jpg" alt="Aur Roz" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă Maxi</p>
+          <h3 class="product-name">„Aur Roz"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="fuste"
+           data-photos='["r99.jpg"]'
+           data-name="Argint Lichid" data-cat="Fustă Midi"
+           data-desc="Satinul argintiu care prinde lumina și nu o mai dă drumul — o fustă midi cu falduri largi și talie înaltă, eleganță metalică.">
+        <div class="product-img">
+          <img src="../assets/rochii/r99.jpg" alt="Argint Lichid" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă Midi</p>
+          <h3 class="product-name">„Argint Lichid"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="fuste"
+           data-photos='["r100.jpg"]'
+           data-name="Brocart Roz Vintage" data-cat="Fustă Midi"
+           data-desc="Brocartul cu trandafiri în roz și ivory, cute generoase și talie înaltă — o fustă care aduce romantismul epocilor trecute în garderoba modernă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r100.jpg" alt="Brocart Roz Vintage" loading="lazy">
+          <span class="product-badge">Unicat</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Fustă Midi</p>
+          <h3 class="product-name">„Brocart Roz Vintage"</h3>
+        </div>
+      </div>
+
+      <!-- ══════════════ JACHETE & PALTOANE ══════════════ -->
+
+      <div class="product-card" data-category="jachete"
            data-photos='["r40.jpg"]'
-           data-name="Eleganță Ivory" data-cat="Palton / Jachetă">
+           data-name="Eleganță Ivory" data-cat="Jachetă / Palton"
+           data-desc="Ivory-ul perfect al lânii fine, croială lungă și structurată — o jachetă-palton care definește eleganța cu o simplitate dezarmantă.">
         <div class="product-img">
           <img src="../assets/rochii/r40.jpg" alt="Eleganță Ivory" loading="lazy">
           <span class="product-badge">Unicat</span>
         </div>
         <div class="product-info">
-          <p class="product-category">Palton / Jachetă</p>
+          <p class="product-category">Jachetă / Palton</p>
           <h3 class="product-name">„Eleganță Ivory"</h3>
         </div>
       </div>
 
-    </div>
+      <div class="product-card" data-category="jachete"
+           data-photos='["r41.jpg","r51.jpg"]'
+           data-name="Umbra Elegantă" data-cat="Palton"
+           data-desc="Negrul profund al lânii structurate, talie sculptată, poale evazate ca un clopot — un palton care transformă fiecare ieșire într-un moment de stil.">
+        <div class="product-img">
+          <img src="../assets/rochii/r41.jpg" alt="Umbra Elegantă" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Palton</p>
+          <h3 class="product-name">„Umbra Elegantă"</h3>
+        </div>
+      </div>
 
-    <div style="text-align:center; margin-top:5rem;" class="reveal">
-      <div class="ornament"><span>✦</span></div>
-      <h3 style="margin-bottom:1rem; color:var(--cream);">Nu ai găsit ce cauți?</h3>
-      <p style="color:rgba(248,245,242,0.6); margin-bottom:2rem; max-width:400px; margin-left:auto; margin-right:auto; font-family:var(--font-serif); font-style:italic;">
-        Fiecare vis poate deveni realitate. Contactează-ne pentru o piesă personalizată, croită special pentru tine.
-      </p>
-      <a href="contact.html" class="btn btn-primary"><span>Comandă Personalizat</span></a>
-    </div>
-  </section>
+      <div class="product-card" data-category="jachete"
+           data-photos='["r42.jpg"]'
+           data-name="Bronz Imperial" data-cat="Palton / Rochie-Mantou"
+           data-desc="Țesătura metalizată bronz cu reflexe cupru, umeri bufanți și guler înalt — o piesă de colecție ce aduce la viață spiritul unei împărătese.">
+        <div class="product-img">
+          <img src="../assets/rochii/r42.jpg" alt="Bronz Imperial" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Palton / Rochie-Mantou</p>
+          <h3 class="product-name">„Bronz Imperial"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jachete"
+           data-photos='["r46_1.jpg","r46_2.jpg"]'
+           data-name="Violet Boucle" data-cat="Jachetă"
+           data-desc="Lâna boucle în violet intens, fără guler, cu margini franjurate — o jachetă cu textura toamnei și culoarea pasiunii.">
+        <div class="product-img">
+          <img src="../assets/rochii/r46_1.jpg" alt="Violet Boucle" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Jachetă</p>
+          <h3 class="product-name">„Violet Boucle"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jachete"
+           data-photos='["r52_1.jpg","r52_2.jpg","r52_3.jpg","r52_4.jpg"]'
+           data-name="Mantou Ivory" data-cat="Jachetă / Palton"
+           data-desc="Ivory structural în toată splendoarea sa — umeri definiți, talie sculpturală, poale evazate. O jachetă-mantou cu suflet de couture.">
+        <div class="product-img">
+          <img src="../assets/rochii/r52_1.jpg" alt="Mantou Ivory" loading="lazy">
+          <span class="photo-count">4 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Jachetă / Palton</p>
+          <h3 class="product-name">„Mantou Ivory"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jachete"
+           data-photos='["r55_1.jpg","r55_2.jpg","r55_3.jpg","r55_4.jpg"]'
+           data-name="Ivory Structured" data-cat="Jachetă Structurată"
+           data-desc="Arhitectura pură a unei jachete cu personalitate — ivory imaculat, croială de precizie, detalii care vorbesc despre măiestrie autentică.">
+        <div class="product-img">
+          <img src="../assets/rochii/r55_1.jpg" alt="Ivory Structured" loading="lazy">
+          <span class="photo-count">4 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Jachetă Structurată</p>
+          <h3 class="product-name">„Ivory Structured"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jachete"
+           data-photos='["r64_1.jpg","r64_2.jpg"]'
+           data-name="Aur de Iarnă" data-cat="Capă / Pelerină"
+           data-desc="Astrahan auriu cu glugă și șireturi albe — o capă regală pentru zilele de iarnă când vrei să aduci căldura și opulența dintr-o altă epocă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r64_1.jpg" alt="Aur de Iarnă" loading="lazy">
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Capă / Pelerină</p>
+          <h3 class="product-name">„Aur de Iarnă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jachete"
+           data-photos='["r80.jpg"]'
+           data-name="Fuchsia Couture" data-cat="Jachetă"
+           data-desc="Fuchsia-ul cel mai îndrăzneț îmbrăcat în lână fină — o jachetă cu talie sculptată și un singur nasture care rezumă eleganța într-un singur gest.">
+        <div class="product-img">
+          <img src="../assets/rochii/r80.jpg" alt="Fuchsia Couture" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Jachetă</p>
+          <h3 class="product-name">„Fuchsia Couture"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jachete"
+           data-photos='["r94_1.jpg","r94_2.jpg"]'
+           data-name="Bolero de Mireasă" data-cat="Bolero Dantelă"
+           data-desc="Dantela albă brodată cu flori tridimensionale — un bolero diafan care îmbracă umerii cu delicatețe regală, perfect deasupra rochiei de mireasă.">
+        <div class="product-img">
+          <img src="../assets/rochii/r94_1.jpg" alt="Bolero de Mireasă" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Bolero Dantelă</p>
+          <h3 class="product-name">„Bolero de Mireasă"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jachete"
+           data-photos='["r125.jpg"]'
+           data-name="Cobalt Sclipitor" data-cat="Jachetă"
+           data-desc="Albastrul cobalt cel mai viu îmbrăcat în tweed cu fire sclipitoare — o jachetă fără guler, curată ca o linie arhitecturală, care transformă orice ținută de zi într-o declarație de stil.">
+        <div class="product-img">
+          <img src="../assets/rochii/r125.jpg" alt="Cobalt Sclipitor" loading="lazy">
+        </div>
+        <div class="product-info">
+          <p class="product-category">Jachetă</p>
+          <h3 class="product-name">„Cobalt Sclipitor"</h3>
+        </div>
+      </div>
+
+    </div><!-- /products-grid -->
+  </div><!-- /grid-wrap -->
+
+  <!-- FOOTER simplu -->
+  <footer class="footer-simple">
+    <p>© 2025 <span>Lucia Fashion</span> — Eleganță croită cu suflet</p>
+  </footer>
 
   <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" onclick="closeLightboxBtn()">✕ Închide</button>
-    <button class="lightbox-nav lightbox-prev" onclick="navigatePhoto(-1)">&#8592;</button>
-    <div class="lightbox-main" onclick="closeLightbox(event)">
-      <img id="lightboxImg" src="" alt="">
-    </div>
-    <button class="lightbox-nav lightbox-next" onclick="navigatePhoto(1)">&#8594;</button>
-    <div class="lightbox-footer">
-      <div class="lightbox-footer-info">
-        <strong id="lightboxName"></strong>
-        <span id="lightboxCat"></span>
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lb-close" id="lbClose">✕</button>
+      <div class="lb-gallery">
+        <img src="" alt="" class="lb-main-img" id="lbMainImg">
+        <div class="lb-thumbs" id="lbThumbs"></div>
       </div>
-      <div class="lightbox-thumbnails" id="lightboxThumbs"></div>
-      <div class="lightbox-counter" id="lightboxCounter"></div>
+      <div class="lb-info">
+        <p class="lb-cat" id="lbCat"></p>
+        <h2 class="lb-name" id="lbName"></h2>
+        <div class="lb-divider"></div>
+        <p class="lb-desc" id="lbDesc"></p>
+      </div>
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-logo">Lucia Fashion<span>Design Vestimentar</span></div>
-        <p>Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigare</h4>
-        <ul>
-          <li><a href="../index.html">Acasă</a></li>
-          <li><a href="colectii.html">Colecții</a></li>
-          <li><a href="lenjerii.html">Lenjerii</a></li>
-          <li><a href="despre.html">Despre noi</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Colecții</h4>
-        <ul>
-          <li><a href="colectii.html">Rochii de Mireasă</a></li>
-          <li><a href="colectii.html">Rochii de Seară</a></li>
-          <li><a href="colectii.html">Rochii de Bal</a></li>
-          <li><a href="colectii.html">Fuste & Bluze</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></li>
-          <li><a href="tel:+40700000000">+40 700 000 000</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Lucia Fashion Design. Toate drepturile rezervate.</p>
-      <p>Creat cu ♥ pentru eleganță autentică</p>
-    </div>
-  </footer>
-
   <script src="../js/main.js"></script>
   <script>
-    const BASE = '../assets/rochii/';
-    let currentPhotos = [];
-    let currentPhotoIdx = 0;
-    let currentName = '';
-    let currentCat = '';
+    // ── FILTER ──
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.product-card');
 
-    // Filter
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+    filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.product-card').forEach(card => {
-          card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+        const f = btn.dataset.filter;
+        cards.forEach(c => {
+          c.classList.toggle('hidden', f !== 'all' && c.dataset.category !== f);
         });
       });
     });
 
-    // Open lightbox
-    document.querySelectorAll('.product-card').forEach(card => {
+    // ── LIGHTBOX ──
+    const lb = document.getElementById('lightbox');
+    const lbClose = document.getElementById('lbClose');
+    const lbMainImg = document.getElementById('lbMainImg');
+    const lbThumbs = document.getElementById('lbThumbs');
+    const lbCat = document.getElementById('lbCat');
+    const lbName = document.getElementById('lbName');
+    const lbDesc = document.getElementById('lbDesc');
+    const BASE = '../assets/rochii/';
+
+    cards.forEach(card => {
       card.addEventListener('click', () => {
-        currentPhotos = JSON.parse(card.dataset.photos || '[]');
-        currentName = card.dataset.name || '';
-        currentCat = card.dataset.cat || '';
-        currentPhotoIdx = 0;
-        openLightbox();
-      });
-    });
+        const photos = JSON.parse(card.dataset.photos);
+        lbCat.textContent = card.dataset.cat;
+        lbName.textContent = '„' + card.dataset.name + '"';
+        lbDesc.textContent = card.dataset.desc;
+        lbMainImg.src = BASE + photos[0];
+        lbMainImg.alt = card.dataset.name;
 
-    function openLightbox() {
-      updateLightbox();
-      document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function updateLightbox() {
-      const photo = currentPhotos[currentPhotoIdx];
-      document.getElementById('lightboxImg').src = BASE + photo;
-      document.getElementById('lightboxImg').alt = currentName;
-      document.getElementById('lightboxName').textContent = currentName;
-      document.getElementById('lightboxCat').textContent = currentCat;
-      document.getElementById('lightboxCounter').textContent =
-        currentPhotos.length > 1 ? (currentPhotoIdx + 1) + ' / ' + currentPhotos.length : '';
-
-      // Thumbnails
-      const thumbsEl = document.getElementById('lightboxThumbs');
-      thumbsEl.innerHTML = '';
-      if (currentPhotos.length > 1) {
-        currentPhotos.forEach((p, i) => {
+        lbThumbs.innerHTML = '';
+        photos.forEach((p, i) => {
           const img = document.createElement('img');
           img.src = BASE + p;
-          img.className = 'lightbox-thumb' + (i === currentPhotoIdx ? ' active' : '');
-          img.onclick = (e) => { e.stopPropagation(); currentPhotoIdx = i; updateLightbox(); };
-          thumbsEl.appendChild(img);
+          img.alt = card.dataset.name;
+          img.className = 'lb-thumb' + (i === 0 ? ' active' : '');
+          img.addEventListener('click', () => {
+            lbMainImg.src = BASE + p;
+            document.querySelectorAll('.lb-thumb').forEach(t => t.classList.remove('active'));
+            img.classList.add('active');
+          });
+          lbThumbs.appendChild(img);
         });
-      }
-    }
 
-    function navigatePhoto(dir) {
-      currentPhotoIdx = (currentPhotoIdx + dir + currentPhotos.length) % currentPhotos.length;
-      updateLightbox();
-    }
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
 
-    function closeLightbox(e) {
-      if (e.target === e.currentTarget) closeLightboxBtn();
-    }
+    lbClose.addEventListener('click', closeLb);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
-    function closeLightboxBtn() {
-      document.getElementById('lightbox').classList.remove('active');
+    function closeLb() {
+      lb.classList.remove('open');
       document.body.style.overflow = '';
     }
-
-    document.addEventListener('keydown', e => {
-      if (!document.getElementById('lightbox').classList.contains('active')) return;
-      if (e.key === 'ArrowRight') navigatePhoto(1);
-      if (e.key === 'ArrowLeft') navigatePhoto(-1);
-      if (e.key === 'Escape') closeLightboxBtn();
-    });
   </script>
 </body>
 </html>

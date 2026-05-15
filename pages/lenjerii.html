@@ -4,126 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lenjerii de Pat — Lucia Fashion</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta name="description" content="Lenjerii de pat din bumbac ramforsat 100% — colecții elegante, personalizabile, create cu aceeași grijă ca orice piesă Lucia Fashion." />
+  <link rel="stylesheet" href="../css/style.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ══════════════════════════════════════════════
+       LENJERII PAGE — Styles suplimentare față de style.css
+       Navbar, hamburger, mobile overlay vin din style.css global.
+    ══════════════════════════════════════════════ */
 
-    :root {
-      --plum:     #3D1A5C;
-      --violet:   #7B3FA0;
-      --lavender: #C9A8E0;
-      --black:    #0D0D0D;
-      --cream:    #F8F5F2;
-      --serif:    'Cormorant Garamond', Georgia, serif;
-      --sans:     'Montserrat', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
+    /* Body override: fundalul acestei pagini e cream */
     body {
       background: var(--cream);
       color: var(--black);
-      font-family: var(--sans);
-      font-weight: 300;
-      overflow-x: hidden;
     }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 60px;
-      height: 72px;
-      background: rgba(248,245,242,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(61,26,92,0.12);
-    }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--plum);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--sans);
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--plum);
-      text-decoration: none;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active { opacity: 1; }
 
     /* ── HERO ── */
-    .hero {
-      margin-top: 72px;
+    .lenjerii-hero {
+      margin-top: 0; /* navbar e fixed, padding-ul din .page-hero se ocupă de spațiu */
       min-height: 60vh;
       display: flex;
       align-items: flex-end;
-      padding: 80px 60px;
+      padding: 8rem 4rem 5rem;
       background: var(--plum);
       position: relative;
       overflow: hidden;
     }
-
-    .hero::before {
+    .lenjerii-hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
         radial-gradient(ellipse 60% 80% at 80% 50%, rgba(123,63,160,0.4) 0%, transparent 70%),
         radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,224,0.12) 0%, transparent 60%);
+      pointer-events: none;
     }
-
-    .hero-content { position: relative; z-index: 1; max-width: 680px; }
-
+    .lenjerii-hero-content { position: relative; z-index: 1; max-width: 680px; }
     .hero-label {
       display: inline-block;
-      font-family: var(--sans);
+      font-family: var(--font-sans);
       font-size: 0.65rem;
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--lavender);
-      margin-bottom: 24px;
+      margin-bottom: 1.5rem;
     }
-
-    .hero h1 {
-      font-family: var(--serif);
+    .lenjerii-hero h1 {
+      font-family: var(--font-serif);
       font-size: clamp(3rem, 7vw, 5.5rem);
       font-weight: 300;
       color: var(--cream);
       line-height: 1.05;
       letter-spacing: -0.01em;
-      margin-bottom: 28px;
+      margin-bottom: 1.5rem;
     }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--lavender);
-    }
-
+    .lenjerii-hero h1 em { font-style: italic; color: var(--lavender); }
     .hero-desc {
       font-size: 0.85rem;
       font-weight: 300;
@@ -136,31 +71,27 @@
     /* ── INTRO STRIP ── */
     .intro-strip {
       background: var(--cream);
-      padding: 70px 60px;
+      padding: 4rem 4rem;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 1px;
       border-bottom: 1px solid rgba(61,26,92,0.1);
     }
-
     .intro-item {
-      padding: 0 48px;
+      padding: 0 3rem;
       border-left: 1px solid rgba(61,26,92,0.1);
     }
-
     .intro-item:first-child { border-left: none; padding-left: 0; }
-
     .intro-item-label {
       font-size: 0.6rem;
       font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--violet);
-      margin-bottom: 10px;
+      margin-bottom: 0.6rem;
     }
-
     .intro-item-text {
-      font-family: var(--serif);
+      font-family: var(--font-serif);
       font-size: 1.2rem;
       font-weight: 400;
       color: var(--plum);
@@ -168,23 +99,20 @@
     }
 
     /* ── SECTION HEADER ── */
-    .section-header {
-      padding: 90px 60px 50px;
+    .section-header-lenjerii {
+      padding: 5rem 4rem 3rem;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
     }
-
-    .section-header h2 {
-      font-family: var(--serif);
+    .section-header-lenjerii h2 {
+      font-family: var(--font-serif);
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 300;
       color: var(--plum);
       line-height: 1.1;
     }
-
-    .section-header h2 em { font-style: italic; color: var(--violet); }
-
+    .section-header-lenjerii h2 em { font-style: italic; color: var(--violet); }
     .section-note {
       font-size: 0.72rem;
       font-weight: 400;
@@ -197,28 +125,23 @@
 
     /* ── GRID LENJERII ── */
     .lenjerii-grid {
-      padding: 0 60px 100px;
+      padding: 0 4rem 6rem;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
     }
-
     .lenjerie-card {
-      position: relative;
       background: #fff;
       cursor: default;
       transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
       animation: fadeUp 0.6s both;
     }
-
     .lenjerie-card:hover { transform: translateY(-6px); }
-
     .lenjerie-card:nth-child(1) { animation-delay: 0.05s; }
     .lenjerie-card:nth-child(2) { animation-delay: 0.12s; }
     .lenjerie-card:nth-child(3) { animation-delay: 0.19s; }
     .lenjerie-card:nth-child(4) { animation-delay: 0.26s; }
     .lenjerie-card:nth-child(5) { animation-delay: 0.33s; }
-    .lenjerie-card:nth-child(6) { animation-delay: 0.40s; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -231,42 +154,11 @@
       object-fit: cover;
       display: block;
       background: linear-gradient(135deg, #e8dff0 0%, #d4c0e8 50%, #c9a8e0 100%);
-      position: relative;
-      overflow: hidden;
     }
+    .lenjerie-card.featured { grid-column: span 2; }
+    .lenjerie-card.featured .card-image { aspect-ratio: 16/7; }
 
-    .lenjerie-card.featured .card-image {
-      aspect-ratio: 16/7;
-    }
-
-    .card-image-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #ede6f5 0%, #ddd0ed 100%);
-    }
-
-    .card-image-placeholder svg {
-      width: 40px;
-      height: 40px;
-      opacity: 0.3;
-      color: var(--plum);
-    }
-
-    .card-image-placeholder span {
-      font-size: 0.6rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--plum);
-      opacity: 0.4;
-    }
-
-    .card-body { padding: 28px 28px 32px; }
-
+    .card-body { padding: 1.8rem 1.8rem 2rem; }
     .card-tag {
       display: inline-block;
       font-size: 0.58rem;
@@ -276,31 +168,24 @@
       color: var(--violet);
       background: rgba(123,63,160,0.08);
       padding: 4px 10px;
-      margin-bottom: 14px;
+      margin-bottom: 0.9rem;
     }
-
     .card-title {
-      font-family: var(--serif);
+      font-family: var(--font-serif);
       font-size: 1.45rem;
       font-weight: 400;
       color: var(--plum);
-      margin-bottom: 10px;
+      margin-bottom: 0.6rem;
       line-height: 1.2;
     }
-
     .card-desc {
       font-size: 0.75rem;
       font-weight: 300;
       color: rgba(13,13,13,0.6);
       line-height: 1.75;
-      margin-bottom: 20px;
+      margin-bottom: 1.2rem;
     }
-
-    .card-contents {
-      border-top: 1px solid rgba(61,26,92,0.08);
-      padding-top: 18px;
-    }
-
+    .card-contents { border-top: 1px solid rgba(61,26,92,0.08); padding-top: 1.1rem; }
     .card-contents-label {
       font-size: 0.58rem;
       font-weight: 500;
@@ -308,16 +193,9 @@
       text-transform: uppercase;
       color: var(--plum);
       opacity: 0.5;
-      margin-bottom: 10px;
+      margin-bottom: 0.6rem;
     }
-
-    .card-contents ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
+    .card-contents ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
     .card-contents ul li {
       font-size: 0.72rem;
       font-weight: 300;
@@ -326,7 +204,6 @@
       align-items: center;
       gap: 8px;
     }
-
     .card-contents ul li::before {
       content: '';
       width: 16px;
@@ -335,19 +212,10 @@
       flex-shrink: 0;
     }
 
-    /* ── CARD FEATURED (span 2 col) ── */
-    .lenjerie-card.featured {
-      grid-column: span 2;
-    }
-
-    .lenjerie-card.featured .card-image-placeholder {
-      aspect-ratio: 16/7;
-    }
-
     /* ── CUSTOMIZARE BANNER ── */
     .custom-banner {
-      margin: 0 60px 100px;
-      padding: 70px 80px;
+      margin: 0 4rem 6rem;
+      padding: 4.5rem 5rem;
       background: var(--plum);
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -356,7 +224,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .custom-banner::before {
       content: '';
       position: absolute;
@@ -364,39 +231,28 @@
       width: 400px; height: 400px;
       border-radius: 50%;
       background: rgba(123,63,160,0.25);
+      pointer-events: none;
     }
-
     .custom-banner-content { position: relative; z-index: 1; }
-
     .custom-banner-label {
       font-size: 0.6rem;
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--lavender);
-      margin-bottom: 20px;
+      margin-bottom: 1.2rem;
     }
-
     .custom-banner h3 {
-      font-family: var(--serif);
+      font-family: var(--font-serif);
       font-size: clamp(1.8rem, 3vw, 2.6rem);
       font-weight: 300;
       color: var(--cream);
       line-height: 1.15;
-      margin-bottom: 20px;
+      margin-bottom: 1.2rem;
     }
-
     .custom-banner h3 em { font-style: italic; color: var(--lavender); }
-
-    .custom-banner p {
-      font-size: 0.78rem;
-      font-weight: 300;
-      color: rgba(248,245,242,0.6);
-      line-height: 1.85;
-    }
-
+    .custom-banner p { font-size: 0.78rem; font-weight: 300; color: rgba(248,245,242,0.6); line-height: 1.85; }
     .custom-options { position: relative; z-index: 1; }
-
     .custom-option {
       display: flex;
       align-items: flex-start;
@@ -404,12 +260,10 @@
       padding: 20px 0;
       border-bottom: 1px solid rgba(201,168,224,0.15);
     }
-
     .custom-option:first-child { padding-top: 0; }
     .custom-option:last-child  { border-bottom: none; }
-
     .custom-option-num {
-      font-family: var(--serif);
+      font-family: var(--font-serif);
       font-size: 1.8rem;
       font-weight: 300;
       color: rgba(201,168,224,0.3);
@@ -417,9 +271,8 @@
       flex-shrink: 0;
       width: 36px;
     }
-
     .custom-option-text h4 {
-      font-family: var(--sans);
+      font-family: var(--font-sans);
       font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.1em;
@@ -427,102 +280,26 @@
       color: var(--lavender);
       margin-bottom: 4px;
     }
-
-    .custom-option-text p {
-      font-size: 0.72rem;
-      font-weight: 300;
-      color: rgba(248,245,242,0.5);
-      line-height: 1.6;
-    }
-
-    /* ── CTA CONTACT ── */
-    .cta-section {
-      text-align: center;
-      padding: 80px 60px 100px;
-      border-top: 1px solid rgba(61,26,92,0.1);
-    }
-
-    .cta-section p {
-      font-family: var(--serif);
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--plum);
-      margin-bottom: 32px;
-      line-height: 1.4;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      font-family: var(--sans);
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cream);
-      background: var(--plum);
-      padding: 16px 44px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .cta-btn:hover { background: var(--violet); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--black);
-      padding: 40px 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    footer .logo {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      color: var(--cream);
-      opacity: 0.6;
-    }
-
-    footer p {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      color: rgba(248,245,242,0.3);
-    }
+    .custom-option-text p { font-size: 0.72rem; font-weight: 300; color: rgba(248,245,242,0.5); line-height: 1.6; }
 
     /* ── GALERIE ── */
-    .gallery-section { padding: 0 60px 100px; }
-
+    .gallery-section { padding: 0 4rem 6rem; }
     .gallery-header {
-      padding: 80px 0 50px;
+      padding: 5rem 0 3rem;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
     }
-
     .gallery-header h2 {
-      font-family: var(--serif);
+      font-family: var(--font-serif);
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 300;
       color: var(--plum);
       line-height: 1.1;
     }
-
     .gallery-header h2 em { font-style: italic; color: var(--violet); }
-
-    .gallery-header p {
-      font-size: 0.72rem;
-      color: rgba(61,26,92,0.5);
-      max-width: 240px;
-      text-align: right;
-      line-height: 1.6;
-    }
-
-    .gallery-grid {
-      columns: 3;
-      column-gap: 6px;
-    }
-
+    .gallery-header p { font-size: 0.72rem; color: rgba(61,26,92,0.5); max-width: 240px; text-align: right; line-height: 1.6; }
+    .gallery-grid { columns: 3; column-gap: 6px; }
     .gallery-item {
       break-inside: avoid;
       margin-bottom: 6px;
@@ -530,23 +307,16 @@
       cursor: zoom-in;
       position: relative;
     }
-
-    .gallery-item img {
-      width: 100%;
-      display: block;
-      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
-
+    .gallery-item img { width: 100%; display: block; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
     .gallery-item:hover img { transform: scale(1.04); }
-
     .gallery-item::after {
       content: '';
       position: absolute;
       inset: 0;
       background: rgba(61,26,92,0);
       transition: background 0.3s;
+      pointer-events: none;
     }
-
     .gallery-item:hover::after { background: rgba(61,26,92,0.08); }
 
     /* ── LIGHTBOX ── */
@@ -554,31 +324,27 @@
       display: none;
       position: fixed;
       inset: 0;
-      z-index: 1000;
+      z-index: 2000;
       background: rgba(13,13,13,0.95);
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
     }
-
     .lightbox.active { display: flex; }
-
     .lightbox img {
       max-width: 88vw;
       max-height: 88vh;
       object-fit: contain;
       animation: lbIn 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-
     @keyframes lbIn {
       from { opacity: 0; transform: scale(0.94); }
       to   { opacity: 1; transform: scale(1); }
     }
-
     .lightbox-close {
       position: absolute;
       top: 24px; right: 32px;
-      font-family: var(--sans);
+      font-family: var(--font-sans);
       font-size: 0.65rem;
       font-weight: 500;
       letter-spacing: 0.18em;
@@ -589,9 +355,7 @@
       background: none;
       border: none;
     }
-
     .lightbox-close:hover { color: var(--cream); }
-
     .lightbox-nav {
       position: absolute;
       top: 50%;
@@ -605,25 +369,122 @@
       font-size: 1.2rem;
       transition: all 0.2s;
     }
-
     .lightbox-nav:hover { background: rgba(248,245,242,0.1); color: var(--cream); }
     .lightbox-prev { left: 24px; }
     .lightbox-next { right: 24px; }
-
     .lightbox-counter {
       position: absolute;
       bottom: 24px;
       font-size: 0.6rem;
       letter-spacing: 0.2em;
       color: rgba(248,245,242,0.3);
+      font-family: var(--font-sans);
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 5rem 4rem 6rem;
+      border-top: 1px solid rgba(61,26,92,0.1);
+    }
+    .cta-section p {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--plum);
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+    .cta-btn {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--plum);
+      padding: 16px 44px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .cta-btn:hover { background: var(--violet); }
+
+    /* ── FOOTER simplu ── */
+    .footer-simple {
+      background: var(--black);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-simple .logo {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--cream);
+      opacity: 0.6;
+    }
+    .footer-simple p {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: rgba(248,245,242,0.3);
+    }
+
+    /* ══ TABLET (max 900px) ══ */
+    @media (max-width: 900px) {
+      .lenjerii-hero { padding: 7rem 2rem 4rem; }
+      .intro-strip { padding: 3rem 2rem; }
+      .intro-item { padding: 0 2rem; }
+      .section-header-lenjerii { padding: 4rem 2rem 2rem; }
+      .lenjerii-grid { padding: 0 2rem 4rem; grid-template-columns: 1fr 1fr; }
+      .lenjerie-card.featured { grid-column: span 2; }
+      .custom-banner { margin: 0 2rem 4rem; padding: 3rem 3rem; }
+      .gallery-section { padding: 0 2rem 4rem; }
+      .gallery-grid { columns: 2; }
+      .cta-section { padding: 3rem 2rem 4rem; }
+      .footer-simple { padding: 2rem; }
+    }
+
+    /* ══ MOBILE (max 600px) ══ */
+    @media (max-width: 600px) {
+      .lenjerii-hero { padding: 6.5rem 1.2rem 3rem; min-height: 50vh; }
+      .lenjerii-hero h1 { font-size: clamp(2.2rem, 9vw, 3.5rem); }
+      .intro-strip { grid-template-columns: 1fr; padding: 2.5rem 1.2rem; gap: 0; }
+      .intro-item {
+        border-left: none;
+        border-top: 1px solid rgba(61,26,92,0.1);
+        padding: 1.2rem 0 0;
+        margin-top: 1.2rem;
+      }
+      .intro-item:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+      .section-header-lenjerii { flex-direction: column; align-items: flex-start; padding: 3rem 1.2rem 1.5rem; gap: 1rem; }
+      .section-note { text-align: left; max-width: 100%; }
+      .lenjerii-grid { grid-template-columns: 1fr; padding: 0 1.2rem 3rem; }
+      .lenjerie-card.featured { grid-column: span 1; }
+      .lenjerie-card.featured .card-image { aspect-ratio: 4/3; }
+      .custom-banner { grid-template-columns: 1fr; margin: 0 1.2rem 3rem; padding: 2.5rem 1.8rem; gap: 2rem; }
+      .gallery-section { padding: 0 1.2rem 3rem; }
+      .gallery-grid { columns: 2; column-gap: 4px; }
+      .gallery-header { flex-direction: column; align-items: flex-start; padding: 3rem 0 2rem; gap: 0.8rem; }
+      .gallery-header p { text-align: left; max-width: 100%; }
+      .cta-section { padding: 3rem 1.2rem 3.5rem; }
+      .footer-simple { flex-direction: column; gap: 0.8rem; padding: 2rem 1.2rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="../index.html" class="nav-logo">Lucia Fashion</a>
+  <!-- Custom Cursor (din style.css) -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- ══ NAVBAR — identic cu restul site-ului ══ -->
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">
+      Lucia Fashion
+      <span>Design Vestimentar</span>
+    </a>
     <ul class="nav-links">
       <li><a href="../index.html">Acasă</a></li>
       <li><a href="colectii.html">Colecții</a></li>
@@ -632,13 +493,11 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <button class="nav-hamburger" aria-label="Meniu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- Mobile menu overlay -->
+  <!-- Mobile overlay -->
   <div class="nav-mobile-overlay">
     <button class="nav-mobile-close">✕ Închide</button>
     <a href="../index.html">Acasă</a>
@@ -649,8 +508,8 @@
   </div>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
+  <section class="lenjerii-hero">
+    <div class="lenjerii-hero-content">
       <span class="hero-label">Colecție exclusivă</span>
       <h1>Lenjerii de pat<br><em>pentru odihnă</em><br>desăvârșită</h1>
       <p class="hero-desc">Confecționate din bumbac ramforsat 100%, lenjeriile noastre îmbină confortul autentic cu eleganța unui design atemporal.</p>
@@ -674,7 +533,7 @@
   </div>
 
   <!-- SECTIUNE PRODUSE -->
-  <div class="section-header">
+  <div class="section-header-lenjerii">
     <h2>Colecțiile<br>noastre de <em>lenjerii</em></h2>
     <p class="section-note">Fiecare set este disponibil în varianta standard sau personalizat conform dorințelor dumneavoastră.</p>
   </div>
@@ -683,7 +542,7 @@
 
     <!-- Card 1 — Featured -->
     <div class="lenjerie-card featured">
-      <img class="card-image" src="../assets/l20.jpg" alt="Colecția Classique — lenjerie tropicală pe pat" loading="lazy">
+      <img class="card-image" src="../assets/l20.jpg" alt="Colecția Classique" loading="lazy">
       <div class="card-body">
         <span class="card-tag">Bestseller</span>
         <div class="card-title">Colecția Classique</div>
@@ -701,7 +560,7 @@
 
     <!-- Card 2 -->
     <div class="lenjerie-card">
-      <img class="card-image" src="../assets/l29.jpg" alt="Colecția Lumière — trandafiri roz pe pat" loading="lazy">
+      <img class="card-image" src="../assets/l29.jpg" alt="Colecția Lumière" loading="lazy">
       <div class="card-body">
         <span class="card-tag">Colecție nouă</span>
         <div class="card-title">Colecția Lumière</div>
@@ -719,7 +578,7 @@
 
     <!-- Card 3 -->
     <div class="lenjerie-card">
-      <img class="card-image" src="../assets/l27.jpg" alt="Colecția Noblesse — stele multicolore pe pat" loading="lazy">
+      <img class="card-image" src="../assets/l27.jpg" alt="Colecția Noblesse" loading="lazy">
       <div class="card-body">
         <span class="card-tag">Premium</span>
         <div class="card-title">Colecția Noblesse</div>
@@ -737,7 +596,7 @@
 
     <!-- Card 4 -->
     <div class="lenjerie-card">
-      <img class="card-image" src="../assets/l1.jpg" alt="Colecția Blossom — bujori roz" loading="lazy">
+      <img class="card-image" src="../assets/l1.jpg" alt="Colecția Blossom" loading="lazy">
       <div class="card-body">
         <span class="card-tag">Seasonal</span>
         <div class="card-title">Colecția Blossom</div>
@@ -755,7 +614,7 @@
 
     <!-- Card 5 -->
     <div class="lenjerie-card">
-      <img class="card-image" src="../assets/l18.jpg" alt="Colecția Pure — lavandă și ierburi de câmp" loading="lazy">
+      <img class="card-image" src="../assets/l18.jpg" alt="Colecția Pure" loading="lazy">
       <div class="card-body">
         <span class="card-tag">Minimalist</span>
         <div class="card-title">Colecția Pure</div>
@@ -860,11 +719,12 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="footer-simple">
     <span class="logo">Lucia Fashion</span>
     <p>© 2025 Lucia Fashion. Toate drepturile rezervate.</p>
   </footer>
 
+  <script src="../js/main.js"></script>
   <script>
     const images = [
       '../assets/l20.jpg', '../assets/l29.jpg', '../assets/l28.jpg', '../assets/l27.jpg',
@@ -876,7 +736,6 @@
       '../assets/l22.jpg', '../assets/l23.jpg', '../assets/l24.jpg', '../assets/l25.jpg',
       '../assets/l26.jpg'
     ];
-
     let current = 0;
 
     function openLightbox(index) {
@@ -886,24 +745,18 @@
       document.getElementById('lightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
-
     function closeLightbox(e) {
-      if (e.target === document.getElementById('lightbox')) {
-        closeLightboxBtn();
-      }
+      if (e.target === document.getElementById('lightbox')) closeLightboxBtn();
     }
-
     function closeLightboxBtn() {
       document.getElementById('lightbox').classList.remove('active');
       document.body.style.overflow = '';
     }
-
     function navigate(dir) {
       current = (current + dir + images.length) % images.length;
       document.getElementById('lightboxImg').src = images[current];
       document.getElementById('lightboxCounter').textContent = (current + 1) + ' / ' + images.length;
     }
-
     document.addEventListener('keydown', function(e) {
       if (!document.getElementById('lightbox').classList.contains('active')) return;
       if (e.key === 'ArrowRight') navigate(1);
@@ -911,6 +764,5 @@
       if (e.key === 'Escape') closeLightboxBtn();
     });
   </script>
-
 </body>
 </html>

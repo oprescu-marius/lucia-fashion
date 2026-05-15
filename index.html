@@ -5,7 +5,363 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lucia Fashion — Atelier de Design Vestimentar</title>
   <meta name="description" content="Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze. Design autentic românesc." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+
+    /* ══════════════════════════════════════
+       INDEX — styles specifice paginii
+    ══════════════════════════════════════ */
+
+    /* ── HERO NOU — Atelier / TV ── */
+    .hero-atelier {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Coloana stânga — text */
+    .hero-atelier-left {
+      background: var(--plum);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 7rem 4rem 5rem 5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-atelier-left::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      top: 0; bottom: 0;
+      width: 120px;
+      background: var(--plum);
+      clip-path: polygon(0 0, 0 100%, 100% 100%);
+      z-index: 3;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge-line {
+      width: 36px; height: 1px;
+      background: var(--gold);
+    }
+    .hero-badge-text {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-atelier-left h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+    }
+    .hero-atelier-left h1 em {
+      font-style: italic;
+      color: var(--lavender);
+    }
+
+    .hero-atelier-left p {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(248,245,242,0.6);
+      line-height: 1.9;
+      max-width: 380px;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-tv-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 18px;
+      background: rgba(201,168,112,0.12);
+      border: 1px solid rgba(201,168,112,0.25);
+      margin-bottom: 2.5rem;
+    }
+    .hero-tv-badge svg { flex-shrink: 0; }
+    .hero-tv-badge span {
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-atelier-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Coloana dreapta — imagine */
+    .hero-atelier-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-atelier-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.88) saturate(0.9);
+    }
+    .hero-atelier-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(61,26,92,0.3) 0%, transparent 40%);
+    }
+
+    /* Ornament colț */
+    .hero-atelier-left .hero-corner-ornament {
+      position: absolute;
+      top: 5rem; left: 5rem;
+      width: 60px; height: 60px;
+      opacity: 0.25;
+    }
+    .hero-atelier-left .hero-corner-ornament::before,
+    .hero-atelier-left .hero-corner-ornament::after {
+      content: '';
+      position: absolute;
+      background: var(--gold);
+    }
+    .hero-atelier-left .hero-corner-ornament::before {
+      left: 0; top: 0;
+      width: 1px; height: 100%;
+    }
+    .hero-atelier-left .hero-corner-ornament::after {
+      left: 0; top: 0;
+      width: 100%; height: 1px;
+    }
+
+    /* ── STATS BAR — vine din style.css dar override culori ── */
+
+    /* ── COLECȚII PREVIEW ── */
+    .collections-preview {
+      padding: 6rem 4rem;
+      background: var(--cream);
+    }
+
+    /* ── FEATURED PHOTOS — galerie 3 rochii ── */
+    .featured-gallery {
+      padding: 0 4rem 6rem;
+      background: var(--cream);
+    }
+    .featured-gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+    .featured-gallery-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--plum);
+    }
+    .featured-gallery-header h2 em { font-style: italic; color: var(--violet); }
+    .featured-gallery-header a {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--violet);
+      text-decoration: none;
+      border-bottom: 1px solid var(--lavender);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .featured-gallery-header a:hover { color: var(--plum); }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      grid-template-rows: 480px 200px;
+      gap: 5px;
+      height: 685px;
+    }
+    .featured-item {
+      overflow: hidden;
+      position: relative;
+      background: #1a0f2e;
+    }
+    .featured-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .featured-item:hover img { transform: scale(1.04); }
+    /* Albastru — toată coloana stângă, ambele rânduri */
+    .featured-item:first-child { grid-column: 1; grid-row: 1 / 3; }
+    /* Ivory — rând 1, col 2 */
+    .featured-item:nth-child(2) { grid-column: 2; grid-row: 1; }
+    /* Roșu — rând 1, col 3 */
+    .featured-item:nth-child(3) { grid-column: 3; grid-row: 1; }
+    /* Banner mov — rând 2, col 2+3 */
+    .featured-item:nth-child(4) { grid-column: 2 / 4; grid-row: 2; }
+
+    .featured-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(61,26,92,0.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    .featured-item:hover .featured-item-overlay { opacity: 1; }
+    .featured-item-label {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    /* ── LENJERII PREVIEW ── */
+    .lenjerii-preview {
+      background: var(--black);
+      padding: 6rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .lenjerii-preview-text { }
+    .lenjerii-preview-text .section-eyebrow { color: var(--gold); }
+    .lenjerii-preview-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.15;
+      margin: 1rem 0 1.5rem;
+    }
+    .lenjerii-preview-text h2 em { font-style: italic; color: var(--lavender); }
+    .lenjerii-preview-text p {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(248,245,242,0.55);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+    .lenjerii-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 2.5rem;
+    }
+    .lenjerii-features li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(248,245,242,0.65);
+      letter-spacing: 0.05em;
+    }
+    .lenjerii-features li::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .lenjerii-preview-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .lenjerii-preview-gallery img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.85) saturate(0.8);
+      transition: filter 0.4s, transform 0.4s;
+    }
+    .lenjerii-preview-gallery img:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/7;
+    }
+    .lenjerii-preview-gallery img:hover {
+      filter: brightness(1) saturate(1);
+      transform: scale(1.02);
+    }
+
+    /* ── ABOUT PREVIEW ── */
+    .about-preview {
+      background: var(--cream);
+    }
+
+    /* ── CARD cu poză reală ── */
+    .collection-card .card-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.6s ease;
+    }
+    .collection-card:hover .card-photo { transform: scale(1.06); }
+
+    /* ══ MOBILE ══ */
+    @media (max-width: 900px) {
+      .hero-atelier { grid-template-columns: 1fr; min-height: auto; }
+      .hero-atelier-left {
+        padding: 8rem 2rem 4rem;
+        order: 2;
+      }
+      .hero-atelier-left::after { display: none; }
+      .hero-atelier-right { order: 1; height: 55vw; min-height: 300px; }
+      .collections-preview { padding: 4rem 2rem; }
+      .featured-gallery { padding: 0 2rem 4rem; }
+      .featured-grid { grid-template-columns: 1fr 1fr; }
+      .featured-item:first-child { grid-row: span 1; min-height: auto; }
+      .featured-item { aspect-ratio: 3/4 !important; }
+      .lenjerii-preview { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-atelier-left { padding: 7rem 1.5rem 3rem; }
+      .collections-preview { padding: 3rem 1rem; }
+      .featured-gallery { padding: 0 1rem 3rem; }
+      .featured-gallery-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .featured-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+      .featured-item:first-child { grid-column: span 2; min-height: 260px; }
+      .lenjerii-preview { padding: 3rem 1rem; }
+      .lenjerii-preview-gallery { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -29,9 +385,7 @@
       <li><a href="pages/contact.html">Contact</a></li>
     </ul>
     <button class="nav-hamburger" aria-label="Meniu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </nav>
 
@@ -46,61 +400,42 @@
   </div>
 
   <!-- ══════════════════════════════
-       HERO
+       HERO — Atelier & TV
   ══════════════════════════════ -->
-  <section class="hero">
-    <!-- Ornamental corners -->
-    <div class="hero-corner tl">
-      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 78 L2 2 L78 2" stroke="rgba(201,168,112,0.5)" stroke-width="1"/>
-        <path d="M2 40 L2 2 L40 2" stroke="rgba(201,168,112,0.3)" stroke-width="0.5"/>
-        <circle cx="2" cy="2" r="3" fill="rgba(201,168,112,0.6)"/>
-        <path d="M18 2 Q2 2 2 18" stroke="rgba(201,168,112,0.4)" stroke-width="0.5" fill="none"/>
-      </svg>
-    </div>
-    <div class="hero-corner tr">
-      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 78 L2 2 L78 2" stroke="rgba(201,168,112,0.5)" stroke-width="1"/>
-        <path d="M2 40 L2 2 L40 2" stroke="rgba(201,168,112,0.3)" stroke-width="0.5"/>
-        <circle cx="2" cy="2" r="3" fill="rgba(201,168,112,0.6)"/>
-        <path d="M18 2 Q2 2 2 18" stroke="rgba(201,168,112,0.4)" stroke-width="0.5" fill="none"/>
-      </svg>
-    </div>
-    <div class="hero-corner bl">
-      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 78 L2 2 L78 2" stroke="rgba(201,168,112,0.5)" stroke-width="1"/>
-        <path d="M2 40 L2 2 L40 2" stroke="rgba(201,168,112,0.3)" stroke-width="0.5"/>
-        <circle cx="2" cy="2" r="3" fill="rgba(201,168,112,0.6)"/>
-        <path d="M18 2 Q2 2 2 18" stroke="rgba(201,168,112,0.4)" stroke-width="0.5" fill="none"/>
-      </svg>
-    </div>
-    <div class="hero-corner br">
-      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 78 L2 2 L78 2" stroke="rgba(201,168,112,0.5)" stroke-width="1"/>
-        <path d="M2 40 L2 2 L40 2" stroke="rgba(201,168,112,0.3)" stroke-width="0.5"/>
-        <circle cx="2" cy="2" r="3" fill="rgba(201,168,112,0.6)"/>
-        <path d="M18 2 Q2 2 2 18" stroke="rgba(201,168,112,0.4)" stroke-width="0.5" fill="none"/>
-      </svg>
-    </div>
+  <section class="hero-atelier">
 
-    <!-- Animated rings -->
-    <div class="hero-rings">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-    </div>
+    <!-- Stânga: text -->
+    <div class="hero-atelier-left">
+      <div class="hero-corner-ornament"></div>
 
-    <div class="hero-content">
-      <p class="hero-eyebrow">✦ Atelier de creație vestimentară ✦</p>
-      <h1 class="hero-title">
-        <em>Lucia</em> Fashion
+      <div class="hero-badge">
+        <div class="hero-badge-line"></div>
+        <span class="hero-badge-text">Atelier de creație vestimentară</span>
+      </div>
+
+      <!-- Badge TV -->
+      <div class="hero-tv-badge">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+          <rect x="1" y="1" width="16" height="10" rx="1.5" stroke="#C9A86C" stroke-width="1.2"/>
+          <path d="M6 13h6M9 11v2" stroke="#C9A86C" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <span>Apariție TV · Ziua Copilului · Atelier de creație</span>
+      </div>
+
+      <h1>
+        Arta cusutului,<br>
+        <em>dăruită</em><br>
+        generațiilor viitoare
       </h1>
-      <p class="hero-subtitle">Eleganță · Unicat · Artizanat</p>
-      <p class="hero-desc">
-        Fiecare piesă este o poveste — creată cu răbdare, cusută cu pasiune,
-        purtată cu grație.
+
+      <p>
+        D-na Elena a dedicat zeci de ani creației vestimentare. De Ziua Copilului,
+        a deschis atelierul pentru cei mici — inițiindu-i în tainele acului și aței,
+        cu răbdare și dragoste. Un moment surprins de televiziune, pentru că
+        frumusețea trebuie împărtășită.
       </p>
-      <div class="hero-actions">
+
+      <div class="hero-atelier-actions">
         <a href="pages/colectii.html" class="btn btn-primary">
           <span>Descoperă Colecțiile</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -111,10 +446,11 @@
       </div>
     </div>
 
-    <div class="scroll-indicator">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
+    <!-- Dreapta: poza atelierului TV -->
+    <div class="hero-atelier-right">
+      <img src="assets/c2.jpg" alt="D-na Elena la atelierul de creație vestimentară pentru copii — apariție TV">
     </div>
+
   </section>
 
   <!-- ══════════════════════════════
@@ -140,6 +476,72 @@
   </div>
 
   <!-- ══════════════════════════════
+       GALERIE FEATURED — 3 rochii
+  ══════════════════════════════ -->
+  <div class="featured-gallery reveal">
+    <div class="featured-gallery-header">
+      <h2>Creații care<br><em>opresc timpul</em></h2>
+    </div>
+    <div class="featured-grid">
+
+      <!-- Albastru — coloana stânga întreagă, centrat să se vadă și picioarele -->
+      <div class="featured-item">
+        <img src="assets/rochii/r118_3.jpg" alt="Rochie albastră Lucia Fashion"
+             style="object-position: center 30%;">
+        <div class="featured-item-overlay">
+          <span class="featured-item-label">„Albastru Regal" — Rochie Seară</span>
+        </div>
+      </div>
+
+      <!-- Ivory — sus dreapta, focusat pe față+rochie -->
+      <div class="featured-item">
+        <img src="assets/rochii/r120_3.jpg" alt="Rochie ivory Lucia Fashion"
+             style="object-position: center 12%;">
+        <div class="featured-item-overlay">
+          <span class="featured-item-label">„Ivory Auriu cu Flori"</span>
+        </div>
+      </div>
+
+      <!-- Roșu — sus col 3 -->
+      <div class="featured-item">
+        <img src="assets/rochii/r119_2.jpg" alt="Rochie roșie Lucia Fashion"
+             style="object-position: center 8%;">
+        <div class="featured-item-overlay">
+          <span class="featured-item-label">„Roșu Rebel"</span>
+        </div>
+      </div>
+
+      <!-- Banner mov jos col 2+3 -->
+      <div class="featured-item" style="
+        grid-column: 2 / 4; grid-row: 2;
+        background: linear-gradient(135deg, var(--plum) 0%, #5a2580 100%);
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 0.7rem; padding: 2rem; position: relative; overflow: hidden;
+      ">
+        <div style="position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:rgba(123,63,160,0.3);pointer-events:none;"></div>
+        <div style="position:absolute;left:-20px;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(201,168,224,0.06);pointer-events:none;"></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:0.2rem;">
+          <div style="width:28px;height:1px;background:var(--gold);opacity:0.6;"></div>
+          <span style="font-family:var(--font-sans);font-size:0.58rem;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);">Colecție exclusivă</span>
+          <div style="width:28px;height:1px;background:var(--gold);opacity:0.6;"></div>
+        </div>
+        <span style="font-family:var(--font-serif);font-size:1.9rem;font-weight:300;color:var(--cream);font-style:italic;text-align:center;line-height:1.15;">Creații care<br>spun o poveste</span>
+        <a href="pages/colectii.html" style="
+          margin-top:0.4rem;font-family:var(--font-sans);font-size:0.6rem;
+          font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+          color:var(--cream);text-decoration:none;padding:8px 22px;
+          border:1px solid rgba(201,168,112,0.4);transition:all 0.3s;position:relative;z-index:1;
+        " onmouseover="this.style.background='rgba(201,168,112,0.15)';this.style.borderColor='#C9A86C'"
+           onmouseout="this.style.background='transparent';this.style.borderColor='rgba(201,168,112,0.4)'">
+          Vezi toate colecțiile →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
        COLECȚII PREVIEW
   ══════════════════════════════ -->
   <section class="collections-preview">
@@ -150,12 +552,11 @@
     </div>
 
     <div class="collections-grid reveal">
-      <!-- Card mare -->
-      <div class="collection-card">
-        <div class="card-bg card-bg-1">
-          <div class="card-pattern"></div>
-        </div>
-        <div class="card-overlay"></div>
+
+      <!-- Card 1 — Mireasă: poza procesată cu overlay mov -->
+      <div class="collection-card" onclick="location.href='pages/colectii.html'" style="cursor:pointer;">
+        <img class="card-photo" src="assets/card_mireasa.jpg" alt="Rochii de Mireasă Lucia Fashion" style="object-position:center 15%;">
+        <div class="card-overlay" style="background:linear-gradient(to top,rgba(61,26,92,0.75) 0%,transparent 50%);"></div>
         <div class="card-content">
           <div class="card-tag">✦ Colecție Specială</div>
           <h3 class="card-title">Rochii de Mireasă</h3>
@@ -163,12 +564,10 @@
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="collection-card">
-        <div class="card-bg card-bg-2">
-          <div class="card-pattern"></div>
-        </div>
-        <div class="card-overlay"></div>
+      <!-- Card 2 — Seară: poza procesată rochie albastră -->
+      <div class="collection-card" onclick="location.href='pages/colectii.html'" style="cursor:pointer;">
+        <img class="card-photo" src="assets/card_seara.jpg" alt="Rochii de Seară Lucia Fashion" style="object-position:center 10%;">
+        <div class="card-overlay" style="background:linear-gradient(to top,rgba(61,26,92,0.75) 0%,transparent 55%);"></div>
         <div class="card-content">
           <div class="card-tag">Elegant</div>
           <h3 class="card-title">Rochii de Seară</h3>
@@ -176,31 +575,28 @@
         </div>
       </div>
 
-      <!-- Card 3 -->
-      <div class="collection-card">
-        <div class="card-bg card-bg-3">
-          <div class="card-pattern"></div>
-        </div>
-        <div class="card-overlay"></div>
+      <!-- Card 3 — Ținute de Zi: r120_2 procesat -->
+      <div class="collection-card" onclick="location.href='pages/colectii.html'" style="cursor:pointer;">
+        <img class="card-photo" src="assets/card_zi.jpg" alt="Ținute de Zi Lucia Fashion" style="object-position:center 8%;">
+        <div class="card-overlay" style="background:linear-gradient(to top,rgba(61,26,92,0.75) 0%,transparent 55%);"></div>
         <div class="card-content">
-          <div class="card-tag">Business</div>
-          <h3 class="card-title">Ținute Business</h3>
-          <p class="card-sub">Profesional · Rafinat</p>
+          <div class="card-tag">Rafinat</div>
+          <h3 class="card-title">Ținute de Zi</h3>
+          <p class="card-sub">Bluze · Fuste · Jachete</p>
         </div>
       </div>
 
-      <!-- Card 4 -->
-      <div class="collection-card">
-        <div class="card-bg card-bg-4">
-          <div class="card-pattern"></div>
-        </div>
-        <div class="card-overlay"></div>
+      <!-- Card 4 — Lenjerii: l20 procesat -->
+      <div class="collection-card" onclick="location.href='pages/lenjerii.html'" style="cursor:pointer;">
+        <img class="card-photo" src="assets/card_lenjerii.jpg" alt="Lenjerii de Pat Lucia Fashion" style="object-position:center 20%;">
+        <div class="card-overlay" style="background:linear-gradient(to top,rgba(61,26,92,0.78) 0%,transparent 55%);"></div>
         <div class="card-content">
-          <div class="card-tag">Vintage</div>
-          <h3 class="card-title">Colecție Vintage</h3>
-          <p class="card-sub">Retro · Autentic · Unic</p>
+          <div class="card-tag" style="color:var(--lavender);">Colecție nouă</div>
+          <h3 class="card-title">Lenjerii de Pat</h3>
+          <p class="card-sub">Bumbac 100% · Personalizate</p>
         </div>
       </div>
+
     </div>
 
     <div style="text-align:center; margin-top:3rem;" class="reveal">
@@ -211,15 +607,63 @@
   </section>
 
   <!-- ══════════════════════════════
-       ABOUT PREVIEW
+       LENJERII PREVIEW
+  ══════════════════════════════ -->
+  <section class="lenjerii-preview reveal">
+    <div class="lenjerii-preview-text">
+      <span class="section-eyebrow">✦ Colecție exclusivă</span>
+      <h2>Lenjerii de pat<br>din <em>bumbac pur</em></h2>
+      <p>
+        Confecționate manual cu aceeași grijă și atenție la detalii ca orice piesă
+        Lucia Fashion. Bumbac ramforsat 100% natural, disponibile în sute de modele
+        și personalizabile la orice dimensiune sau combinație de culori.
+      </p>
+      <ul class="lenjerii-features">
+        <li>Bumbac ramforsat 100% — hipoalergenic</li>
+        <li>Set complet: cearceaf, față pilotă, 2 fețe pernă</li>
+        <li>Disponibile în orice dimensiune</li>
+        <li>Personalizare completă la cerere</li>
+      </ul>
+      <a href="pages/lenjerii.html" class="btn btn-primary">
+        <span>Descoperă Lenjerii</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+    <div class="lenjerii-preview-gallery">
+      <img src="assets/l20.jpg" alt="Lenjerie de pat Lucia Fashion">
+      <img src="assets/l1.jpg" alt="Lenjerie bujori roz Lucia Fashion">
+      <img src="assets/l18.jpg" alt="Lenjerie lavandă Lucia Fashion">
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       ABOUT PREVIEW — Povestea combinată
   ══════════════════════════════ -->
   <section class="about-preview">
-    <div class="about-visual reveal">
-      <div class="about-frame">
-        <div class="about-frame-inner"></div>
-        <div class="about-frame-deco"></div>
+    <div class="about-visual reveal" style="position:relative; overflow:hidden;">
+      <!-- Poza reală cu D-na Elena la atelierul TV -->
+      <img
+        src="assets/c2.jpg"
+        alt="D-na Elena la atelierul de creație pentru copii — apariție TV"
+        style="width:100%; height:100%; object-fit:cover; object-position:center top; min-height:420px; display:block;"
+      >
+      <!-- Badge TV peste poză -->
+      <div style="
+        position:absolute; bottom:1.5rem; left:1.5rem;
+        background:rgba(13,13,13,0.75);
+        backdrop-filter:blur(6px);
+        border:1px solid rgba(201,168,112,0.3);
+        padding:0.6rem 1rem;
+        display:flex; align-items:center; gap:10px;
+      ">
+        <svg width="16" height="12" viewBox="0 0 18 14" fill="none">
+          <rect x="1" y="1" width="16" height="10" rx="1.5" stroke="#C9A86C" stroke-width="1.2"/>
+          <path d="M6 13h6M9 11v2" stroke="#C9A86C" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <span style="font-family:var(--font-sans); font-size:0.58rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold);">Apariție TV · Ziua Copilului</span>
       </div>
     </div>
+
     <div class="about-text reveal reveal-delay-1">
       <span class="section-eyebrow">✦ Povestea noastră</span>
       <h2 class="section-title" style="text-align:left; margin-bottom:1.5rem;">
@@ -228,16 +672,30 @@
       <blockquote class="about-quote">
         Moda trece. Stilul rămâne.
       </blockquote>
-      <p class="about-body">
-        Lucia Fashion este mai mult decât un atelier — este un spațiu unde țesătura
-        devine artă și fiecare cusătură poartă o poveste. Cu peste 15 ani de experiență
-        în design vestimentar, creăm piese unicat care celebrează feminitatea autentică.
+
+      <p style="font-family:'Montserrat',sans-serif; font-size:0.82rem; font-weight:300; color:#3D1A5C; line-height:1.95; margin-bottom:1.2rem; letter-spacing:0.02em;">
+        Lucia Fashion s-a născut dintr-o dragoste profundă pentru textile și pentru
+        frumusețea feminină. Este mai mult decât un atelier — este un spațiu unde
+        țesătura devine artă și fiecare cusătură poartă o poveste. Cu peste 15 ani
+        de experiență în design vestimentar, creăm piese unicat care celebrează
+        feminitatea autentică.
       </p>
-      <p class="about-body">
-        Fiecare rochie, fiecare bluză, fiecare fustă este gândită individual — pentru
-        tine, după măsura ta, după visul tău.
+
+      <p style="font-family:'Montserrat',sans-serif; font-size:0.82rem; font-weight:300; color:#3D1A5C; line-height:1.95; margin-bottom:1.2rem; letter-spacing:0.02em;">
+        Fiecare rochie, fiecare bluză, fiecare fustă este gândită individual —
+        pentru tine, după măsura ta, după visul tău. Nu există producție în serie,
+        nu există compromisuri. Există doar atenție, răbdare și pasiune pentru
+        detaliul care face diferența.
       </p>
-      <a href="pages/despre.html" class="btn btn-primary" style="margin-top:1rem;">
+
+      <p style="font-family:'Montserrat',sans-serif; font-size:0.82rem; font-weight:300; color:#3D1A5C; line-height:1.95; margin-bottom:1.8rem; letter-spacing:0.02em;">
+        Iar pasiunea D-nei Elena depășește atelierul. De Ziua Copilului, a deschis
+        ușile pentru cei mici — inițiindu-i cu blândețe și bucurie în tainele
+        acului și aței. Un moment surprins de televiziune, pentru că arta autentică
+        merită să treacă din generație în generație.
+      </p>
+
+      <a href="pages/despre.html" class="btn btn-primary" style="margin-top:0.5rem;">
         <span>Descoperă Povestea</span>
       </a>
     </div>
@@ -270,17 +728,17 @@
         <ul>
           <li><a href="pages/colectii.html">Rochii de Mireasă</a></li>
           <li><a href="pages/colectii.html">Rochii de Seară</a></li>
+          <li><a href="pages/colectii.html">Lenjerii de Pat</a></li>
           <li><a href="pages/colectii.html">Ținute Business</a></li>
-          <li><a href="pages/colectii.html">Vintage</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></li>
-          <li><a href="tel:+40700000000">+40 700 000 000</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
+          <li><a href="mailto:tudoranlucia@yahoo.com">tudoranlucia@yahoo.com</a></li>
+          <li><a href="tel:+40728304151">0728 304 151</a></li>
+          <li><a href="https://www.facebook.com/luciafashiondesign/" target="_blank" rel="noopener">Facebook</a></li>
+          <li style="color:rgba(248,245,242,0.4); font-size:0.7rem;">Str. Plutașilor nr. 18, Sector 1, București</li>
         </ul>
       </div>
     </div>
