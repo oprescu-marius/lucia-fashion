@@ -6,6 +6,30 @@
   <title>Despre Noi — Lucia Fashion</title>
   <meta name="description" content="Povestea atelierului Lucia Fashion — pasiune, experiență și dragoste pentru design vestimentar autentic." />
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    @media (max-width: 768px) {
+      /* Story sections stacked pe mobile */
+      .about-story {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+      }
+      /* Textul din prima sectiune — jos (dupa imagine) */
+      .story-img-wrap {
+        min-height: 72vw !important;
+        max-height: 88vw !important;
+        width: 100% !important;
+        flex: none !important;
+      }
+      .about-story-text {
+        padding: 2.5rem 1.5rem !important;
+        order: 2;
+      }
+      /* Prima sectiune: textul e primul in DOM, imaginea a doua — inversam */
+      .about-story.story-text-first .about-story-text { order: 2; }
+      .about-story.story-text-first .story-img-wrap   { order: 1; }
+    }
+  </style>
 </head>
 <body>
 
@@ -56,16 +80,18 @@
   <section class="about-section">
 
     <!-- Story -->
-    <div class="about-story">
-      <div class="about-story-text reveal">
+    <div class="about-story story-text-first" style="align-items:stretch; gap:0;">
+
+      <!-- Text stânga -->
+      <div class="about-story-text reveal" style="display:flex; flex-direction:column; justify-content:center; padding:4rem 4rem 4rem 5rem;">
         <span class="section-eyebrow">✦ Cum a început totul</span>
         <h2 style="margin-bottom:1.5rem;">O Poveste Cusută<br>cu <em>Dragoste</em></h2>
-        <p>
+        <p style="margin-bottom:1.2rem;">
           Lucia Fashion s-a născut dintr-o dragoste profundă pentru textile și pentru frumusețea feminină.
           Totul a început cu o mașină de cusut, o grămadă de vise și convingerea că îmbrăcămintea
           este mai mult decât un simplu obiect — este o extensie a personalității, a stării de spirit, a sufletului.
         </p>
-        <p>
+        <p style="margin-bottom:1.2rem;">
           De-a lungul anilor, atelierul nostru a crescut, dar principiul fundamental a rămas același:
           fiecare piesă este unică, fiecare clientă este specială, fiecare comandă este tratată cu
           aceeași atenție și grijă ca și prima.
@@ -75,13 +101,33 @@
           tradiția cu modernitatea, rezultând ținute care depășesc tendințele sezoniere și
           rămân relevante pentru ani îndelungați.
         </p>
-      </div>
-      <div class="about-img-placeholder reveal reveal-delay-1" style="display:flex; align-items:center; justify-content:center;">
-        <div style="text-align:center;">
-          <div style="font-family:var(--font-serif); font-size:6rem; color:rgba(201,168,112,0.15); line-height:1;">LF</div>
-          <p style="color:rgba(248,245,242,0.2); font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase;">Imagine în curând</p>
+        <div style="margin-top:2rem; display:flex; align-items:center; gap:14px;">
+          <div style="width:36px; height:1px; background:var(--gold);"></div>
+          <span style="font-family:var(--font-sans); font-size:0.6rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);">Artizanat autentic din 2009</span>
         </div>
       </div>
+
+      <!-- Imagine dreapta — full bleed -->
+      <div class="story-img-wrap reveal reveal-delay-1" style="position:relative; overflow:hidden; min-height:520px; flex:1;">
+        <img
+          src="../assets/lf4.png"
+          alt="Atelier Lucia Fashion — artizanat vestimentar autentic"
+          style="
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            object-position:65% center;
+            display:block;
+            position:absolute;
+            inset:0;
+          "
+        >
+        <div style="position:absolute; inset:0; background:linear-gradient(to right, rgba(61,26,92,0.45) 0%, transparent 35%); pointer-events:none;"></div>
+        <div style="position:absolute; bottom:2rem; left:2rem; background:rgba(13,13,13,0.65); backdrop-filter:blur(8px); border:1px solid rgba(201,168,112,0.3); padding:0.7rem 1.2rem; display:flex; align-items:center; gap:10px;">
+          <span style="font-family:var(--font-sans); font-size:0.58rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);">✦ Fiecare cusătură, o poveste</span>
+        </div>
+      </div>
+
     </div>
 
     <!-- Ornament -->
@@ -115,21 +161,27 @@
     <div class="ornament reveal" style="margin-top: 5rem;"><span>✦</span></div>
 
     <!-- Second story block -->
-    <div class="about-story" style="margin-top: 4rem;">
-      <div class="about-img-placeholder reveal" style="display:flex; align-items:center; justify-content:center;">
-        <div style="text-align:center;">
-          <div style="font-family:var(--font-serif); font-size:6rem; color:rgba(201,168,112,0.15); line-height:1;">♡</div>
-          <p style="color:rgba(248,245,242,0.2); font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase;">Atelier foto în curând</p>
-        </div>
+    <div class="about-story" style="margin-top: 4rem; align-items:stretch; gap:0;">
+
+      <!-- Imagine stânga — full bleed -->
+      <div class="story-img-wrap reveal" style="position:relative; overflow:hidden; min-height:540px; flex:1;">
+        <img
+          src="../assets/lf3p.png"
+          alt="Eleganță feminină — Lucia Fashion"
+          style="width:100%; height:100%; object-fit:cover; object-position:75% 20%; display:block; position:absolute; inset:0;"
+        >
+        <div style="position:absolute; inset:0; background:linear-gradient(to left, rgba(61,26,92,0.45) 0%, transparent 40%); pointer-events:none;"></div>
       </div>
-      <div class="about-story-text reveal reveal-delay-1">
+
+      <!-- Text dreapta -->
+      <div class="about-story-text reveal reveal-delay-1" style="display:flex; flex-direction:column; justify-content:center; padding:4rem 5rem 4rem 4rem;">
         <span class="section-eyebrow">✦ Misiunea noastră</span>
         <h2 style="margin-bottom:1.5rem;">Îmbrăcăm <em>Vise</em>,<br>Nu Doar Trupuri</h2>
-        <p>
+        <p style="margin-bottom:1.2rem;">
           Credem că o femeie care se simte bine în hainele pe care le poartă emană o
           energie aparte. De aceea, nu creăm doar ținute — creăm experiențe.
         </p>
-        <p>
+        <p style="margin-bottom:1.2rem;">
           Fiecare consultație, fiecare probă, fiecare ajustare este o parte din
           procesul prin care visul tău devine realitate. Lucrăm pas cu pas,
           împreună cu tine, până când rezultatul este exact ceea ce ai dorit.
@@ -137,7 +189,12 @@
         <blockquote class="about-quote" style="margin-top:2rem;">
           Hainele bune deschid uși pe care oamenii buni le lasă deschise.
         </blockquote>
+        <div style="margin-top:2rem; display:flex; align-items:center; gap:14px;">
+          <div style="width:36px; height:1px; background:var(--gold);"></div>
+          <span style="font-family:var(--font-sans); font-size:0.6rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);">Fiecare clientă, o lume întreagă</span>
+        </div>
       </div>
+
     </div>
 
     <!-- CTA -->
@@ -184,9 +241,9 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></li>
-          <li><a href="tel:+40700000000">+40 700 000 000</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
+          <li><a href="tel:+40728304151">0728 304 151</a></li>
+          <li><a href="https://www.facebook.com/luciafashiondesign/" target="_blank" rel="noopener">Facebook</a></li>
+          <li style="color:rgba(248,245,242,0.35); font-size:0.7rem; line-height:1.5;">Str. Plutașilor 18<br>Sector 1, București</li>
         </ul>
       </div>
     </div>
