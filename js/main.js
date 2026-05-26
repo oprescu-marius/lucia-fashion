@@ -133,35 +133,23 @@
   }
 
   /* ── Contact Form ──────────────────────────── */
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+  // Handlerul complet pentru contact form este în contact.html
+  // main.js nu intervine pentru a evita conflicte
 
-      const btn = this.querySelector('.btn-primary');
-      const originalText = btn.innerHTML;
-
-      btn.innerHTML = '<span>Se trimite...</span>';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        btn.innerHTML = '<span>✓ Mesaj trimis</span>';
-        btn.style.background = '#2d7a4f';
-        contactForm.reset();
-
-        setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 3000);
-      }, 1200);
-    });
-  }
+  /* ── Copyright year dinamic ────────────────── */
+  const yearEl = document.getElementById('copyright-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ── Smooth page transitions ───────────────── */
   document.querySelectorAll('a[href]').forEach(link => {
     const href = link.getAttribute('href');
-    if (!href.startsWith('#') && !href.startsWith('mailto') && !href.startsWith('tel')) {
+    // Excludem mailto, tel, _blank si ancore
+    if (
+      !href.startsWith('#') &&
+      !href.startsWith('mailto') &&
+      !href.startsWith('tel') &&
+      link.getAttribute('target') !== '_blank'
+    ) {
       link.addEventListener('click', function (e) {
         e.preventDefault();
         document.body.style.opacity = '0';

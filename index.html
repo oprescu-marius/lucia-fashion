@@ -5,9 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lucia Fashion — Atelier de Design Vestimentar</title>
   <meta name="description" content="Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze. Design autentic românesc." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luciafashion.ro/" />
+  <meta property="og:title" content="Lucia Fashion — Atelier de Design Vestimentar" />
+  <meta property="og:description" content="Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze. Design autentic românesc." />
+  <meta property="og:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
+  <meta property="og:locale" content="ro_RO" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- SEO suplimentar -->
+  <meta name="keywords" content="rochii mireasă București, atelier croitorie București, rochii de seară, design vestimentar, rochii unicat, lenjerii de pat, Lucia Fashion" />
+  <meta name="author" content="Lucia Fashion" />
+  <meta name="geo.region" content="RO-B" />
+  <meta name="geo.placename" content="București" />
+  <link rel="canonical" href="https://luciafashion.ro/" />
+
+  <!-- Schema markup — LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "Lucia Fashion",
+    "description": "Atelier de creație vestimentară — rochii unicat, rochii de mireasă, rochii de seară, fuste, bluze și lenjerii de pat.",
+    "url": "https://luciafashion.ro",
+    "telephone": "+40728304151",
+    "email": "contact@luciafashion.ro",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Strada Plutașilor nr. 18",
+      "addressLocality": "București",
+      "postalCode": "011054",
+      "addressCountry": "RO"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 44.4922985,
+      "longitude": 26.0341214
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "21:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/luciafashiondesign/"
+    ],
+    "priceRange": "$$",
+    "currenciesAccepted": "RON",
+    "paymentAccepted": "Cash, Transfer bancar"
+  }
+  </script>
+
+  <!-- Fonturi -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="css/style.css" />
   <style>
 
@@ -512,7 +573,7 @@
 
     <!-- Dreapta: poza atelierului TV -->
     <div class="hero-atelier-right">
-      <img src="assets/c2.jpg" alt="D-na Elena la atelierul de creație vestimentară pentru copii — apariție TV" style="object-position: 50% 55%;">
+      <img src="assets/c2.jpg" alt="D-na Elena la atelierul de creație vestimentară pentru copii — apariție TV" style="object-position: 50% 55%;" loading="eager">
     </div>
 
   </section>
@@ -550,7 +611,7 @@
 
       <!-- Albastru — coloana stânga întreagă, centrat să se vadă și picioarele -->
       <div class="featured-item">
-        <img src="assets/rochii/r118_3.jpg" alt="Rochie albastră Lucia Fashion"
+        <img src="assets/rochii/r118_3.jpg" alt="Rochie albastră Lucia Fashion" loading="lazy"
              style="object-position: center 30%;">
         <div class="featured-item-overlay">
           <span class="featured-item-label">„Albastru Regal" — Rochie Seară</span>
@@ -559,7 +620,7 @@
 
       <!-- Ivory — sus dreapta, focusat pe față+rochie -->
       <div class="featured-item">
-        <img src="assets/rochii/r120_3.jpg" alt="Rochie ivory Lucia Fashion"
+        <img src="assets/rochii/r120_3.jpg" alt="Rochie ivory Lucia Fashion" loading="lazy"
              style="object-position: center 12%;">
         <div class="featured-item-overlay">
           <span class="featured-item-label">„Ivory Auriu cu Flori"</span>
@@ -568,7 +629,7 @@
 
       <!-- Roșu — sus col 3 -->
       <div class="featured-item">
-        <img src="assets/rochii/r119_2.jpg" alt="Rochie roșie Lucia Fashion"
+        <img src="assets/rochii/r119_2.jpg" alt="Rochie roșie Lucia Fashion" loading="lazy"
              style="object-position: center 8%;">
         <div class="featured-item-overlay">
           <span class="featured-item-label">„Roșu Rebel"</span>
@@ -619,7 +680,7 @@
 
       <!-- Card 1 — Mireasă: poza procesată cu overlay mov -->
       <div class="collection-card" onclick="location.href='pages/colectii.html'" style="cursor:pointer;">
-        <img class="card-photo" src="assets/card_mireasa.jpg" alt="Rochii de Mireasă Lucia Fashion" style="object-position:center 15%;">
+        <img class="card-photo" src="assets/card_mireasa.jpg" alt="Rochii de Mireasă Lucia Fashion" loading="lazy" style="object-position:center 15%;">
         <div class="card-overlay" style="background:linear-gradient(to top,rgba(61,26,92,0.75) 0%,transparent 50%);"></div>
         <div class="card-content">
           <div class="card-tag">✦ Colecție Specială</div>
@@ -630,7 +691,7 @@
 
       <!-- Card 2 — Seară: poza procesată rochie albastră -->
       <div class="collection-card" onclick="location.href='pages/colectii.html'" style="cursor:pointer;">
-        <img class="card-photo" src="assets/card_seara.jpg" alt="Rochii de Seară Lucia Fashion" style="object-position:center 10%;">
+        <img class="card-photo" src="assets/card_seara.jpg" alt="Rochii de Seară Lucia Fashion" loading="lazy" style="object-position:center 10%;">
         <div class="card-overlay" style="background:linear-gradient(to top,rgba(61,26,92,0.75) 0%,transparent 55%);"></div>
         <div class="card-content">
           <div class="card-tag">Elegant</div>
@@ -641,7 +702,7 @@
 
       <!-- Card 3 — Ținute de Zi: r120_2 procesat -->
       <div class="collection-card" onclick="location.href='pages/colectii.html'" style="cursor:pointer;">
-        <img class="card-photo" src="assets/card_zi.jpg" alt="Ținute de Zi Lucia Fashion" style="object-position:center 8%;">
+        <img class="card-photo" src="assets/card_zi.jpg" alt="Ținute de Zi Lucia Fashion" loading="lazy" style="object-position:center 8%;">
         <div class="card-overlay" style="background:linear-gradient(to top,rgba(61,26,92,0.75) 0%,transparent 55%);"></div>
         <div class="card-content">
           <div class="card-tag">Rafinat</div>
@@ -652,7 +713,7 @@
 
       <!-- Card 4 — Lenjerii: l20 procesat -->
       <div class="collection-card" onclick="location.href='pages/lenjerii.html'" style="cursor:pointer;">
-        <img class="card-photo" src="assets/card_lenjerii.jpg" alt="Lenjerii de Pat Lucia Fashion" style="object-position:center 20%;">
+        <img class="card-photo" src="assets/card_lenjerii.jpg" alt="Lenjerii de Pat Lucia Fashion" loading="lazy" style="object-position:center 20%;">
         <div class="card-overlay" style="background:linear-gradient(to top,rgba(61,26,92,0.78) 0%,transparent 55%);"></div>
         <div class="card-content">
           <div class="card-tag" style="color:var(--lavender);">Colecție nouă</div>
@@ -694,9 +755,9 @@
       </a>
     </div>
     <div class="lenjerii-preview-gallery">
-      <img src="assets/l20.jpg" alt="Lenjerie de pat Lucia Fashion">
-      <img src="assets/l1.jpg" alt="Lenjerie bujori roz Lucia Fashion">
-      <img src="assets/l18.jpg" alt="Lenjerie lavandă Lucia Fashion">
+      <img src="assets/l20.jpg" alt="Lenjerie de pat Lucia Fashion" loading="lazy">
+      <img src="assets/l1.jpg" alt="Lenjerie bujori roz Lucia Fashion" loading="lazy">
+      <img src="assets/l18.jpg" alt="Lenjerie lavandă Lucia Fashion" loading="lazy">
     </div>
   </section>
 
@@ -709,6 +770,7 @@
       <img
         src="assets/c2.jpg"
         alt="D-na Elena la atelierul de creație pentru copii — apariție TV"
+        loading="lazy"
         style="width:100%; height:100%; object-fit:cover; object-position:center 60%; min-height:420px; display:block;"
       >
       <!-- Badge TV peste poză -->
@@ -807,7 +869,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Lucia Fashion Design. Toate drepturile rezervate.</p>
+      <p>© <span id="copyright-year">2025</span> Lucia Fashion Design. Toate drepturile rezervate.</p>
       <p>Creat cu ♥ pentru eleganță autentică</p>
     </div>
   </footer>

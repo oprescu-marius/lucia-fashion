@@ -5,6 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Lucia Fashion</title>
   <meta name="description" content="Contactează Lucia Fashion pentru comenzi personalizate, întrebări sau programări la atelier. Str. Plutașilor 18, Sector 1, București." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luciafashion.ro/pages/contact.html" />
+  <meta property="og:title" content="Contact — Lucia Fashion" />
+  <meta property="og:description" content="Contactează Lucia Fashion pentru comenzi personalizate, întrebări sau programări la atelier. Str. Plutașilor 18, Sector 1, București." />
+  <meta property="og:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
+  <meta property="og:locale" content="ro_RO" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- SEO suplimentar -->
+  <meta name="keywords" content="contact Lucia Fashion, programare atelier croitorie, comandă rochie mireasă București, Strada Plutașilor 18" />
+  <meta name="author" content="Lucia Fashion" />
+  <link rel="canonical" href="https://luciafashion.ro/pages/contact.html" />
+
+  <!-- Schema markup — ContactPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact — Lucia Fashion",
+    "url": "https://luciafashion.ro/pages/contact.html",
+    "description": "Contactează Lucia Fashion pentru comenzi personalizate, întrebări sau programări la atelier.",
+    "mainEntity": {
+      "@type": "ClothingStore",
+      "name": "Lucia Fashion",
+      "telephone": "+40728304151",
+      "email": "contact@luciafashion.ro",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Strada Plutașilor nr. 18",
+        "addressLocality": "București",
+        "addressCountry": "RO"
+      }
+    }
+  }
+  </script>
+
+  <!-- Fonturi -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="../css/style.css" />
   <style>
     .map-section { padding: 0 3rem 5rem; }
@@ -215,7 +261,7 @@
         method="POST"
         data-netlify="true"
         netlify-honeypot="bot-field"
-        action="/pages/contact.html?success=true"
+        action="/pages/contact.html"
       >
         <!-- Câmpuri obligatorii Netlify -->
         <input type="hidden" name="form-name" value="contact" />
@@ -364,7 +410,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Lucia Fashion Design. Toate drepturile rezervate.</p>
+      <p>© <span id="copyright-year">2025</span> Lucia Fashion Design. Toate drepturile rezervate.</p>
       <p>Creat cu ♥ pentru eleganță autentică</p>
     </div>
   </footer>

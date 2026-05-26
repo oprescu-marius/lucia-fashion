@@ -5,6 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Despre Noi — Lucia Fashion</title>
   <meta name="description" content="Povestea atelierului Lucia Fashion — pasiune, experiență și dragoste pentru design vestimentar autentic." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luciafashion.ro/pages/despre.html" />
+  <meta property="og:title" content="Despre Noi — Lucia Fashion" />
+  <meta property="og:description" content="Povestea atelierului Lucia Fashion — pasiune, experiență și dragoste pentru design vestimentar autentic." />
+  <meta property="og:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
+  <meta property="og:locale" content="ro_RO" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- SEO suplimentar -->
+  <meta name="keywords" content="Lucia Fashion despre, atelier croitorie București, design vestimentar autentic, croitoreasă București" />
+  <meta name="author" content="Lucia Fashion" />
+  <link rel="canonical" href="https://luciafashion.ro/pages/despre.html" />
+
+  <!-- Schema markup — AboutPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "Despre Noi — Lucia Fashion",
+    "url": "https://luciafashion.ro/pages/despre.html",
+    "description": "Povestea atelierului Lucia Fashion — pasiune, experiență și dragoste pentru design vestimentar autentic.",
+    "mainEntity": {
+      "@type": "ClothingStore",
+      "name": "Lucia Fashion",
+      "url": "https://luciafashion.ro",
+      "telephone": "+40728304151",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Strada Plutașilor nr. 18",
+        "addressLocality": "București",
+        "addressCountry": "RO"
+      }
+    }
+  }
+  </script>
+
+  <!-- Fonturi -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
     @media (max-width: 768px) {
@@ -105,12 +150,49 @@
           <div style="width:36px; height:1px; background:var(--gold);"></div>
           <span style="font-family:var(--font-sans); font-size:0.6rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);">Artizanat autentic din 2009</span>
         </div>
+
+        <!-- Link spre pagina Poveste -->
+        <a href="../poveste.html" style="
+          display:inline-flex;
+          align-items:center;
+          gap:14px;
+          margin-top:2.5rem;
+          text-decoration:none;
+          group: true;
+        ">
+          <div style="
+            width:42px; height:42px;
+            border:1px solid rgba(201,168,112,0.3);
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+            transition:all 0.3s;
+            background:rgba(201,168,112,0.05);
+          " class="poveste-icon">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M1 7h12M8 3l5 4-5 4" stroke="#C9A86C" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:var(--font-serif); font-size:1.1rem; font-weight:400; font-style:italic; color:var(--cream); line-height:1.2;">Citește întreaga poveste</div>
+            <div style="font-family:var(--font-sans); font-size:0.58rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-top:3px;">Povestea Lucia Fashion →</div>
+          </div>
+        </a>
+        <style>
+          a:hover .poveste-icon {
+            background: rgba(201,168,112,0.15);
+            border-color: var(--gold);
+            transform: scale(1.08);
+          }
+        </style>
       </div>
 
       <!-- Imagine dreapta — full bleed -->
       <div class="story-img-wrap reveal reveal-delay-1" style="position:relative; overflow:hidden; min-height:520px; flex:1;">
         <img
-          src="../assets/lf4.png"
+          src="../assets/lf4.png" loading="lazy"
           alt="Atelier Lucia Fashion — artizanat vestimentar autentic"
           style="
             width:100%;
@@ -166,7 +248,7 @@
       <!-- Imagine stânga — full bleed -->
       <div class="story-img-wrap reveal" style="position:relative; overflow:hidden; min-height:540px; flex:1;">
         <img
-          src="../assets/lf3p.png"
+          src="../assets/lf3p.png" loading="lazy"
           alt="Eleganță feminină — Lucia Fashion"
           style="width:100%; height:100%; object-fit:cover; object-position:75% 20%; display:block; position:absolute; inset:0;"
         >
@@ -248,7 +330,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Lucia Fashion Design. Toate drepturile rezervate.</p>
+      <p>© <span id="copyright-year">2025</span> Lucia Fashion Design. Toate drepturile rezervate.</p>
       <p>Creat cu ♥ pentru eleganță autentică</p>
     </div>
   </footer>
