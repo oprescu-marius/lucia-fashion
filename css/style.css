@@ -142,6 +142,8 @@ body::before {
   align-items: center;
   justify-content: space-between;
   transition: var(--transition);
+  /* Gradient subtil sus pentru lizibilitate pe orice fundal */
+  background: linear-gradient(to bottom, rgba(13,13,13,0.45) 0%, transparent 100%);
 }
 
 .navbar.scrolled {
@@ -186,9 +188,10 @@ body::before {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--cream);
-  opacity: 0.8;
+  opacity: 0.9;
   position: relative;
   transition: var(--transition);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
 
 .nav-links a::after {

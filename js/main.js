@@ -141,30 +141,35 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ── Smooth page transitions ───────────────── */
-  document.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href');
-    // Excludem mailto, tel, _blank si ancore
-    if (
-      !href.startsWith('#') &&
-      !href.startsWith('mailto') &&
-      !href.startsWith('tel') &&
-      link.getAttribute('target') !== '_blank'
-    ) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.4s ease';
-        setTimeout(() => window.location = href, 380);
-      });
-    }
-  });
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Fade in on load
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.5s ease';
-  window.addEventListener('load', () => {
-    document.body.style.opacity = '1';
-  });
+  if (!reduceMotion) {
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      // Excludem mailto, tel, _blank si ancore
+      if (
+        !href.startsWith('#') &&
+        !href.startsWith('mailto') &&
+        !href.startsWith('tel') &&
+        link.getAttribute('target') !== '_blank'
+      ) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.body.style.opacity = '0';
+          document.body.style.transition = 'opacity 0.22s ease';
+          setTimeout(() => window.location = href, 200);
+        });
+      }
+    });
+
+    // Fade in on load — cu plasă de siguranță ca pagina să nu rămână albă
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.4s ease';
+    const showBody = () => { document.body.style.opacity = '1'; };
+    window.addEventListener('load', showBody);
+    // Fallback: dacă 'load' întârzie sau nu se declanșează, afișăm oricum
+    setTimeout(showBody, 1200);
+  }
 
 })();
 

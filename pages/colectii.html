@@ -239,14 +239,68 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 350px;
+      min-height: 500px;
       padding: 1rem;
+      position: relative;
     }
     .lb-main-img {
       width: 100%;
-      max-height: 420px;
+      max-height: 560px;
       object-fit: contain;
       border-radius: 4px;
+    }
+    /* Crossfade container */
+    .lb-img-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lb-img-wrap img {
+      width: 100%;
+      max-height: 560px;
+      object-fit: contain;
+      border-radius: 4px;
+      position: absolute;
+      top: 0; left: 0;
+      transition: opacity 0.45s ease;
+    }
+    .lb-img-wrap img.lb-active { opacity: 1; position: relative; }
+    .lb-img-wrap img.lb-inactive { opacity: 0; position: absolute; }
+    /* Săgeți navigare */
+    .lb-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(201,168,112,0.12);
+      border: 1px solid rgba(201,168,112,0.25);
+      color: #C9A86C;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      z-index: 5;
+      user-select: none;
+    }
+    .lb-nav-btn:hover {
+      background: rgba(201,168,112,0.3);
+      border-color: #C9A86C;
+    }
+    .lb-nav-btn.lb-hidden { opacity: 0; pointer-events: none; }
+    .lb-prev { left: 0.5rem; }
+    .lb-next { right: 0.5rem; }
+    .lb-counter {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: rgba(248,245,242,0.3);
+      margin-top: 0.5rem;
     }
     .lb-thumbs {
       display: flex;
@@ -321,6 +375,15 @@
 
     .hidden { display: none !important; }
 
+    /* Pe touch devices: dezactivăm hover ca primul tap să meargă direct la click */
+    @media (hover: none) {
+      .product-card:hover {
+        transform: none;
+        box-shadow: 0 2px 12px rgba(61,26,92,0.08);
+      }
+      .product-card:hover .product-img img { transform: none; }
+    }
+
     /* ══ MOBILE ══ */
     @media (max-width: 900px) {
       .page-header { padding: 8rem 1.5rem 2.5rem; }
@@ -372,6 +435,7 @@
       <li><a href="../index.html">Acasă</a></li>
       <li><a href="colectii.html" class="active">Colecții</a></li>
       <li><a href="lenjerii.html">Lenjerii</a></li>
+      <li><a href="tablouri.html">Tablouri</a></li>
       <li><a href="despre.html">Despre noi</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -386,6 +450,7 @@
     <a href="../index.html">Acasă</a>
     <a href="colectii.html">Colecții</a>
     <a href="lenjerii.html">Lenjerii</a>
+    <a href="tablouri.html">Tablouri</a>
     <a href="despre.html">Despre noi</a>
     <a href="contact.html">Contact</a>
   </div>
@@ -1059,6 +1124,21 @@
         <div class="product-info">
           <p class="product-category">Rochie Seară</p>
           <h3 class="product-name">„Constelație Neagră"</h3>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="seara"
+           data-photos='["r127_1.jpg","r127_2.jpg"]'
+           data-name="Prună cu Broderie" data-cat="Rochie Seară"
+           data-desc="Lurex-ul prună brodată cu motive florale fine, decolteu V drapat la spate și siluetă lungă care alunecă pe corp — o rochie de seară care vorbește despre eleganță discretă și feminitate rafinată.">
+        <div class="product-img">
+          <img src="../assets/rochii/r127_1.jpg" alt="Prună cu Broderie" loading="lazy">
+          <span class="product-badge">Unicat</span>
+          <span class="photo-count">2 foto</span>
+        </div>
+        <div class="product-info">
+          <p class="product-category">Rochie Seară</p>
+          <h3 class="product-name">„Prună cu Broderie"</h3>
         </div>
       </div>
 
@@ -2112,7 +2192,13 @@
     <div class="lightbox-inner">
       <button class="lb-close" id="lbClose">✕</button>
       <div class="lb-gallery">
-        <img src="" alt="" class="lb-main-img" id="lbMainImg">
+        <button class="lb-nav-btn lb-prev" id="lbPrev">&#8592;</button>
+        <div class="lb-img-wrap" id="lbImgWrap">
+          <img src="" alt="" class="lb-main-img lb-active" id="lbImgA">
+          <img src="" alt="" class="lb-main-img lb-inactive" id="lbImgB">
+        </div>
+        <button class="lb-nav-btn lb-next" id="lbNext">&#8594;</button>
+        <div class="lb-counter" id="lbCounter"></div>
         <div class="lb-thumbs" id="lbThumbs"></div>
       </div>
       <div class="lb-info">
@@ -2144,49 +2230,118 @@
     // ── LIGHTBOX ──
     const lb = document.getElementById('lightbox');
     const lbClose = document.getElementById('lbClose');
-    const lbMainImg = document.getElementById('lbMainImg');
+    const lbImgA = document.getElementById('lbImgA');
+    const lbImgB = document.getElementById('lbImgB');
     const lbThumbs = document.getElementById('lbThumbs');
     const lbCat = document.getElementById('lbCat');
     const lbName = document.getElementById('lbName');
     const lbDesc = document.getElementById('lbDesc');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    const lbCounter = document.getElementById('lbCounter');
     const BASE = '../assets/rochii/';
 
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const photos = JSON.parse(card.dataset.photos);
-        lbCat.textContent = card.dataset.cat;
-        lbName.textContent = '„' + card.dataset.name + '"';
-        lbDesc.textContent = card.dataset.desc;
-        lbMainImg.src = BASE + photos[0];
-        lbMainImg.alt = card.dataset.name;
+    let currentPhotos = [];
+    let currentIndex = 0;
+    let activeImg = lbImgA; // care din cele 2 e vizibila acum
 
-        lbThumbs.innerHTML = '';
-        photos.forEach((p, i) => {
-          const img = document.createElement('img');
-          img.src = BASE + p;
-          img.alt = card.dataset.name;
-          img.className = 'lb-thumb' + (i === 0 ? ' active' : '');
-          img.addEventListener('click', () => {
-            lbMainImg.src = BASE + p;
-            document.querySelectorAll('.lb-thumb').forEach(t => t.classList.remove('active'));
-            img.classList.add('active');
-          });
-          lbThumbs.appendChild(img);
-        });
+    function updateNav() {
+      lbPrev.classList.toggle('lb-hidden', currentPhotos.length <= 1);
+      lbNext.classList.toggle('lb-hidden', currentPhotos.length <= 1);
+      lbCounter.textContent = currentPhotos.length > 1
+        ? (currentIndex + 1) + ' / ' + currentPhotos.length : '';
+    }
 
-        lb.classList.add('open');
-        document.body.style.overflow = 'hidden';
+    function goTo(index) {
+      if (currentPhotos.length <= 1) return;
+      currentIndex = (index + currentPhotos.length) % currentPhotos.length;
+      const newSrc = BASE + currentPhotos[currentIndex];
+
+      // Elementul inactiv
+      const nextImg = activeImg === lbImgA ? lbImgB : lbImgA;
+
+      // Pregătim imaginea nouă în spate, invizibil
+      nextImg.src = newSrc;
+      nextImg.classList.remove('lb-active');
+      nextImg.classList.add('lb-inactive');
+
+      // Crossfade: activăm noua, dezactivăm vechea
+      requestAnimationFrame(() => {
+        nextImg.classList.remove('lb-inactive');
+        nextImg.classList.add('lb-active');
+        activeImg.classList.remove('lb-active');
+        activeImg.classList.add('lb-inactive');
+        activeImg = nextImg;
       });
+
+      // Sincronizăm thumbs
+      document.querySelectorAll('.lb-thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === currentIndex);
+      });
+      updateNav();
+    }
+
+    function openLightbox(card) {
+      currentPhotos = JSON.parse(card.dataset.photos);
+      currentIndex = 0;
+
+      lbCat.textContent = card.dataset.cat;
+      lbName.textContent = '„' + card.dataset.name + '"';
+      lbDesc.textContent = card.dataset.desc;
+
+      // Prima poză direct, fără tranziție
+      lbImgA.src = BASE + currentPhotos[0];
+      lbImgA.alt = card.dataset.name;
+      lbImgA.classList.add('lb-active');
+      lbImgA.classList.remove('lb-inactive');
+      lbImgB.src = '';
+      lbImgB.classList.add('lb-inactive');
+      lbImgB.classList.remove('lb-active');
+      activeImg = lbImgA;
+
+      lbThumbs.innerHTML = '';
+      currentPhotos.forEach((p, i) => {
+        const img = document.createElement('img');
+        img.src = BASE + p;
+        img.alt = card.dataset.name;
+        img.className = 'lb-thumb' + (i === 0 ? ' active' : '');
+        img.addEventListener('click', () => goTo(i));
+        lbThumbs.appendChild(img);
+      });
+
+      updateNav();
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => openLightbox(card));
     });
 
+    lbPrev.addEventListener('click', e => { e.stopPropagation(); goTo(currentIndex - 1); });
+    lbNext.addEventListener('click', e => { e.stopPropagation(); goTo(currentIndex + 1); });
     lbClose.addEventListener('click', closeLb);
     lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')      closeLb();
+      if (e.key === 'ArrowRight')  goTo(currentIndex + 1);
+      if (e.key === 'ArrowLeft')   goTo(currentIndex - 1);
+    });
+
+    let touchStartX = 0;
+    lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+    });
 
     function closeLb() {
       lb.classList.remove('open');
       document.body.style.overflow = '';
     }
+
   </script>
 </body>
 </html>

@@ -53,13 +53,11 @@
   <link rel="stylesheet" href="../css/style.css" />
   <style>
     @media (max-width: 768px) {
-      /* Story sections stacked pe mobile */
       .about-story {
         display: flex !important;
         flex-direction: column !important;
         gap: 0 !important;
       }
-      /* Textul din prima sectiune — jos (dupa imagine) */
       .story-img-wrap {
         min-height: 72vw !important;
         max-height: 88vw !important;
@@ -70,9 +68,14 @@
         padding: 2.5rem 1.5rem !important;
         order: 2;
       }
-      /* Prima sectiune: textul e primul in DOM, imaginea a doua — inversam */
       .about-story.story-text-first .about-story-text { order: 2; }
       .about-story.story-text-first .story-img-wrap   { order: 1; }
+    }
+    /* Hover pe linkul spre poveste */
+    a:hover .poveste-icon {
+      background: rgba(201,168,112,0.15) !important;
+      border-color: var(--gold) !important;
+      transform: scale(1.08);
     }
   </style>
 </head>
@@ -90,6 +93,7 @@
       <li><a href="../index.html">Acasă</a></li>
       <li><a href="colectii.html">Colecții</a></li>
       <li><a href="lenjerii.html">Lenjerii</a></li>
+      <li><a href="tablouri.html">Tablouri</a></li>
       <li><a href="despre.html" class="active">Despre noi</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -106,6 +110,7 @@
     <a href="../index.html">Acasă</a>
     <a href="colectii.html">Colecții</a>
     <a href="lenjerii.html">Lenjerii</a>
+    <a href="tablouri.html">Tablouri</a>
     <a href="despre.html">Despre noi</a>
     <a href="contact.html">Contact</a>
   </div>
@@ -151,14 +156,12 @@
           <span style="font-family:var(--font-sans); font-size:0.6rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);">Artizanat autentic din 2009</span>
         </div>
 
-        <!-- Link spre pagina Poveste -->
         <a href="../poveste.html" style="
           display:inline-flex;
           align-items:center;
           gap:14px;
           margin-top:2.5rem;
           text-decoration:none;
-          group: true;
         ">
           <div style="
             width:42px; height:42px;
@@ -180,19 +183,12 @@
             <div style="font-family:var(--font-sans); font-size:0.58rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-top:3px;">Povestea Lucia Fashion →</div>
           </div>
         </a>
-        <style>
-          a:hover .poveste-icon {
-            background: rgba(201,168,112,0.15);
-            border-color: var(--gold);
-            transform: scale(1.08);
-          }
-        </style>
       </div>
 
       <!-- Imagine dreapta — full bleed -->
       <div class="story-img-wrap reveal reveal-delay-1" style="position:relative; overflow:hidden; min-height:520px; flex:1;">
         <img
-          src="../assets/lf4.png" loading="lazy"
+          src="../assets/lf4.jpg" loading="lazy"
           alt="Atelier Lucia Fashion — artizanat vestimentar autentic"
           style="
             width:100%;
@@ -248,7 +244,7 @@
       <!-- Imagine stânga — full bleed -->
       <div class="story-img-wrap reveal" style="position:relative; overflow:hidden; min-height:540px; flex:1;">
         <img
-          src="../assets/lf3p.png" loading="lazy"
+          src="../assets/lf3p.jpg" loading="lazy"
           alt="Eleganță feminină — Lucia Fashion"
           style="width:100%; height:100%; object-fit:cover; object-position:75% 20%; display:block; position:absolute; inset:0;"
         >

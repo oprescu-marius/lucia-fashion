@@ -1,5 +1,5 @@
 @echo off
-cd /d "D:\Claude Home\Projects\Lucia Fashion\lucia-fashion"
+cd /d "D:\Claude\Home\Projects\Lucia Fashion\Site Lucia Fashion\lucia-fashion"
 git add .
 set /p msg="Descrie modificarea: "
 git commit -m "%msg%"

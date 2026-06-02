@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablouri — Lucia Fashion</title>
+  <meta name="description" content="Tablouri în ulei realizate de Elena Tudoran — picturi originale cu peisaje, iarnă, păduri și flori. Unicat, semnate și disponibile la comandă." />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luciafashion.ro/pages/tablouri.html" />
+  <meta property="og:title" content="Tablouri — Lucia Fashion" />
+  <meta property="og:description" content="Tablouri în ulei realizate de Elena Tudoran — picturi originale unicat." />
+  <meta property="og:image" content="https://luciafashion.ro/assets/tablouri/t01.jpg" />
+  <meta property="og:locale" content="ro_RO" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="keywords" content="tablouri ulei Elena Tudoran, picturi originale București, tablouri unicat de vânzare, peisaje românești" />
+  <meta name="author" content="Lucia Fashion" />
+  <link rel="canonical" href="https://luciafashion.ro/pages/tablouri.html" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Tablouri — Lucia Fashion",
+    "url": "https://luciafashion.ro/pages/tablouri.html",
+    "description": "Tablouri în ulei realizate de Elena Tudoran.",
+    "provider": { "@type": "ClothingStore", "name": "Lucia Fashion", "url": "https://luciafashion.ro" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <style>
+    /* ── BODY: fundal întunecat ca o galerie ── */
+    body {
+      background-color: #0f0820;
+      color: var(--cream);
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: linear-gradient(160deg, #1a0f2e 0%, #3D1A5C 60%, #1a0f2e 100%);
+      text-align: center;
+      padding: 9rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(201,168,224,0.12);
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A8E0' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .page-header-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .page-header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      color: var(--lavender);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+      position: relative;
+    }
+    .page-header-line {
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.2rem auto 0;
+      position: relative;
+    }
+
+    /* ── FILTERS ── */
+    .filters-wrap {
+      background: rgba(15,8,32,0.95);
+      border-bottom: 1px solid rgba(201,168,224,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      backdrop-filter: blur(8px);
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid rgba(201,168,224,0.25);
+      color: var(--lavender);
+      padding: 0.4rem 1.2rem;
+      border-radius: 2rem;
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--plum); }
+
+    /* ── MASONRY GRID ── */
+    .grid-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      /* Spotlight: luminos în centru, întunecat pe margini */
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%,
+          rgba(123,63,160,0.08) 0%,
+          transparent 70%);
+      position: relative;
+    }
+    .grid-wrap::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 70% at 50% 45%,
+          transparent 30%,
+          rgba(5,2,15,0.45) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .tablouri-grid {
+      columns: 4;
+      column-gap: 1.2rem;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 1100px) { .tablouri-grid { columns: 3; } }
+    @media (max-width: 700px)  { .tablouri-grid { columns: 2; } }
+    @media (max-width: 420px)  { .tablouri-grid { columns: 1; } }
+
+    /* ── CARD ── */
+    .tablou-card {
+      break-inside: avoid;
+      margin-bottom: 1.2rem;
+      position: relative;
+      cursor: pointer;
+      border-radius: 2px;
+      overflow: hidden;
+      /* Ramă subtilă ca un tablou real */
+      box-shadow:
+        0 2px 8px rgba(0,0,0,0.6),
+        inset 0 0 0 1px rgba(201,168,112,0.12);
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+    }
+    .tablou-card:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.7),
+        0 0 40px rgba(123,63,160,0.2),
+        inset 0 0 0 1px rgba(201,168,112,0.4);
+    }
+    .tablou-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: filter 0.4s ease, transform 0.4s ease;
+      /* Compensare ușoară pentru calitatea pozelor */
+      filter: contrast(1.05) saturate(1.1) brightness(1.02);
+    }
+    .tablou-card:hover img {
+      transform: scale(1.03);
+      filter: contrast(1.1) saturate(1.2) brightness(1.05);
+    }
+
+    /* Overlay */
+    .tablou-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,8,32,0.88) 0%, rgba(15,8,32,0.1) 55%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 1.2rem;
+    }
+    .tablou-card:hover .tablou-overlay { opacity: 1; }
+    .tablou-overlay-cat {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .tablou-overlay-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    .tablou-card.hidden { display: none; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5,2,15,0.97);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      /* Forțăm cursorul vizibil — cursorul custom dispare pe fond negru */
+      cursor: auto !important;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-overlay * { cursor: auto !important; }
+    .lightbox-overlay button,
+    .lightbox-overlay a { cursor: pointer !important; }
+
+    .lb-inner {
+      background: var(--cream);
+      border-radius: 4px;
+      max-width: 960px;
+      width: calc(100% - 2rem);
+      max-height: 92vh;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      position: relative;
+    }
+
+    /* Stânga: imagine pe fond întunecat */
+    .lb-gallery {
+      background: #1a0f2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      min-height: 480px;
+      position: relative;
+    }
+    .lb-img-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lb-img-wrap img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      border-radius: 2px;
+      position: absolute;
+      top: 0; left: 0;
+      transition: opacity 0.45s ease;
+      filter: contrast(1.08) saturate(1.15) brightness(1.04);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+    .lb-img-wrap img.lb-active   { opacity: 1; position: relative; }
+    .lb-img-wrap img.lb-inactive { opacity: 0; position: absolute; }
+
+    /* Săgeți */
+    .lb-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(201,168,112,0.1);
+      border: 1px solid rgba(201,168,112,0.2);
+      color: var(--gold);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+      z-index: 5;
+    }
+    .lb-nav-btn:hover { background: rgba(201,168,112,0.25); border-color: var(--gold); }
+    .lb-prev { left: 0.4rem; }
+    .lb-next { right: 0.4rem; }
+
+    .lb-counter {
+      font-family: var(--font-sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: rgba(248,245,242,0.3);
+      margin-top: 0.8rem;
+    }
+
+    /* Dreapta: detalii */
+    .lb-info {
+      padding: 2.5rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow-y: auto;
+      background: var(--cream);
+    }
+    .lb-cat {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--violet);
+    }
+    .lb-name {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--plum);
+      line-height: 1.2;
+      font-style: italic;
+    }
+    .lb-divider { width: 40px; height: 2px; background: var(--gold); flex-shrink: 0; }
+    .lb-technique {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--violet);
+      opacity: 0.7;
+    }
+    .lb-desc {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: #3a3a3a;
+      font-family: var(--font-sans);
+      font-weight: 300;
+    }
+    .lb-cta {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(61,26,92,0.1);
+    }
+    .lb-cta a {
+      display: inline-block;
+      background: var(--plum);
+      color: var(--cream);
+      padding: 0.7rem 1.6rem;
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .lb-cta a:hover { background: var(--violet); }
+
+    /* Buton închidere — în colțul cardului */
+    .lb-close {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      background: var(--plum);
+      color: white;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2200;
+      transition: background 0.2s;
+    }
+    .lb-close:hover { background: var(--violet); }
+
+    /* Hint ESC în colțul stâng jos */
+    .lb-hint {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      color: rgba(201,168,224,0.4);
+      z-index: 2200;
+      pointer-events: none;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: linear-gradient(135deg, #1a0f2e 0%, var(--plum) 50%, #1a0f2e 100%);
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid rgba(201,168,224,0.1);
+    }
+    .cta-section h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+      font-style: italic;
+    }
+    .cta-section p {
+      color: var(--lavender);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--plum);
+      padding: 0.9rem 2.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: #07041a !important;
+      border-top: 1px solid rgba(201,168,224,0.08);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      .lb-inner { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
+      .lb-gallery { min-height: 260px; padding: 1rem; }
+      .lb-info { padding: 1.5rem 1.2rem; }
+      .lb-name { font-size: 1.4rem; }
+    }
+    @media (max-width: 600px) {
+      .filters-wrap { overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .filters-wrap::-webkit-scrollbar { display: none; }
+      .filter-btn { flex-shrink: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">
+      Lucia Fashion
+      <span>Design Vestimentar</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Acasă</a></li>
+      <li><a href="colectii.html">Colecții</a></li>
+      <li><a href="lenjerii.html">Lenjerii</a></li>
+      <li><a href="tablouri.html" class="active">Tablouri</a></li>
+      <li><a href="despre.html">Despre noi</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Meniu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile-overlay">
+    <button class="nav-mobile-close">✕ Închide</button>
+    <a href="../index.html">Acasă</a>
+    <a href="colectii.html">Colecții</a>
+    <a href="lenjerii.html">Lenjerii</a>
+    <a href="tablouri.html">Tablouri</a>
+    <a href="despre.html">Despre noi</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <p class="page-header-eyebrow">✦ Galerie de artă</p>
+    <h1>Tablouri</h1>
+    <p>Ulei pe pânză · Elena Tudoran</p>
+    <div class="page-header-line"></div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters-wrap">
+    <button class="filter-btn active" data-filter="all">Toate</button>
+    <button class="filter-btn" data-filter="peisaje">Peisaje</button>
+    <button class="filter-btn" data-filter="iarna">Iarnă</button>
+    <button class="filter-btn" data-filter="padure">Pădure</button>
+    <button class="filter-btn" data-filter="flori">Flori</button>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid-wrap">
+    <div class="tablouri-grid" id="tablouriGrid"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Îți place un tablou?</h2>
+    <p>Toate lucrările sunt originale, pictate și semnate de Elena Tudoran. Contactează-ne pentru detalii despre disponibilitate și prețuri.</p>
+    <a href="contact.html" class="cta-btn">Comandă un tablou</a>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lb-hint">ESC · click în afară · ← →</div>
+    <div class="lb-inner">
+      <div class="lb-gallery">
+        <div class="lb-img-wrap" id="lbImgWrap">
+          <img class="lb-active"   id="lbImgA" src="" alt="" />
+          <img class="lb-inactive" id="lbImgB" src="" alt="" />
+        </div>
+        <div class="lb-counter" id="lbCounter">1 / 17</div>
+        <button class="lb-nav-btn lb-prev" id="lbPrev">&#8592;</button>
+        <button class="lb-nav-btn lb-next" id="lbNext">&#8594;</button>
+      </div>
+      <div class="lb-info">
+        <button class="lb-close" id="lbClose">&times;</button>
+        <div class="lb-cat"   id="lbCat"></div>
+        <div class="lb-name"  id="lbName"></div>
+        <div class="lb-divider"></div>
+        <div class="lb-technique" id="lbTechnique"></div>
+        <div class="lb-desc"  id="lbDesc"></div>
+        <div class="lb-cta"><a href="contact.html">Comandă acest tablou</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Lucia Fashion</div>
+        <p class="footer-tagline">Eleganță croită cu suflet din 1997</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigare</h4>
+        <ul>
+          <li><a href="../index.html">Acasă</a></li>
+          <li><a href="colectii.html">Colecții</a></li>
+          <li><a href="lenjerii.html">Lenjerii</a></li>
+          <li><a href="tablouri.html">Tablouri</a></li>
+          <li><a href="despre.html">Despre noi</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Str. Plutașilor 18, Sector 1<br />București, România</p>
+        <p><a href="tel:+40728304151">0728 304 151</a></p>
+        <p><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Lucia Fashion · Design vestimentar București</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // ══════════════════════════════════════════
+    // DATE TABLOURI
+    // ══════════════════════════════════════════
+    const tablouri = [
+      {
+        file: 't01.jpg',
+        cat: 'peisaje',
+        catLabel: 'Peisaj',
+        name: 'Drum prin Câmpie',
+        technique: 'Ulei pe pânză',
+        desc: 'O potecă singuratică șerpuiește prin câmpia vastă, mărginită de garduri de lemn și copaci înfrunziți. La orizont, vârfurile înzăpezite ale munților completează un tablou de o liniște profundă, specific peisajului românesc.'
+      },
+      {
+        file: 't02.jpg',
+        cat: 'iarna',
+        catLabel: 'Iarnă',
+        name: 'Maiestate Alpină',
+        technique: 'Ulei pe pânză',
+        desc: 'Vârfuri înzăpezite se ridică maiestuos deasupra pădurii de conifere și a lacului înghețat. Tonurile albastre și albe dominate de lumina rece a iernii redau cu intensitate aerul pur și tăcerea muntelui în anotimpul alb.'
+      },
+      {
+        file: 't03.jpg',
+        cat: 'padure',
+        catLabel: 'Pădure',
+        name: 'Copacul Singur',
+        technique: 'Tehnică mixtă pe lemn',
+        desc: 'Un copac bătrân cu ramuri goale domină compoziția, flancat de vegetație ce îi amintește că viața continuă. Tehnica mixtă pe suport de lemn conferă tabloului o textură aparte, rustică și profundă, cu o forță expresivă rară.'
+      },
+      {
+        file: 't04.jpg',
+        cat: 'peisaje',
+        catLabel: 'Peisaj',
+        name: 'Casa de la Marginea Apei',
+        technique: 'Ulei pe pânză',
+        desc: 'O casă cu acoperiș de paie se oglindește în apele liniștite, sub un cer dramatic de apus. Verdele luxuriant al grădinii și culorile calde ale cerului — de la auriu la mov — creează o atmosferă de basm pastoral.'
+      },
+      {
+        file: 't05.jpg',
+        cat: 'iarna',
+        catLabel: 'Iarnă',
+        name: 'Pădure de Iarnă',
+        technique: 'Ulei pe pânză',
+        desc: 'Copacii încovoiați sub greutatea zăpezii formează un coridor albastru spre lumină. Tonurile reci de albastru și alb, aplicate cu pensulă energică, capturează tăcerea și frumusețea rece a unei zile de iarnă în pădure.'
+      },
+      {
+        file: 't06.jpg',
+        cat: 'iarna',
+        catLabel: 'Iarnă',
+        name: 'Amurg de Iarnă',
+        technique: 'Ulei pe pânză',
+        desc: 'Un apus dramatic în nuanțe de aur și violet se reflectă în zăpada proaspătă. Contrastul puternic dintre cerul aprins și peisajul înghețat, dintre căldura apusului și frigul iernii, creează o tensiune vizuală de o rară intensitate.'
+      },
+      {
+        file: 't07.jpg',
+        cat: 'peisaje',
+        catLabel: 'Peisaj',
+        name: 'Grădina cu Trandafiri',
+        technique: 'Ulei pe pânză',
+        desc: 'O casă la țară înconjurată de trandafiri înfloriți și verdeață abundentă, cu munții zăpeziți în fundal. Un tablou ce respiră liniștea și parfumul verii românești la sat, surprins cu o sensibilitate aparte.'
+      },
+      {
+        file: 't08.jpg',
+        cat: 'peisaje',
+        catLabel: 'Peisaj',
+        name: 'Apus de Toamnă',
+        technique: 'Ulei pe pânză',
+        desc: 'Soarele apune printre copacii toamnei, inundând o potecă umedă cu o lumină caldă, aurită. Contrastul dramatic dintre negrul ramurilor și cerul în flăcări creează o scenă de o intensitate aproape teatrală.'
+      },
+      {
+        file: 't09.jpg',
+        cat: 'iarna',
+        catLabel: 'Iarnă',
+        name: 'Coliba din Pădure',
+        technique: 'Ulei pe pânză',
+        desc: 'O colibă roșie cu acoperiș acoperit de zăpadă se ascunde printre brazi înalți și birching-uri. Roșul cald al lemnului față de albul imaculat al zăpezii și albastrul pădurii creează un contrast plin de căldură și intimitate.'
+      },
+      {
+        file: 't10.jpg',
+        cat: 'iarna',
+        catLabel: 'Iarnă',
+        name: 'Răsărit Roz',
+        technique: 'Ulei pe pânză',
+        desc: 'Soarele de iarnă colorează cerul și zăpada în nuanțe de roz, lavandă și mov, transformând o dimineață rece într-un spectacol de culoare. Un tablou ce aduce căldură și optimism chiar și în miezul anotimpului alb.'
+      },
+      {
+        file: 't11.jpg',
+        cat: 'flori',
+        catLabel: 'Flori',
+        name: 'Margarete',
+        technique: 'Ulei pe pânză',
+        desc: 'Un buchet generos de margarete albe pe fond întunecat, redate cu simplitate și eleganță. Contrastul puternic dintre florile luminoase și fundalul dens creează un efect aproape tridimensional, specific picturii flamande clasice.'
+      },
+      {
+        file: 't12.jpg',
+        cat: 'flori',
+        catLabel: 'Flori',
+        name: 'Scaunul cu Flori',
+        technique: 'Ulei pe pânză',
+        desc: 'Un scaun vechi de lemn pe care odihnesc buchete colorate de flori sălbatice, pe un fundal gri texturat. Natură statică cu iz poetic — o meditație despre frumusețea simplicității și a obiectelor cu poveste.'
+      },
+      {
+        file: 't13.jpg',
+        cat: 'peisaje',
+        catLabel: 'Peisaj',
+        name: 'Vară la Munte',
+        technique: 'Ulei pe pânză',
+        desc: 'Pini înalți și vârfuri violacee de munte în lumina caldă a verii. Verdele intens al vegetației și nuanțele lavandei munților creează un tablou plin de vitalitate și prospețime, ce invită privitorul la o plimbare imaginară.'
+      },
+      {
+        file: 't14.jpg',
+        cat: 'padure',
+        catLabel: 'Pădure',
+        name: 'Pădurea cu Flori',
+        technique: 'Ulei pe pânză',
+        desc: 'Trunchiuri albe de mesteacăn se înalță din covorul de flori sălbatice albastre, albe și roz. O scenă de o frumusețe secretă, ca dintr-un basm nordic — lumina difuză între trunchiuri și florile fragile la picioarele lor.'
+      },
+      {
+        file: 't15.jpg',
+        cat: 'flori',
+        catLabel: 'Flori',
+        name: 'Hibiscus Alb',
+        technique: 'Ulei pe pânză',
+        desc: 'O floare albă de hibiscus în plină înflorire, redată cu pastă bogată și lumini delicate pe fond de culori lavandă și roz. Semnătura „Nuți" în colț atestă atenția artistei față de detaliu și eleganța compoziției.'
+      },
+      {
+        file: 't17.jpg',
+        cat: 'flori',
+        catLabel: 'Flori',
+        name: 'Maci Albaștri cu Margarete',
+        technique: 'Ulei pe pânză',
+        desc: 'Un buchet vibrant de maci albaștri și margarete albe pe fond neutru. Culorile vii și compoziția echilibrată fac din acest tablou o piesă de colecție. Semnătura „Nuți" confirmă autenticitatea lucrării.'
+      },
+      {
+        file: 't18.jpg',
+        cat: 'peisaje',
+        catLabel: 'Peisaj',
+        name: 'Toamnă pe Cărare',
+        technique: 'Ulei pe pânză',
+        desc: 'O cărare îngustă șerpuiește printre copacii îmbrăcați în roșu, portocaliu și ocru tomnatic. Lumina difuză și paleta caldă capturează melancolia dulce a toamnei românești — un moment de contemplare înainte de iarnă.'
+      }
+    ];
+
+    // ── RENDER GRID ──
+    const grid = document.getElementById('tablouriGrid');
+    tablouri.forEach((t, i) => {
+      const card = document.createElement('div');
+      card.className = 'tablou-card';
+      card.dataset.cat = t.cat;
+      card.dataset.idx = i;
+      card.innerHTML = `
+        <img src="../assets/tablouri/${t.file}" alt="${t.name} — tablou Elena Tudoran" loading="lazy" />
+        <div class="tablou-overlay">
+          <div class="tablou-overlay-cat">${t.catLabel}</div>
+          <div class="tablou-overlay-title">${t.name}</div>
+        </div>
+      `;
+      card.addEventListener('click', () => openLightbox(i));
+      grid.appendChild(card);
+    });
+
+    // ── FILTER ──
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.tablou-card').forEach(c => {
+          c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f);
+        });
+      });
+    });
+
+    // ── LIGHTBOX ──
+    const lb       = document.getElementById('lightbox');
+    const lbImgA   = document.getElementById('lbImgA');
+    const lbImgB   = document.getElementById('lbImgB');
+    const lbCat    = document.getElementById('lbCat');
+    const lbName   = document.getElementById('lbName');
+    const lbTech   = document.getElementById('lbTechnique');
+    const lbDesc   = document.getElementById('lbDesc');
+    const lbCounter= document.getElementById('lbCounter');
+    const lbClose  = document.getElementById('lbClose');
+    const lbPrev   = document.getElementById('lbPrev');
+    const lbNext   = document.getElementById('lbNext');
+
+    let currentIdx = 0;
+    let activeImg  = 'a';
+
+    function getVisible() {
+      return tablouri.filter((_, i) => {
+        const card = grid.children[i];
+        return card && !card.classList.contains('hidden');
+      });
+    }
+
+    function fillInfo(t) {
+      lbCat.textContent  = t.catLabel;
+      lbName.textContent = `„${t.name}"`;
+      lbTech.textContent = t.technique;
+      lbDesc.textContent = t.desc;
+    }
+
+    function setImage(src, alt, animate) {
+      if (!animate) {
+        lbImgA.src = src; lbImgA.alt = alt;
+        lbImgA.className = 'lb-active';
+        lbImgB.className = 'lb-inactive';
+        activeImg = 'a';
+        return;
+      }
+      if (activeImg === 'a') {
+        lbImgB.src = src; lbImgB.alt = alt;
+        lbImgA.className = 'lb-inactive';
+        lbImgB.className = 'lb-active';
+        activeImg = 'b';
+      } else {
+        lbImgA.src = src; lbImgA.alt = alt;
+        lbImgB.className = 'lb-inactive';
+        lbImgA.className = 'lb-active';
+        activeImg = 'a';
+      }
+    }
+
+    function showIdx(idx, animate) {
+      const visible = getVisible();
+      if (!visible.length) return;
+      currentIdx = (idx + visible.length) % visible.length;
+      const t = visible[currentIdx];
+      setImage(`../assets/tablouri/${t.file}`, t.name, animate);
+      fillInfo(t);
+      lbCounter.textContent = `${currentIdx + 1} / ${visible.length}`;
+    }
+
+    function openLightbox(tablouIdx) {
+      const visible = getVisible();
+      const visIdx = visible.findIndex(t => t === tablouri[tablouIdx]);
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      showIdx(visIdx >= 0 ? visIdx : 0, false);
+    }
+
+    lbClose.addEventListener('click', () => { lb.classList.remove('open'); document.body.style.overflow = ''; });
+    lb.addEventListener('click', e => { if (e.target === lb) { lb.classList.remove('open'); document.body.style.overflow = ''; } });
+    lbPrev.addEventListener('click', () => showIdx(currentIdx - 1, true));
+    lbNext.addEventListener('click', () => showIdx(currentIdx + 1, true));
+
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft')  showIdx(currentIdx - 1, true);
+      if (e.key === 'ArrowRight') showIdx(currentIdx + 1, true);
+      if (e.key === 'Escape') { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    });
+
+    let touchX = null;
+    lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend',   e => {
+      if (touchX === null) return;
+      const diff = touchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) showIdx(diff > 0 ? currentIdx + 1 : currentIdx - 1, true);
+      touchX = null;
+    }, { passive: true });
+
+    // Copyright
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
