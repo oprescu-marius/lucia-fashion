@@ -471,6 +471,26 @@
       .filter-btn { flex-shrink: 0; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Acasă",
+        "item": "https://luciafashion.ro/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tablouri",
+        "item": "https://luciafashion.ro/pages/tablouri.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -531,7 +551,7 @@
   <div class="cta-section">
     <h2>Îți place un tablou?</h2>
     <p>Toate lucrările sunt originale, pictate și semnate de Elena Tudoran. Contactează-ne pentru detalii despre disponibilitate și prețuri.</p>
-    <a href="contact.html" class="cta-btn">Comandă un tablou</a>
+    <a href="contact.html?subiect=Tablou" class="cta-btn">Comandă un tablou</a>
   </div>
 
   <!-- LIGHTBOX -->
@@ -554,19 +574,19 @@
         <div class="lb-divider"></div>
         <div class="lb-technique" id="lbTechnique"></div>
         <div class="lb-desc"  id="lbDesc"></div>
-        <div class="lb-cta"><a href="contact.html">Comandă acest tablou</a></div>
+        <div class="lb-cta"><a id="lbOrder" href="contact.html" onclick="this.href='contact.html?subiect=Tablou&tablou='+encodeURIComponent(window.__currentTablou||'');">Comandă acest tablou</a></div>
       </div>
     </div>
   </div>
 
   <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-inner">
+  <footer class="footer">
+    <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo">Lucia Fashion</div>
-        <p class="footer-tagline">Eleganță croită cu suflet din 1997</p>
+        <div class="nav-logo">Lucia Fashion<span>Design Vestimentar</span></div>
+        <p>Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze.</p>
       </div>
-      <div class="footer-links">
+      <div class="footer-col">
         <h4>Navigare</h4>
         <ul>
           <li><a href="../index.html">Acasă</a></li>
@@ -577,15 +597,19 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
-      <div class="footer-contact">
+      <div class="footer-col">
         <h4>Contact</h4>
-        <p>Str. Plutașilor 18, Sector 1<br />București, România</p>
-        <p><a href="tel:+40728304151">0728 304 151</a></p>
-        <p><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></p>
+        <ul>
+          <li><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></li>
+          <li><a href="tel:+40728304151">0728 304 151</a></li>
+          <li><a href="https://www.facebook.com/luciafashiondesign/" target="_blank" rel="noopener">Facebook</a></li>
+          <li style="color:rgba(248,245,242,0.35); font-size:0.7rem; line-height:1.5;">Str. Plutașilor 18<br>Sector 1, București</li>
+        </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year"></span> Lucia Fashion · Design vestimentar București</p>
+      <p>© <span id="year"></span> Lucia Fashion · Design vestimentar București</p>
+      <p>Creat cu ♥ pentru eleganță autentică</p>
     </div>
   </footer>
 
@@ -594,9 +618,10 @@
     // ══════════════════════════════════════════
     // DATE TABLOURI
     // ══════════════════════════════════════════
+    const dimsMap = {"t01.webp": [1200, 900], "t02.webp": [1200, 900], "t03.webp": [1200, 900], "t04.webp": [1200, 900], "t05.webp": [1200, 900], "t06.webp": [1200, 898], "t07.webp": [1200, 900], "t08.webp": [1200, 900], "t09.webp": [1200, 900], "t10.webp": [1200, 900], "t11.webp": [900, 1200], "t12.webp": [1200, 900], "t13.webp": [900, 1200], "t14.webp": [1002, 1200], "t15.webp": [900, 1200], "t17.webp": [900, 1200], "t18.webp": [900, 1200]};
     const tablouri = [
       {
-        file: 't01.jpg',
+        file: 't01.webp',
         cat: 'peisaje',
         catLabel: 'Peisaj',
         name: 'Drum prin Câmpie',
@@ -604,7 +629,7 @@
         desc: 'O potecă singuratică șerpuiește prin câmpia vastă, mărginită de garduri de lemn și copaci înfrunziți. La orizont, vârfurile înzăpezite ale munților completează un tablou de o liniște profundă, specific peisajului românesc.'
       },
       {
-        file: 't02.jpg',
+        file: 't02.webp',
         cat: 'iarna',
         catLabel: 'Iarnă',
         name: 'Maiestate Alpină',
@@ -612,15 +637,7 @@
         desc: 'Vârfuri înzăpezite se ridică maiestuos deasupra pădurii de conifere și a lacului înghețat. Tonurile albastre și albe dominate de lumina rece a iernii redau cu intensitate aerul pur și tăcerea muntelui în anotimpul alb.'
       },
       {
-        file: 't03.jpg',
-        cat: 'padure',
-        catLabel: 'Pădure',
-        name: 'Copacul Singur',
-        technique: 'Tehnică mixtă pe lemn',
-        desc: 'Un copac bătrân cu ramuri goale domină compoziția, flancat de vegetație ce îi amintește că viața continuă. Tehnica mixtă pe suport de lemn conferă tabloului o textură aparte, rustică și profundă, cu o forță expresivă rară.'
-      },
-      {
-        file: 't04.jpg',
+        file: 't04.webp',
         cat: 'peisaje',
         catLabel: 'Peisaj',
         name: 'Casa de la Marginea Apei',
@@ -628,7 +645,7 @@
         desc: 'O casă cu acoperiș de paie se oglindește în apele liniștite, sub un cer dramatic de apus. Verdele luxuriant al grădinii și culorile calde ale cerului — de la auriu la mov — creează o atmosferă de basm pastoral.'
       },
       {
-        file: 't05.jpg',
+        file: 't05.webp',
         cat: 'iarna',
         catLabel: 'Iarnă',
         name: 'Pădure de Iarnă',
@@ -636,7 +653,7 @@
         desc: 'Copacii încovoiați sub greutatea zăpezii formează un coridor albastru spre lumină. Tonurile reci de albastru și alb, aplicate cu pensulă energică, capturează tăcerea și frumusețea rece a unei zile de iarnă în pădure.'
       },
       {
-        file: 't06.jpg',
+        file: 't06.webp',
         cat: 'iarna',
         catLabel: 'Iarnă',
         name: 'Amurg de Iarnă',
@@ -644,7 +661,7 @@
         desc: 'Un apus dramatic în nuanțe de aur și violet se reflectă în zăpada proaspătă. Contrastul puternic dintre cerul aprins și peisajul înghețat, dintre căldura apusului și frigul iernii, creează o tensiune vizuală de o rară intensitate.'
       },
       {
-        file: 't07.jpg',
+        file: 't07.webp',
         cat: 'peisaje',
         catLabel: 'Peisaj',
         name: 'Grădina cu Trandafiri',
@@ -652,7 +669,7 @@
         desc: 'O casă la țară înconjurată de trandafiri înfloriți și verdeață abundentă, cu munții zăpeziți în fundal. Un tablou ce respiră liniștea și parfumul verii românești la sat, surprins cu o sensibilitate aparte.'
       },
       {
-        file: 't08.jpg',
+        file: 't08.webp',
         cat: 'peisaje',
         catLabel: 'Peisaj',
         name: 'Apus de Toamnă',
@@ -660,7 +677,7 @@
         desc: 'Soarele apune printre copacii toamnei, inundând o potecă umedă cu o lumină caldă, aurită. Contrastul dramatic dintre negrul ramurilor și cerul în flăcări creează o scenă de o intensitate aproape teatrală.'
       },
       {
-        file: 't09.jpg',
+        file: 't09.webp',
         cat: 'iarna',
         catLabel: 'Iarnă',
         name: 'Coliba din Pădure',
@@ -668,7 +685,7 @@
         desc: 'O colibă roșie cu acoperiș acoperit de zăpadă se ascunde printre brazi înalți și birching-uri. Roșul cald al lemnului față de albul imaculat al zăpezii și albastrul pădurii creează un contrast plin de căldură și intimitate.'
       },
       {
-        file: 't10.jpg',
+        file: 't10.webp',
         cat: 'iarna',
         catLabel: 'Iarnă',
         name: 'Răsărit Roz',
@@ -676,7 +693,7 @@
         desc: 'Soarele de iarnă colorează cerul și zăpada în nuanțe de roz, lavandă și mov, transformând o dimineață rece într-un spectacol de culoare. Un tablou ce aduce căldură și optimism chiar și în miezul anotimpului alb.'
       },
       {
-        file: 't11.jpg',
+        file: 't11.webp',
         cat: 'flori',
         catLabel: 'Flori',
         name: 'Margarete',
@@ -684,7 +701,7 @@
         desc: 'Un buchet generos de margarete albe pe fond întunecat, redate cu simplitate și eleganță. Contrastul puternic dintre florile luminoase și fundalul dens creează un efect aproape tridimensional, specific picturii flamande clasice.'
       },
       {
-        file: 't12.jpg',
+        file: 't12.webp',
         cat: 'flori',
         catLabel: 'Flori',
         name: 'Scaunul cu Flori',
@@ -692,7 +709,7 @@
         desc: 'Un scaun vechi de lemn pe care odihnesc buchete colorate de flori sălbatice, pe un fundal gri texturat. Natură statică cu iz poetic — o meditație despre frumusețea simplicității și a obiectelor cu poveste.'
       },
       {
-        file: 't13.jpg',
+        file: 't13.webp',
         cat: 'peisaje',
         catLabel: 'Peisaj',
         name: 'Vară la Munte',
@@ -700,7 +717,7 @@
         desc: 'Pini înalți și vârfuri violacee de munte în lumina caldă a verii. Verdele intens al vegetației și nuanțele lavandei munților creează un tablou plin de vitalitate și prospețime, ce invită privitorul la o plimbare imaginară.'
       },
       {
-        file: 't14.jpg',
+        file: 't14.webp',
         cat: 'padure',
         catLabel: 'Pădure',
         name: 'Pădurea cu Flori',
@@ -708,7 +725,7 @@
         desc: 'Trunchiuri albe de mesteacăn se înalță din covorul de flori sălbatice albastre, albe și roz. O scenă de o frumusețe secretă, ca dintr-un basm nordic — lumina difuză între trunchiuri și florile fragile la picioarele lor.'
       },
       {
-        file: 't15.jpg',
+        file: 't15.webp',
         cat: 'flori',
         catLabel: 'Flori',
         name: 'Hibiscus Alb',
@@ -716,7 +733,7 @@
         desc: 'O floare albă de hibiscus în plină înflorire, redată cu pastă bogată și lumini delicate pe fond de culori lavandă și roz. Semnătura „Nuți" în colț atestă atenția artistei față de detaliu și eleganța compoziției.'
       },
       {
-        file: 't17.jpg',
+        file: 't17.webp',
         cat: 'flori',
         catLabel: 'Flori',
         name: 'Maci Albaștri cu Margarete',
@@ -724,7 +741,7 @@
         desc: 'Un buchet vibrant de maci albaștri și margarete albe pe fond neutru. Culorile vii și compoziția echilibrată fac din acest tablou o piesă de colecție. Semnătura „Nuți" confirmă autenticitatea lucrării.'
       },
       {
-        file: 't18.jpg',
+        file: 't18.webp',
         cat: 'peisaje',
         catLabel: 'Peisaj',
         name: 'Toamnă pe Cărare',
@@ -741,7 +758,7 @@
       card.dataset.cat = t.cat;
       card.dataset.idx = i;
       card.innerHTML = `
-        <img src="../assets/tablouri/${t.file}" alt="${t.name} — tablou Elena Tudoran" loading="lazy" />
+        <img src="../assets/tablouri/${t.file}" alt="${t.name} — tablou Elena Tudoran" width="${dimsMap[t.file]?dimsMap[t.file][0]:''}" height="${dimsMap[t.file]?dimsMap[t.file][1]:''}" loading="lazy" />
         <div class="tablou-overlay">
           <div class="tablou-overlay-cat">${t.catLabel}</div>
           <div class="tablou-overlay-title">${t.name}</div>
@@ -773,6 +790,7 @@
     const lbDesc   = document.getElementById('lbDesc');
     const lbCounter= document.getElementById('lbCounter');
     const lbClose  = document.getElementById('lbClose');
+    const lbOrder  = document.getElementById('lbOrder');
     const lbPrev   = document.getElementById('lbPrev');
     const lbNext   = document.getElementById('lbNext');
 
@@ -791,6 +809,10 @@
       lbName.textContent = `„${t.name}"`;
       lbTech.textContent = t.technique;
       lbDesc.textContent = t.desc;
+      window.__currentTablou = t.name;
+      if (lbOrder) {
+        lbOrder.href = 'contact.html?subiect=Tablou&tablou=' + encodeURIComponent(t.name);
+      }
     }
 
     function setImage(src, alt, animate) {

@@ -63,16 +63,26 @@
   /* ── Scroll Reveal ─────────────────────────── */
   const revealEls = document.querySelectorAll('.reveal');
   if (revealEls.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    const show = (el) => el.classList.add('visible');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            show(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
 
-    revealEls.forEach(el => io.observe(el));
+      revealEls.forEach(el => io.observe(el));
+
+      // Plasă de siguranță: dacă observerul nu declanșează din orice motiv,
+      // afișează tot conținutul după 2.5s ca să nu rămână secțiuni goale.
+      setTimeout(() => revealEls.forEach(show), 2500);
+    } else {
+      // Browser fără IntersectionObserver — afișează tot direct.
+      revealEls.forEach(show);
+    }
   }
 
   /* ── Filter Buttons (Colecții page) ─────────── */
@@ -193,19 +203,16 @@
     document.body.style.overflow = '';
   }
 
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.contains('open') ? closeMenu() : openMenu();
-  });
-
+  hamburger.addEventListener('click', openMenu);
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
-  // Închide la click pe link
-  overlay.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
+  // Închide meniul când se apasă pe un link
+  overlay.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
   });
 
-  // Închide la Escape
-  document.addEventListener('keydown', e => {
+  // Închide la tasta Escape
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeMenu();
   });
 })();

@@ -143,6 +143,26 @@
       .map-wrap iframe { height: 260px; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Acasă",
+        "item": "https://luciafashion.ro/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": "https://luciafashion.ro/pages/contact.html"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -277,8 +297,8 @@
             <span class="field-error" id="err-fname">Te rugăm să introduci prenumele.</span>
           </div>
           <div class="form-group">
-            <label for="lname">Nume *</label>
-            <input type="text" id="lname" name="nume" placeholder="Ionescu" required autocomplete="family-name" />
+            <label for="lname">Nume <span style="opacity:0.5;">(opțional)</span></label>
+            <input type="text" id="lname" name="nume" placeholder="Ionescu" autocomplete="family-name" />
             <span class="field-error" id="err-lname">Te rugăm să introduci numele.</span>
           </div>
         </div>
@@ -425,6 +445,23 @@
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const submitLabel = document.getElementById('submitLabel');
+
+    // ── Prefill din parametrii URL (ex: buton „Comandă acest tablou") ──
+    const urlParams = new URLSearchParams(location.search);
+    const subjParam = urlParams.get('subiect');
+    if (subjParam) {
+      const sel = document.getElementById('subject');
+      if (sel && Array.from(sel.options).some(o => o.value === subjParam)) {
+        sel.value = subjParam;
+      }
+    }
+    const tablouParam = urlParams.get('tablou');
+    if (tablouParam) {
+      const msg = document.getElementById('message');
+      if (msg && !msg.value.trim()) {
+        msg.value = 'Aș dori să comand tabloul „' + tablouParam + '".';
+      }
+    }
 
     function validateField(el) {
       const errEl = document.getElementById('err-' + el.id);

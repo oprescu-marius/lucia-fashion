@@ -304,6 +304,8 @@ body::before {
   margin-bottom: 0.5rem;
   animation: fadeInUp 1.2s ease 0.5s both;
   letter-spacing: 0.05em;
+  line-height: 1.18;
+  padding-bottom: 0.12em;
 }
 
 .hero-title em {
