@@ -142,6 +142,51 @@
     requestAnimationFrame(update);
   }
 
+  /* ── Gallery stagger reveal (colecții/tablouri) ──
+     Aplică intrare fade-up decalată pe copiii unui container.
+     Auto: orice element cu [data-stagger]. Manual: window.luciaStagger(el)
+     (pentru grile construite din JS, ex. tablouri.html). */
+  const reduceMotionGallery = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  window.luciaStagger = function (container) {
+    if (!container) return;
+    const items = Array.from(container.children);
+    if (!items.length) return;
+
+    // Curățare completă — elementul revine la stilurile lui normale
+    const finish = (el) => {
+      el.classList.remove('g-reveal', 'g-in');
+      el.style.transitionDelay = '';
+    };
+
+    if (reduceMotionGallery || !('IntersectionObserver' in window)) return;
+
+    const gio = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('g-in');
+        setTimeout(() => finish(en.target), 900);
+        gio.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+
+    items.forEach((el, i) => {
+      el.classList.add('g-reveal');
+      el.style.transitionDelay = (i % 6) * 70 + 'ms';
+      gio.observe(el);
+    });
+
+    // Plasă de siguranță: nimic nu rămâne ascuns după 3s
+    setTimeout(() => items.forEach((el) => {
+      if (el.classList.contains('g-reveal')) {
+        el.classList.add('g-in');
+        setTimeout(() => finish(el), 900);
+      }
+    }), 3000);
+  };
+
+  document.querySelectorAll('[data-stagger]').forEach(window.luciaStagger);
+
   /* ── Contact Form ──────────────────────────── */
   // Handlerul complet pentru contact form este în contact.html
   // main.js nu intervine pentru a evita conflicte
@@ -149,6 +194,12 @@
   /* ── Copyright year dinamic ────────────────── */
   const yearEl = document.getElementById('copyright-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ── Gold shimmer pe titluri ───────────────────
+     Aplică automat clasa .shimmer-title (definită în style.css,
+     respectiv inline în poveste.html) pe titlurile principale. */
+  document.querySelectorAll('h1, .section-title, .featured-gallery-header h2, .lenjerii-preview-text h2')
+    .forEach(el => el.classList.add('shimmer-title'));
 
   /* ── Smooth page transitions ───────────────── */
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -164,10 +215,15 @@
         link.getAttribute('target') !== '_blank'
       ) {
         link.addEventListener('click', function (e) {
+          // IMPORTANT: href-ul se citește LA CLICK, nu din closure-ul de la
+          // încărcare — unele linkuri își schimbă href-ul dinamic (ex. butonul
+          // „Comandă acest tablou" din lightbox-ul tablouri.html, care adaugă
+          // ?subiect=Tablou&tablou=<nume>). Cu valoarea veche se pierdeau parametrii.
+          const dest = link.getAttribute('href');
           e.preventDefault();
           document.body.style.opacity = '0';
           document.body.style.transition = 'opacity 0.22s ease';
-          setTimeout(() => window.location = href, 200);
+          setTimeout(() => window.location = dest, 200);
         });
       }
     });
@@ -216,3 +272,43 @@
     if (e.key === 'Escape') closeMenu();
   });
 })();
+
+/* ── Buton „Înapoi sus" ───────────────────────
+   Injectat din JS (stil + element), ca să funcționeze pe toate
+   paginile fără modificări de HTML — inclusiv poveste.html. */
+(function () {
+  var style = document.createElement('style');
+  style.textContent =
+    '.back-to-top{position:fixed;right:1.4rem;bottom:1.4rem;width:46px;height:46px;border-radius:50%;' +
+      'background:rgba(61,26,92,0.92);border:1px solid rgba(201,168,112,0.5);color:#C9A86C;' +
+      'display:flex;align-items:center;justify-content:center;padding:0;z-index:950;' +
+      'opacity:0;visibility:hidden;transform:translateY(12px);' +
+      'transition:opacity .35s ease,transform .35s ease,visibility .35s,background .25s,border-color .25s;' +
+      'box-shadow:0 6px 24px rgba(13,13,13,0.35);}' +
+    '.back-to-top.show{opacity:1;visibility:visible;transform:translateY(0);}' +
+    '.back-to-top:hover{background:rgba(61,26,92,1);border-color:#C9A86C;transform:translateY(-2px);}' +
+    '.back-to-top:active{transform:translateY(0) scale(0.94);}' +
+    '@media (max-width:600px){.back-to-top{right:1rem;bottom:1rem;width:42px;height:42px;}}' +
+    '@media (prefers-reduced-motion: reduce){.back-to-top{transition:opacity .01ms,visibility .01ms;transform:none;}}';
+  document.head.appendChild(style);
+
+  var btn = document.createElement('button');
+  btn.className = 'back-to-top';
+  btn.setAttribute('aria-label', 'Înapoi sus');
+  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">' +
+    '<path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" stroke="currentColor" stroke-width="1.4" ' +
+    'stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.body.appendChild(btn);
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+
+  var toggle = function () {
+    btn.classList.toggle('show', window.scrollY > 600);
+  };
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
+})();
+/* sfârșit main.js */

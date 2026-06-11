@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-372D4N3V0E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-372D4N3V0E');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lenjerii de Pat — Lucia Fashion</title>
@@ -17,6 +25,9 @@
   <meta property="og:image" content="https://luciafashion.ro/assets/l20.jpg" />
   <meta property="og:locale" content="ro_RO" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lenjerii de Pat — Lucia Fashion" />
+  <meta name="twitter:description" content="Lenjerii de pat din bumbac ramforsat 100% — colecții elegante, personalizabile, create cu aceeași grijă ca orice piesă Lucia Fashion." />
+  <meta name="twitter:image" content="https://luciafashion.ro/assets/l20.jpg" />
 
   <!-- SEO suplimentar -->
   <meta name="keywords" content="lenjerii de pat bumbac, lenjerii personalizate București, lenjerii ramforsat, set lenjerie pat, Lucia Fashion" />
@@ -176,11 +187,10 @@
       animation: fadeUp 0.6s both;
     }
     .lenjerie-card:hover { transform: translateY(-6px); }
-    .lenjerie-card:nth-child(1) { animation-delay: 0.05s; }
-    .lenjerie-card:nth-child(2) { animation-delay: 0.12s; }
-    .lenjerie-card:nth-child(3) { animation-delay: 0.19s; }
-    .lenjerie-card:nth-child(4) { animation-delay: 0.26s; }
-    .lenjerie-card:nth-child(5) { animation-delay: 0.33s; }
+    /* Stagger pe coloane — funcționează pentru toate cardurile, nu doar primele 5 */
+    .lenjerie-card:nth-child(3n+1) { animation-delay: 0.05s; }
+    .lenjerie-card:nth-child(3n+2) { animation-delay: 0.15s; }
+    .lenjerie-card:nth-child(3n)   { animation-delay: 0.25s; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -817,13 +827,4 @@
       current = (current + dir + images.length) % images.length;
       document.getElementById('lightboxImg').src = images[current];
       document.getElementById('lightboxCounter').textContent = (current + 1) + ' / ' + images.length;
-    }
-    document.addEventListener('keydown', function(e) {
-      if (!document.getElementById('lightbox').classList.contains('active')) return;
-      if (e.key === 'ArrowRight') navigate(1);
-      if (e.key === 'ArrowLeft') navigate(-1);
-      if (e.key === 'Escape') closeLightboxBtn();
-    });
-  </script>
-</body>
-</html>
+  

@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-372D4N3V0E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-372D4N3V0E');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Colecții — Lucia Fashion</title>
@@ -17,6 +25,9 @@
   <meta property="og:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
   <meta property="og:locale" content="ro_RO" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Colecții — Lucia Fashion" />
+  <meta name="twitter:description" content="Descoperă colecțiile Lucia Fashion — rochii de mireasă, rochii de seară, rochii de bal, bluze, fuste și jachete. Design vestimentar autentic românesc." />
+  <meta name="twitter:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
 
   <!-- SEO suplimentar -->
   <meta name="keywords" content="rochii mireasă București, rochii de seară unicat, rochii de bal, bluze elegante, fuste, jachete, design vestimentar București" />
@@ -495,7 +506,7 @@
 
   <!-- GRID -->
   <div class="grid-wrap">
-    <div class="products-grid" id="productsGrid">
+    <div class="products-grid" id="productsGrid" data-stagger>
 
       <!-- ══════════════ ROCHII MIREASĂ ══════════════ -->
 
@@ -907,12 +918,12 @@
       </div>
 
       <div class="product-card" data-category="seara"
-           data-photos='["r78_1.webp","r78_2.webp"]'
+           data-photos='["r78_0.webp","r78_1.webp","r78_2.webp"]'
            data-name="Noapte de Satin" data-cat="Rochie Seară"
            data-desc="Satinul bleumarin care alunecă pe siluetă ca umbra nopții — drapaj lateral sculpted, decolteu V îndrăzneț, o rochie care vorbește înainte ca tu să deschizi gura.">
         <div class="product-img">
-          <img src="../assets/rochii/r78_1.webp" alt="Noapte de Satin" loading="lazy">
-          <span class="photo-count">2 foto</span>
+          <img src="../assets/rochii/r78_0.webp" alt="Noapte de Satin" loading="lazy">
+          <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie Seară</p>
@@ -921,13 +932,13 @@
       </div>
 
       <div class="product-card" data-category="seara"
-           data-photos='["r85_1.webp","r85_2.webp","r85_3.webp"]'
+           data-photos='["r85_01.webp","r85_02.webp"]'
            data-name="Umbra cu Mărgele" data-cat="Rochie Seară"
            data-desc="Dantela cu mărgele care acoperă fără să ascundă — o rochie mini cu spate complet decupat și o coloană de dantelă care coboară dramatic, pentru serile când vrei să fii de neuitat.">
         <div class="product-img">
-          <img src="../assets/rochii/r85_1.webp" alt="Umbra cu Mărgele" loading="lazy">
+          <img src="../assets/rochii/r85_01.webp" alt="Umbra cu Mărgele" loading="lazy">
           <span class="product-badge">Unicat</span>
-          <span class="photo-count">3 foto</span>
+          <span class="photo-count">2 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie Seară</p>
@@ -936,13 +947,13 @@
       </div>
 
       <div class="product-card" data-category="seara"
-           data-photos='["r86_1.webp","r86_2.webp"]'
+           data-photos='["r86_0.webp","r86_1.webp","r86_2.webp"]'
            data-name="Argint & Dantelă Neagră" data-cat="Rochie Seară"
            data-desc="Satinul argintiu îmbrăcat în dantelă neagră — un contrast rece și senzual, mâneci de mesh care completează o rochie mini cu spatele deschis și suflet de haute couture.">
         <div class="product-img">
-          <img src="../assets/rochii/r86_1.webp" alt="Argint & Dantelă Neagră" loading="lazy">
+          <img src="../assets/rochii/r86_0.webp" alt="Argint & Dantelă Neagră" loading="lazy">
           <span class="product-badge gold">Exclusiv</span>
-          <span class="photo-count">2 foto</span>
+          <span class="photo-count">3 foto</span>
         </div>
         <div class="product-info">
           <p class="product-category">Rochie Seară</p>
@@ -2326,17 +2337,4 @@
     });
 
     let touchStartX = 0;
-    lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    lb.addEventListener('touchend', e => {
-      const diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
-    });
-
-    function closeLb() {
-      lb.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-  </script>
-</body>
-</html>
+    lb.addEventListener('touchstart', e => { touchStartX = e.

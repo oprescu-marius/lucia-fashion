@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-372D4N3V0E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-372D4N3V0E');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lucia Fashion — Atelier de Design Vestimentar</title>
@@ -20,6 +28,9 @@
   <meta property="og:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
   <meta property="og:locale" content="ro_RO" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lucia Fashion — Atelier de Design Vestimentar" />
+  <meta name="twitter:description" content="Atelier de creație vestimentară — produse unicat, rochii elegante, rochii de mireasă, fuste și bluze. Design autentic românesc." />
+  <meta name="twitter:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
 
   <!-- SEO suplimentar -->
   <meta name="keywords" content="rochii mireasă București, atelier croitorie București, rochii de seară, design vestimentar, rochii unicat, lenjerii de pat, Lucia Fashion" />
@@ -220,6 +231,20 @@
       gap: 1rem;
       flex-wrap: wrap;
     }
+
+    /* Intrare elegantă a textului din hero (fadeInUp e definit în style.css) */
+    .hero-atelier-left .hero-badge,
+    .hero-atelier-left .hero-tv-badge,
+    .hero-atelier-left h1,
+    .hero-atelier-left p,
+    .hero-atelier-actions {
+      animation: fadeInUp 0.9s ease both;
+    }
+    .hero-atelier-left .hero-badge    { animation-delay: 0.1s; }
+    .hero-atelier-left .hero-tv-badge { animation-delay: 0.25s; }
+    .hero-atelier-left h1             { animation-delay: 0.4s; }
+    .hero-atelier-left p              { animation-delay: 0.55s; }
+    .hero-atelier-actions             { animation-delay: 0.7s; }
 
     /* Coloana dreapta — imagine */
     .hero-atelier-right {
@@ -654,11 +679,11 @@
   <!-- ══════════════════════════════
        GALERIE FEATURED — 3 rochii
   ══════════════════════════════ -->
-  <div class="featured-gallery reveal">
-    <div class="featured-gallery-header">
+  <div class="featured-gallery">
+    <div class="featured-gallery-header reveal">
       <h2>Creații care<br><em>opresc timpul</em></h2>
     </div>
-    <div class="featured-grid">
+    <div class="featured-grid" data-stagger>
 
       <!-- Albastru — coloana stânga întreagă, centrat să se vadă și picioarele -->
       <div class="featured-item">
@@ -727,7 +752,7 @@
       <p class="section-sub">De la rochii de zi la ținute de seară — creații pentru fiecare moment special</p>
     </div>
 
-    <div class="collections-grid reveal">
+    <div class="collections-grid" data-stagger>
 
       <!-- Card 1 — Mireasă: poza procesată cu overlay mov -->
       <div class="collection-card" onclick="location.href='pages/colectii.html'" style="cursor:pointer;">
@@ -896,35 +921,11 @@
           <li><a href="index.html">Acasă</a></li>
           <li><a href="pages/colectii.html">Colecții</a></li>
           <li><a href="pages/lenjerii.html">Lenjerii</a></li>
+          <li><a href="pages/tablouri.html">Tablouri</a></li>
+          <li><a href="poveste.html">Povestea</a></li>
           <li><a href="pages/despre.html">Despre noi</a></li>
           <li><a href="pages/contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Colecții</h4>
-        <ul>
-          <li><a href="pages/colectii.html">Rochii de Mireasă</a></li>
-          <li><a href="pages/colectii.html">Rochii de Seară</a></li>
-          <li><a href="pages/lenjerii.html">Lenjerii de Pat</a></li>
-          <li><a href="pages/colectii.html">Ținute Business</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:contact@luciafashion.ro">contact@luciafashion.ro</a></li>
-          <li><a href="tel:+40728304151">0728 304 151</a></li>
-          <li><a href="https://www.facebook.com/luciafashiondesign/" target="_blank" rel="noopener">Facebook</a></li>
-          <li style="color:rgba(248,245,242,0.35); font-size:0.7rem; line-height:1.5;">Str. Plutașilor 18<br>Sector 1, București</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© <span id="copyright-year">2025</span> Lucia Fashion Design. Toate drepturile rezervate.</p>
-      <p>Creat cu ♥ pentru eleganță autentică</p>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-</body>
-</html>
+        <h4>Cole

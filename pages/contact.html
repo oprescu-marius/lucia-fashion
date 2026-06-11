@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-372D4N3V0E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-372D4N3V0E');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Lucia Fashion</title>
@@ -17,6 +25,9 @@
   <meta property="og:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
   <meta property="og:locale" content="ro_RO" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact — Lucia Fashion" />
+  <meta name="twitter:description" content="Contactează Lucia Fashion pentru comenzi personalizate, întrebări sau programări la atelier. Str. Plutașilor 18, Sector 1, București." />
+  <meta name="twitter:image" content="https://luciafashion.ro/assets/card_seara.jpg" />
 
   <!-- SEO suplimentar -->
   <meta name="keywords" content="contact Lucia Fashion, programare atelier croitorie, comandă rochie mireasă București, Strada Plutașilor 18" />
@@ -410,6 +421,8 @@
           <li><a href="../index.html">Acasă</a></li>
           <li><a href="colectii.html">Colecții</a></li>
           <li><a href="lenjerii.html">Lenjerii</a></li>
+          <li><a href="tablouri.html">Tablouri</a></li>
+          <li><a href="../poveste.html">Povestea</a></li>
           <li><a href="despre.html">Despre noi</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -420,6 +433,7 @@
           <li><a href="colectii.html">Rochii de Mireasă</a></li>
           <li><a href="colectii.html">Rochii de Seară</a></li>
           <li><a href="lenjerii.html">Lenjerii de Pat</a></li>
+          <li><a href="tablouri.html">Tablouri</a></li>
           <li><a href="colectii.html">Ținute Business</a></li>
         </ul>
       </div>
@@ -524,20 +538,4 @@
       .then(function(res) {
         if (res.ok) {
           form.style.display = 'none';
-          const success = document.getElementById('formSuccess');
-          success.classList.add('show');
-          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          throw new Error(res.status);
-        }
-      })
-      .catch(function() {
-        submitBtn.disabled = false;
-        submitLabel.textContent = 'Trimite Mesajul';
-        alert('A apărut o eroare la trimitere.\nTe rugăm să ne contactezi direct:\n📞 0728 304 151\n✉ contact@luciafashion.ro');
-      });
-    });
-  })();
-  </script>
-</body>
-</html>
+          const success = document.getElementByI

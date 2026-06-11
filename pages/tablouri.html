@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-372D4N3V0E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-372D4N3V0E');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tablouri — Lucia Fashion</title>
@@ -15,6 +23,9 @@
   <meta property="og:image" content="https://luciafashion.ro/assets/tablouri/t01.jpg" />
   <meta property="og:locale" content="ro_RO" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tablouri — Lucia Fashion" />
+  <meta name="twitter:description" content="Tablouri în ulei realizate de Elena Tudoran — picturi originale unicat." />
+  <meta name="twitter:image" content="https://luciafashion.ro/assets/tablouri/t01.jpg" />
   <meta name="keywords" content="tablouri ulei Elena Tudoran, picturi originale București, tablouri unicat de vânzare, peisaje românești" />
   <meta name="author" content="Lucia Fashion" />
   <link rel="canonical" href="https://luciafashion.ro/pages/tablouri.html" />
@@ -593,6 +604,7 @@
           <li><a href="colectii.html">Colecții</a></li>
           <li><a href="lenjerii.html">Lenjerii</a></li>
           <li><a href="tablouri.html">Tablouri</a></li>
+          <li><a href="../poveste.html">Povestea</a></li>
           <li><a href="despre.html">Despre noi</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -768,6 +780,9 @@
       grid.appendChild(card);
     });
 
+    // Animație de intrare decalată (funcția e definită în js/main.js)
+    if (typeof window.luciaStagger === 'function') window.luciaStagger(grid);
+
     // ── FILTER ──
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -867,18 +882,4 @@
     });
 
     let touchX = null;
-    lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
-    lb.addEventListener('touchend',   e => {
-      if (touchX === null) return;
-      const diff = touchX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) showIdx(diff > 0 ? currentIdx + 1 : currentIdx - 1, true);
-      touchX = null;
-    }, { passive: true });
-
-    // Copyright
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-  </script>
-
-</body>
-</html>
+    lb.addEventListener('touchstart', e =
