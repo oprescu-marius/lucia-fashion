@@ -538,4 +538,20 @@
       .then(function(res) {
         if (res.ok) {
           form.style.display = 'none';
-          const success = document.getElementByI
+          const success = document.getElementById('formSuccess');
+          success.classList.add('show');
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error(res.status);
+        }
+      })
+      .catch(function() {
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Trimite Mesajul';
+        alert('A apărut o eroare la trimitere.\nTe rugăm să ne contactezi direct:\n📞 0728 304 151\n✉ contact@luciafashion.ro');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

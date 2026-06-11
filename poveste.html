@@ -840,17 +840,18 @@
       .trio-item { height: 70vw; }
     }
 
-    /* ── Gold shimmer pe titluri (hover) — clasa e aplicată din main.js ── */
+    /* ── Gold shimmer pe titluri — clasele sunt gestionate din main.js
+       (.shimmering se adaugă la mouseenter și se scoate la animationend) ── */
     @media (hover: hover) {
-      .shimmer-title:hover,
-      .shimmer-title:hover em {
+      .shimmer-title.shimmering,
+      .shimmer-title.shimmering em {
         background-image: linear-gradient(110deg,
-          currentColor 0%, currentColor 42%,
+          currentColor 0%, currentColor 45%,
           #E8D5A3 50%,
-          currentColor 58%, currentColor 100%);
-        background-size: 220% 100%;
+          currentColor 55%, currentColor 100%);
+        background-size: 300% 100%;
         background-repeat: no-repeat;
-        background-position: -30% 0;
+        background-position: 0% 0;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -858,8 +859,8 @@
       }
     }
     @keyframes gold-shimmer {
-      from { background-position: 120% 0; }
-      to   { background-position: -30% 0; }
+      from { background-position: 100% 0; }
+      to   { background-position: 0% 0; }
     }
 
     /* ── prefers-reduced-motion: dezactivează animațiile ── */
@@ -1240,4 +1241,85 @@
         <div class="timeline-item left reveal reveal-delay-3">
           <div class="timeline-text">
             <h3>Tablourile în acuarelă și ulei</h3>
-            <p>Creativitatea Elenei nu se oprește la textile. Din 2023, pictura devine o nouă formă de exprimare — tablouri în acuarelă și ulei, cu aceeași sensibilitate și aten
+            <p>Creativitatea Elenei nu se oprește la textile. Din 2023, pictura devine o nouă formă de exprimare — tablouri în acuarelă și ulei, cu aceeași sensibilitate și atenție la detaliu care definesc tot ceea ce iese din atelierul Lucia Fashion. O nouă colecție de artă în curând.</p>
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2023</div>
+          </div>
+          <div class="timeline-img">
+            <img src="assets/story/tablouri_2.webp" alt="Tablouri în acuarelă și ulei — Elena Tudoran, Lucia Fashion" loading="lazy" style="object-fit:cover; object-position:center center;">
+          </div>
+        </div>
+
+        <!-- Prezent -->
+        <div class="timeline-item right reveal reveal-delay-3">
+          <div class="timeline-img">
+            <img src="assets/story/New_Board_In_a_classic_style_a_woman_with_dark_hair_and_9cc-ci_E.webp" alt="Proba rochiei de mireasă — Lucia Fashion" loading="lazy" style="object-position: center 20%;">
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">Prezent</div>
+          </div>
+          <div class="timeline-text right">
+            <h3>Recunoaștere și continuitate</h3>
+            <p>„Lucrez non-stop — e muncă, dar e și pasiune. Ai o mulțumire sufletească când toată lumea e mulțumită." Elena continuă să creeze — rochii, lenjerii, jucării, tablouri — cu aceeași energie și dragoste ca în 1970, când împodobea primele păpuși.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA FINAL ══ -->
+  <section class="cta-final">
+    <h2 class="reveal">
+      Aceasta este povestea noastră.<br>
+      <em>Care este a ta?</em>
+    </h2>
+    <p class="reveal reveal-delay-1">
+      Fiecare rochie pe care o creăm devine parte din povestea ta.
+    </p>
+    <div class="cta-buttons reveal reveal-delay-2">
+      <a href="pages/contact.html" class="btn-gold">Programează o consultație</a>
+      <a href="pages/colectii.html" class="btn-outline-gold">Vezi colecțiile</a>
+    </div>
+  </section>
+
+  <!-- FOOTER MINI -->
+  <footer class="footer-mini">
+    <span style="font-family: var(--serif); font-size: 1rem; color: rgba(248,245,242,0.4);">Lucia Fashion</span>
+    <p>© <span id="yr">2025</span> Lucia Fashion Design. Toate drepturile rezervate.</p>
+    <p>Str. Plutașilor 18, Sector 1, București</p>
+  </footer>
+
+  <script>
+    // Copyright year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => io.observe(el));
+
+    // Full bleed parallax scale on scroll
+    const fullBleeds = document.querySelectorAll('.full-bleed');
+    const fbIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    fullBleeds.forEach(el => fbIO.observe(el));
+  </script>
+
+  <!-- Main JS — fade transitions, cursor, hamburger -->
+  <script src="js/main.js"></script>
+</body>
+</html>

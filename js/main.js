@@ -196,10 +196,20 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ── Gold shimmer pe titluri ───────────────────
-     Aplică automat clasa .shimmer-title (definită în style.css,
-     respectiv inline în poveste.html) pe titlurile principale. */
+     La mouseenter pornim animația printr-o clasă (.shimmering),
+     iar la animationend o scoatem. Așa banda aurie își termină
+     mereu cursa complet — fără salt vizual când mouse-ul pleacă
+     de pe titlu în mijlocul animației. */
+  const shimmerHover = window.matchMedia('(hover: hover)').matches;
   document.querySelectorAll('h1, .section-title, .featured-gallery-header h2, .lenjerii-preview-text h2')
-    .forEach(el => el.classList.add('shimmer-title'));
+    .forEach(el => {
+      el.classList.add('shimmer-title');
+      if (!shimmerHover) return;
+      el.addEventListener('mouseenter', () => el.classList.add('shimmering'));
+      el.addEventListener('animationend', (ev) => {
+        if (ev.animationName === 'gold-shimmer') el.classList.remove('shimmering');
+      });
+    });
 
   /* ── Smooth page transitions ───────────────── */
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -827,4 +827,13 @@
       current = (current + dir + images.length) % images.length;
       document.getElementById('lightboxImg').src = images[current];
       document.getElementById('lightboxCounter').textContent = (current + 1) + ' / ' + images.length;
-  
+    }
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'ArrowRight') navigate(1);
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'Escape') closeLightboxBtn();
+    });
+  </script>
+</body>
+</html>
